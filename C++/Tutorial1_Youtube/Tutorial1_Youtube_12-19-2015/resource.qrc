@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/sounds">
+        <file>bg_music_8bit.mp3</file>
+        <file>gunshot.mp3</file>
+        <file>success.wav</file>
+        <file>ouch.wav</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>bullet.png</file>
+        <file>enemy.PNG</file>
+        <file>game-background.png</file>
+        <file>player.PNG</file>
+    </qresource>
+</RCC>
