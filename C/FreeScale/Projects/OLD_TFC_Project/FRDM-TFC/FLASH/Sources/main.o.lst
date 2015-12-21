@@ -1,0 +1,524 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"main.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.global	NUM_PIXELS
+  18              		.section	.rodata.NUM_PIXELS,"a",%progbits
+  21              	NUM_PIXELS:
+  22 0000 60       		.byte	96
+  23              		.global	HALF_NUM_PIXELS
+  24              		.section	.rodata.HALF_NUM_PIXELS,"a",%progbits
+  27              	HALF_NUM_PIXELS:
+  28 0000 30       		.byte	48
+  29              		.global	CAMERA_AIM_POINT_FLOAT
+  30              		.section	.rodata.CAMERA_AIM_POINT_FLOAT,"a",%progbits
+  31              		.align	2
+  34              	CAMERA_AIM_POINT_FLOAT:
+  35 0000 00003E42 		.word	1111359488
+  36              		.global	EXP_RANGE
+  37              		.section	.rodata.EXP_RANGE,"a",%progbits
+  38              		.align	2
+  41              	EXP_RANGE:
+  42 0000 D0070000 		.word	2000
+  43              		.global	__aeabi_i2d
+  44              		.global	__aeabi_ddiv
+  45              		.global	__aeabi_d2f
+  46              		.global	__aeabi_idiv
+  47              		.global	__aeabi_fmul
+  48              		.global	__aeabi_fadd
+  49              		.global	__aeabi_f2iz
+  50              		.global	__aeabi_fsub
+  51              		.global	__aeabi_ui2d
+  52              		.global	__aeabi_dcmpge
+  53              		.global	__aeabi_f2d
+  54              		.global	__aeabi_dadd
+  55              		.global	__aeabi_d2iz
+  56              		.section	.rodata
+  57              		.align	2
+  58              	.LC5:
+  59 0000 54657374 		.ascii	"Test string is: %s\015\012\000"
+  59      20737472 
+  59      696E6720 
+  59      69733A20 
+  59      25730D0A 
+  60 0015 000000   		.section	.text.main,"ax",%progbits
+  61              		.align	2
+  62              		.global	main
+  63              		.code	16
+  64              		.thumb_func
+  66              	main:
+  67              	.LFB0:
+  68              		.file 1 "../Sources/main.c"
+   1:../Sources/main.c **** #include "derivative.h" /* include peripheral declarations */
+   2:../Sources/main.c **** #include "TFC\TFC.h"
+   3:../Sources/main.c **** 
+   4:../Sources/main.c **** // these give variables to particular parameters of the linescan camera
+   5:../Sources/main.c **** const uint8_t NUM_PIXELS = 128 - 2*TRIM_PIXELS_EACH_SIDE;
+   6:../Sources/main.c **** const uint8_t HALF_NUM_PIXELS = (128 - 2*TRIM_PIXELS_EACH_SIDE) / 2;
+   7:../Sources/main.c **** const float CAMERA_AIM_POINT_FLOAT = (float) ((128.0f - 2.0f*TRIM_PIXELS_EACH_SIDE - 1.0f) / 2.0f);
+   8:../Sources/main.c **** 
+   9:../Sources/main.c **** // this sets the exposure range
+  10:../Sources/main.c **** const int EXP_RANGE = (MAX_EXP - MIN_EXP);
+  11:../Sources/main.c **** 
+  12:../Sources/main.c **** int main(void)
+  13:../Sources/main.c **** {
+  69              		.loc 1 13 0
+  70              		.cfi_startproc
+  71 0000 90B5     		push	{r4, r7, lr}
+  72              	.LCFI0:
+  73              		.cfi_def_cfa_offset 12
+  74              		.cfi_offset 4, -12
+  75              		.cfi_offset 7, -8
+  76              		.cfi_offset 14, -4
+  77 0002 8FB0     		sub	sp, sp, #60
+  78              	.LCFI1:
+  79              		.cfi_def_cfa_offset 72
+  80 0004 00AF     		add	r7, sp, #0
+  81              	.LCFI2:
+  82              		.cfi_def_cfa_register 7
+  14:../Sources/main.c **** 	
+  15:../Sources/main.c **** 	float track_center = CAMERA_AIM_POINT_FLOAT;	// default C is X
+  83              		.loc 1 15 0
+  84 0006 7A4B     		ldr	r3, .L9+24
+  85 0008 1B68     		ldr	r3, [r3]
+  86 000a FB62     		str	r3, [r7, #44]
+  16:../Sources/main.c **** 	int exposure_usecs = MAX_EXP;					// default exposure is slow
+  87              		.loc 1 16 0
+  88 000c 794B     		ldr	r3, .L9+28
+  89 000e BB62     		str	r3, [r7, #40]
+  17:../Sources/main.c **** 	float delta_time;								// this adjusts error before adding it to integral error, I_error_angle
+  18:../Sources/main.c **** 	uint8_t* DigitalImage0 = NULL;
+  90              		.loc 1 18 0
+  91 0010 0023     		mov	r3, #0
+  92 0012 7B62     		str	r3, [r7, #36]
+  19:../Sources/main.c **** 	
+  20:../Sources/main.c **** 	/*************************************************************************************************
+  21:../Sources/main.c **** 	/*													PID Loop Variables															*/
+  22:../Sources/main.c **** 	/*************************************************************************************************
+  23:../Sources/main.c **** 	float SP_center_angle = 0.0;	// angle from car to center of track
+  93              		.loc 1 23 0
+  94 0014 0023     		mov	r3, #0
+  95 0016 3B62     		str	r3, [r7, #32]
+  24:../Sources/main.c **** 	float CV_turn_angle = 0.0;		// angle that the car should turn
+  96              		.loc 1 24 0
+  97 0018 0023     		mov	r3, #0
+  98 001a FB61     		str	r3, [r7, #28]
+  25:../Sources/main.c **** 	
+  26:../Sources/main.c **** 	float P_error_angle = 0.0;		// instantaneous error
+  99              		.loc 1 26 0
+ 100 001c 0023     		mov	r3, #0
+ 101 001e BB61     		str	r3, [r7, #24]
+  27:../Sources/main.c **** 	float I_error_angle = 0.0; 		// integral error
+ 102              		.loc 1 27 0
+ 103 0020 0023     		mov	r3, #0
+ 104 0022 7B63     		str	r3, [r7, #52]
+  28:../Sources/main.c **** 	float D_error_angle = 0.0; 		// derivative error
+ 105              		.loc 1 28 0
+ 106 0024 0023     		mov	r3, #0
+ 107 0026 7B61     		str	r3, [r7, #20]
+  29:../Sources/main.c **** 	float last_P_error_angle = 0.0;	// error from previous iteration, used for derivative error calcul
+ 108              		.loc 1 29 0
+ 109 0028 0023     		mov	r3, #0
+ 110 002a 3B63     		str	r3, [r7, #48]
+  30:../Sources/main.c **** 	float temp_I_error_angle = 0.0f;// this is used to help check if integral is getting too large
+ 111              		.loc 1 30 0
+ 112 002c 0023     		mov	r3, #0
+ 113 002e 3B61     		str	r3, [r7, #16]
+  31:../Sources/main.c **** 	
+  32:../Sources/main.c **** 	float Kp = 1.0;					// proportional error constant
+ 114              		.loc 1 32 0
+ 115 0030 FE23     		mov	r3, #254
+ 116 0032 9B05     		lsl	r3, r3, #22
+ 117 0034 FB60     		str	r3, [r7, #12]
+  33:../Sources/main.c **** 	float Ki = 0.1;					// integral error constant
+ 118              		.loc 1 33 0
+ 119 0036 704B     		ldr	r3, .L9+32
+ 120 0038 BB60     		str	r3, [r7, #8]
+  34:../Sources/main.c **** 	float Kd = 0.1;					// derivative error constant
+ 121              		.loc 1 34 0
+ 122 003a 6F4B     		ldr	r3, .L9+32
+ 123 003c 7B60     		str	r3, [r7, #4]
+  35:../Sources/main.c **** 	/*************************************************************************************************
+  36:../Sources/main.c **** 	
+  37:../Sources/main.c **** 	
+  38:../Sources/main.c **** 	TFC_Init();
+ 124              		.loc 1 38 0
+ 125 003e FFF7FEFF 		bl	TFC_Init
+  39:../Sources/main.c **** 	DigitalImage0 = (uint8_t*)malloc(sizeof(uint8_t) * NUM_PIXELS);
+ 126              		.loc 1 39 0
+ 127 0042 6E4B     		ldr	r3, .L9+36
+ 128 0044 1B78     		ldrb	r3, [r3]
+ 129 0046 181C     		mov	r0, r3
+ 130 0048 FFF7FEFF 		bl	malloc
+ 131 004c 031C     		mov	r3, r0
+ 132 004e 7B62     		str	r3, [r7, #36]
+ 133 0050 00E0     		b	.L6
+ 134              	.L8:
+  40:../Sources/main.c **** 	
+  41:../Sources/main.c **** 	// use potentiometer 0 to change the exposure time
+  42:../Sources/main.c **** 	//exposure_usecs = MIN_EXP + EXP_RANGE*(TFC_ReadPot(0) + 1.0)/2.0;
+  43:../Sources/main.c **** 	//TFC_SetLineScanExposureTime(exposure_usecs);
+  44:../Sources/main.c **** 	
+  45:../Sources/main.c **** 	while(1)
+  46:../Sources/main.c **** 	{	   
+  47:../Sources/main.c **** 		//TFC_Task must be called in your main loop.  This keeps certain processing happy (I.E. Serial po
+  48:../Sources/main.c **** 		TFC_Task();
+  49:../Sources/main.c **** 
+  50:../Sources/main.c **** 		delta_time = exposure_usecs / 1000000.0;
+  51:../Sources/main.c **** 		if((TFC_Ticker[0] > 2*exposure_usecs / 1000) && (LineScanImageReady == 1))
+  52:../Sources/main.c **** 		{
+  53:../Sources/main.c **** 				// reset ticker and image ready flag
+  54:../Sources/main.c **** 				TFC_Ticker[0] = 0;
+  55:../Sources/main.c **** 				LineScanImageReady  = 0;
+  56:../Sources/main.c **** 				
+  57:../Sources/main.c **** 				// convert image from linescan camera to digital and find the center between the two black line
+  58:../Sources/main.c **** 				track_center = TFC_LineScanImageToDigital(DigitalImage0);
+  59:../Sources/main.c **** 				
+  60:../Sources/main.c **** 				/**********************************************************************************************
+  61:../Sources/main.c **** 				/*												PID Control Algorithm															*/
+  62:../Sources/main.c **** 				/**********************************************************************************************
+  63:../Sources/main.c **** 
+  64:../Sources/main.c **** 				// find setpoint angle
+  65:../Sources/main.c **** 				SP_center_angle = TFC_GetAngleToTrackCenter(track_center);
+  66:../Sources/main.c **** 
+  67:../Sources/main.c **** 				// calculate error between setpoint angle and current angle
+  68:../Sources/main.c **** 				P_error_angle = SP_center_angle - 0;
+  69:../Sources/main.c **** 
+  70:../Sources/main.c **** 				// update the integral error, but keep it within some specific range
+  71:../Sources/main.c **** 				temp_I_error_angle = I_error_angle + P_error_angle * delta_time;
+  72:../Sources/main.c **** 				if(abs(temp_I_error_angle) < 90) I_error_angle = temp_I_error_angle;
+  73:../Sources/main.c **** 
+  74:../Sources/main.c **** 				// calculate the change in error between iterations
+  75:../Sources/main.c **** 				D_error_angle = P_error_angle - last_P_error_angle;
+  76:../Sources/main.c **** 
+  77:../Sources/main.c **** 				// control variable -- this number is the end result that will be passed into the steering func
+  78:../Sources/main.c **** 				CV_turn_angle = (Kp * P_error_angle) + (Ki * I_error_angle) + (Kd * D_error_angle);
+  79:../Sources/main.c **** 
+  80:../Sources/main.c **** 				/* TODO: Find out if we actually need this if() statement.
+  81:../Sources/main.c **** 					It may be okay to simply update the PWM value multiple times before an actual pulse occurs*/
+  82:../Sources/main.c **** 				
+  83:../Sources/main.c **** 				// if the servo is actually ready to turn
+  84:../Sources/main.c **** 				if(TFC_Ticker[1] >= MIN_SERVO_UPDATE_TIME)
+  85:../Sources/main.c **** 				{
+  86:../Sources/main.c **** 					TFC_Ticker[1] = 0;
+  87:../Sources/main.c **** 					TFC_SetSteeringAngle(CV_turn_angle);
+  88:../Sources/main.c **** 				}
+  89:../Sources/main.c **** 
+  90:../Sources/main.c **** 				//TERMINAL_PRINTF("%s %s %s %s \r\n", (int) (100*P_error_angle), (int) (100*I_error_angle), (in
+  91:../Sources/main.c **** 
+  92:../Sources/main.c **** 				// store the error from this iteration so that it can be used for the next iteration
+  93:../Sources/main.c **** 				last_P_error_angle = P_error_angle;
+  94:../Sources/main.c **** 
+  95:../Sources/main.c **** 				/**********************************************************************************************
+  96:../Sources/main.c **** 
+  97:../Sources/main.c **** 					
+  98:../Sources/main.c **** 				// identify center point of track, and current position
+  99:../Sources/main.c **** 				DigitalImage0[(int) track_center] = CENTER_MARK;
+ 100:../Sources/main.c **** 				DigitalImage0[(int) (CAMERA_AIM_POINT_FLOAT)] = CURRENT_POSITION_MARK;
+ 101:../Sources/main.c **** 				DigitalImage0[(int) (CAMERA_AIM_POINT_FLOAT + 0.5)] = CURRENT_POSITION_MARK;
+ 102:../Sources/main.c **** 			
+ 103:../Sources/main.c **** 				// this will print out the track
+ 104:../Sources/main.c **** 				//TFC_PrintTrackString(DigitalImage0);
+ 105:../Sources/main.c **** 				TERMINAL_PRINTF("Test string is: %s\r\n", DigitalImage0);
+ 106:../Sources/main.c **** 				
+ 107:../Sources/main.c **** //				for(i=0;i<NUM_PIXELS;i++)
+ 108:../Sources/main.c **** //					TERMINAL_PRINTF("%c", DigitalImage0[i]);
+ 109:../Sources/main.c **** //				TERMINAL_PRINTF("\r\n");
+ 110:../Sources/main.c **** 
+ 111:../Sources/main.c **** 		} // if(good time to process picture)
+ 112:../Sources/main.c **** 	}
+ 135              		.loc 1 112 0
+ 136 0052 C046     		mov	r8, r8
+ 137              	.L6:
+  48:../Sources/main.c **** 		TFC_Task();
+ 138              		.loc 1 48 0
+ 139 0054 FFF7FEFF 		bl	TFC_Task
+  50:../Sources/main.c **** 		delta_time = exposure_usecs / 1000000.0;
+ 140              		.loc 1 50 0
+ 141 0058 B86A     		ldr	r0, [r7, #40]
+ 142 005a FFF7FEFF 		bl	__aeabi_i2d
+ 143 005e 031C     		mov	r3, r0
+ 144 0060 0C1C     		mov	r4, r1
+ 145 0062 181C     		mov	r0, r3
+ 146 0064 211C     		mov	r1, r4
+ 147 0066 5D4B     		ldr	r3, .L9+4
+ 148 0068 5B4A     		ldr	r2, .L9
+ 149 006a FFF7FEFF 		bl	__aeabi_ddiv
+ 150 006e 031C     		mov	r3, r0
+ 151 0070 0C1C     		mov	r4, r1
+ 152 0072 181C     		mov	r0, r3
+ 153 0074 211C     		mov	r1, r4
+ 154 0076 FFF7FEFF 		bl	__aeabi_d2f
+ 155 007a 031C     		add	r3, r0, #0
+ 156 007c 3B60     		str	r3, [r7]
+  51:../Sources/main.c **** 		if((TFC_Ticker[0] > 2*exposure_usecs / 1000) && (LineScanImageReady == 1))
+ 157              		.loc 1 51 0
+ 158 007e 604B     		ldr	r3, .L9+40
+ 159 0080 1C68     		ldr	r4, [r3]
+ 160 0082 BB6A     		ldr	r3, [r7, #40]
+ 161 0084 5B00     		lsl	r3, r3, #1
+ 162 0086 181C     		mov	r0, r3
+ 163 0088 FA23     		mov	r3, #250
+ 164 008a 9900     		lsl	r1, r3, #2
+ 165 008c FFF7FEFF 		bl	__aeabi_idiv
+ 166 0090 031C     		mov	r3, r0
+ 167 0092 9C42     		cmp	r4, r3
+ 168 0094 DDD9     		bls	.L8
+  51:../Sources/main.c **** 		if((TFC_Ticker[0] > 2*exposure_usecs / 1000) && (LineScanImageReady == 1))
+ 169              		.loc 1 51 0 is_stmt 0
+ 170 0096 5B4B     		ldr	r3, .L9+44
+ 171 0098 1B78     		ldrb	r3, [r3]
+ 172 009a DBB2     		uxtb	r3, r3
+ 173 009c 012B     		cmp	r3, #1
+ 174 009e D8D1     		bne	.L8
+  54:../Sources/main.c **** 				TFC_Ticker[0] = 0;
+ 175              		.loc 1 54 0 is_stmt 1
+ 176 00a0 574B     		ldr	r3, .L9+40
+ 177 00a2 0022     		mov	r2, #0
+ 178 00a4 1A60     		str	r2, [r3]
+  55:../Sources/main.c **** 				LineScanImageReady  = 0;
+ 179              		.loc 1 55 0
+ 180 00a6 574B     		ldr	r3, .L9+44
+ 181 00a8 0022     		mov	r2, #0
+ 182 00aa 1A70     		strb	r2, [r3]
+  58:../Sources/main.c **** 				track_center = TFC_LineScanImageToDigital(DigitalImage0);
+ 183              		.loc 1 58 0
+ 184 00ac 7B6A     		ldr	r3, [r7, #36]
+ 185 00ae 181C     		mov	r0, r3
+ 186 00b0 FFF7FEFF 		bl	TFC_LineScanImageToDigital
+ 187 00b4 031C     		add	r3, r0, #0
+ 188 00b6 FB62     		str	r3, [r7, #44]
+  65:../Sources/main.c **** 				SP_center_angle = TFC_GetAngleToTrackCenter(track_center);
+ 189              		.loc 1 65 0
+ 190 00b8 FB6A     		ldr	r3, [r7, #44]
+ 191 00ba 181C     		add	r0, r3, #0
+ 192 00bc FFF7FEFF 		bl	TFC_GetAngleToTrackCenter
+ 193 00c0 031C     		add	r3, r0, #0
+ 194 00c2 3B62     		str	r3, [r7, #32]
+  68:../Sources/main.c **** 				P_error_angle = SP_center_angle - 0;
+ 195              		.loc 1 68 0
+ 196 00c4 3B6A     		ldr	r3, [r7, #32]
+ 197 00c6 BB61     		str	r3, [r7, #24]
+  71:../Sources/main.c **** 				temp_I_error_angle = I_error_angle + P_error_angle * delta_time;
+ 198              		.loc 1 71 0
+ 199 00c8 B869     		ldr	r0, [r7, #24]
+ 200 00ca 3968     		ldr	r1, [r7]
+ 201 00cc FFF7FEFF 		bl	__aeabi_fmul
+ 202 00d0 031C     		add	r3, r0, #0
+ 203 00d2 181C     		add	r0, r3, #0
+ 204 00d4 796B     		ldr	r1, [r7, #52]
+ 205 00d6 FFF7FEFF 		bl	__aeabi_fadd
+ 206 00da 031C     		add	r3, r0, #0
+ 207 00dc 3B61     		str	r3, [r7, #16]
+  72:../Sources/main.c **** 				if(abs(temp_I_error_angle) < 90) I_error_angle = temp_I_error_angle;
+ 208              		.loc 1 72 0
+ 209 00de 3869     		ldr	r0, [r7, #16]
+ 210 00e0 FFF7FEFF 		bl	__aeabi_f2iz
+ 211 00e4 031C     		mov	r3, r0
+ 212 00e6 1A1C     		mov	r2, r3
+ 213 00e8 5932     		add	r2, r2, #89
+ 214 00ea 07DB     		blt	.L3
+  72:../Sources/main.c **** 				if(abs(temp_I_error_angle) < 90) I_error_angle = temp_I_error_angle;
+ 215              		.loc 1 72 0 is_stmt 0
+ 216 00ec 3869     		ldr	r0, [r7, #16]
+ 217 00ee FFF7FEFF 		bl	__aeabi_f2iz
+ 218 00f2 031C     		mov	r3, r0
+ 219 00f4 592B     		cmp	r3, #89
+ 220 00f6 01DC     		bgt	.L3
+ 221 00f8 3B69     		ldr	r3, [r7, #16]
+ 222 00fa 7B63     		str	r3, [r7, #52]
+ 223              	.L3:
+  75:../Sources/main.c **** 				D_error_angle = P_error_angle - last_P_error_angle;
+ 224              		.loc 1 75 0 is_stmt 1
+ 225 00fc B869     		ldr	r0, [r7, #24]
+ 226 00fe 396B     		ldr	r1, [r7, #48]
+ 227 0100 FFF7FEFF 		bl	__aeabi_fsub
+ 228 0104 031C     		add	r3, r0, #0
+ 229 0106 7B61     		str	r3, [r7, #20]
+  78:../Sources/main.c **** 				CV_turn_angle = (Kp * P_error_angle) + (Ki * I_error_angle) + (Kd * D_error_angle);
+ 230              		.loc 1 78 0
+ 231 0108 F868     		ldr	r0, [r7, #12]
+ 232 010a B969     		ldr	r1, [r7, #24]
+ 233 010c FFF7FEFF 		bl	__aeabi_fmul
+ 234 0110 031C     		add	r3, r0, #0
+ 235 0112 1C1C     		add	r4, r3, #0
+ 236 0114 B868     		ldr	r0, [r7, #8]
+ 237 0116 796B     		ldr	r1, [r7, #52]
+ 238 0118 FFF7FEFF 		bl	__aeabi_fmul
+ 239 011c 031C     		add	r3, r0, #0
+ 240 011e 201C     		add	r0, r4, #0
+ 241 0120 191C     		add	r1, r3, #0
+ 242 0122 FFF7FEFF 		bl	__aeabi_fadd
+ 243 0126 031C     		add	r3, r0, #0
+ 244 0128 1C1C     		add	r4, r3, #0
+ 245 012a 7868     		ldr	r0, [r7, #4]
+ 246 012c 7969     		ldr	r1, [r7, #20]
+ 247 012e FFF7FEFF 		bl	__aeabi_fmul
+ 248 0132 031C     		add	r3, r0, #0
+ 249 0134 201C     		add	r0, r4, #0
+ 250 0136 191C     		add	r1, r3, #0
+ 251 0138 FFF7FEFF 		bl	__aeabi_fadd
+ 252 013c 031C     		add	r3, r0, #0
+ 253 013e FB61     		str	r3, [r7, #28]
+  84:../Sources/main.c **** 				if(TFC_Ticker[1] >= MIN_SERVO_UPDATE_TIME)
+ 254              		.loc 1 84 0
+ 255 0140 2F4B     		ldr	r3, .L9+40
+ 256 0142 5B68     		ldr	r3, [r3, #4]
+ 257 0144 181C     		mov	r0, r3
+ 258 0146 FFF7FEFF 		bl	__aeabi_ui2d
+ 259 014a 031C     		mov	r3, r0
+ 260 014c 0C1C     		mov	r4, r1
+ 261 014e 181C     		mov	r0, r3
+ 262 0150 211C     		mov	r1, r4
+ 263 0152 234A     		ldr	r2, .L9+8
+ 264 0154 234B     		ldr	r3, .L9+12
+ 265 0156 FFF7FEFF 		bl	__aeabi_dcmpge
+ 266 015a 031C     		mov	r3, r0
+ 267 015c 002B     		cmp	r3, #0
+ 268 015e 06D0     		beq	.L4
+ 269              	.L7:
+  86:../Sources/main.c **** 					TFC_Ticker[1] = 0;
+ 270              		.loc 1 86 0
+ 271 0160 274B     		ldr	r3, .L9+40
+ 272 0162 0022     		mov	r2, #0
+ 273 0164 5A60     		str	r2, [r3, #4]
+  87:../Sources/main.c **** 					TFC_SetSteeringAngle(CV_turn_angle);
+ 274              		.loc 1 87 0
+ 275 0166 FB69     		ldr	r3, [r7, #28]
+ 276 0168 181C     		add	r0, r3, #0
+ 277 016a FFF7FEFF 		bl	TFC_SetSteeringAngle
+ 278              	.L4:
+  93:../Sources/main.c **** 				last_P_error_angle = P_error_angle;
+ 279              		.loc 1 93 0
+ 280 016e BB69     		ldr	r3, [r7, #24]
+ 281 0170 3B63     		str	r3, [r7, #48]
+  99:../Sources/main.c **** 				DigitalImage0[(int) track_center] = CENTER_MARK;
+ 282              		.loc 1 99 0
+ 283 0172 F86A     		ldr	r0, [r7, #44]
+ 284 0174 FFF7FEFF 		bl	__aeabi_f2iz
+ 285 0178 031C     		mov	r3, r0
+ 286 017a 7A6A     		ldr	r2, [r7, #36]
+ 287 017c D318     		add	r3, r2, r3
+ 288 017e 4322     		mov	r2, #67
+ 289 0180 1A70     		strb	r2, [r3]
+ 100:../Sources/main.c **** 				DigitalImage0[(int) (CAMERA_AIM_POINT_FLOAT)] = CURRENT_POSITION_MARK;
+ 290              		.loc 1 100 0
+ 291 0182 1B4B     		ldr	r3, .L9+24
+ 292 0184 1B68     		ldr	r3, [r3]
+ 293 0186 181C     		add	r0, r3, #0
+ 294 0188 FFF7FEFF 		bl	__aeabi_f2iz
+ 295 018c 031C     		mov	r3, r0
+ 296 018e 7A6A     		ldr	r2, [r7, #36]
+ 297 0190 D318     		add	r3, r2, r3
+ 298 0192 5822     		mov	r2, #88
+ 299 0194 1A70     		strb	r2, [r3]
+ 101:../Sources/main.c **** 				DigitalImage0[(int) (CAMERA_AIM_POINT_FLOAT + 0.5)] = CURRENT_POSITION_MARK;
+ 300              		.loc 1 101 0
+ 301 0196 164B     		ldr	r3, .L9+24
+ 302 0198 1B68     		ldr	r3, [r3]
+ 303 019a 181C     		add	r0, r3, #0
+ 304 019c FFF7FEFF 		bl	__aeabi_f2d
+ 305 01a0 031C     		mov	r3, r0
+ 306 01a2 0C1C     		mov	r4, r1
+ 307 01a4 181C     		mov	r0, r3
+ 308 01a6 211C     		mov	r1, r4
+ 309 01a8 0F4A     		ldr	r2, .L9+16
+ 310 01aa 104B     		ldr	r3, .L9+20
+ 311 01ac FFF7FEFF 		bl	__aeabi_dadd
+ 312 01b0 031C     		mov	r3, r0
+ 313 01b2 0C1C     		mov	r4, r1
+ 314 01b4 181C     		mov	r0, r3
+ 315 01b6 211C     		mov	r1, r4
+ 316 01b8 FFF7FEFF 		bl	__aeabi_d2iz
+ 317 01bc 031C     		mov	r3, r0
+ 318 01be 7A6A     		ldr	r2, [r7, #36]
+ 319 01c0 D318     		add	r3, r2, r3
+ 320 01c2 5822     		mov	r2, #88
+ 321 01c4 1A70     		strb	r2, [r3]
+ 105:../Sources/main.c **** 				TERMINAL_PRINTF("Test string is: %s\r\n", DigitalImage0);
+ 322              		.loc 1 105 0
+ 323 01c6 1049     		ldr	r1, .L9+48
+ 324 01c8 104A     		ldr	r2, .L9+52
+ 325 01ca 7B6A     		ldr	r3, [r7, #36]
+ 326 01cc 081C     		mov	r0, r1
+ 327 01ce 111C     		mov	r1, r2
+ 328 01d0 1A1C     		mov	r2, r3
+ 329 01d2 FFF7FEFF 		bl	Qprintf
+ 330              		.loc 1 112 0
+ 331 01d6 3CE7     		b	.L8
+ 332              	.L10:
+ 333              		.align	3
+ 334              	.L9:
+ 335 01d8 00000000 		.word	0
+ 336 01dc 80842E41 		.word	1093567616
+ 337 01e0 00000000 		.word	0
+ 338 01e4 00003440 		.word	1077149696
+ 339 01e8 00000000 		.word	0
+ 340 01ec 0000E03F 		.word	1071644672
+ 341 01f0 00000000 		.word	CAMERA_AIM_POINT_FLOAT
+ 342 01f4 88130000 		.word	5000
+ 343 01f8 CDCCCC3D 		.word	1036831949
+ 344 01fc 00000000 		.word	NUM_PIXELS
+ 345 0200 00000000 		.word	TFC_Ticker
+ 346 0204 00000000 		.word	LineScanImageReady
+ 347 0208 00000000 		.word	SDA_SERIAL_OUTGOING_QUEUE
+ 348 020c 00000000 		.word	.LC5
+ 349              		.cfi_endproc
+ 350              	.LFE0:
+ 352              		.text
+ 353              	.Letext0:
+ 354              		.file 2 "F:/CW MCU v10.6/MCU/ARM_GCC_Support/ewl/EWL_C/include/cstdint"
+ 355              		.file 3 "F:/FreeScale/Projects/TFC_Project/FRDM-TFC/Project_Headers/TFC\\TFC_Queue.h"
+ 356              		.file 4 "F:/FreeScale/Projects/TFC_Project/FRDM-TFC/Project_Headers/TFC\\TFC_ARM_SysTick.h"
+ 357              		.file 5 "F:/FreeScale/Projects/TFC_Project/FRDM-TFC/Project_Headers/TFC\\TFC_LineScanCamera.h"
+ 358              		.file 6 "F:/FreeScale/Projects/TFC_Project/FRDM-TFC/Project_Headers/TFC\\TFC_UART.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\GOLGIR~1\AppData\Local\Temp\cciUdXo7.s:21     .rodata.NUM_PIXELS:00000000 NUM_PIXELS
+C:\Users\GOLGIR~1\AppData\Local\Temp\cciUdXo7.s:27     .rodata.HALF_NUM_PIXELS:00000000 HALF_NUM_PIXELS
+C:\Users\GOLGIR~1\AppData\Local\Temp\cciUdXo7.s:34     .rodata.CAMERA_AIM_POINT_FLOAT:00000000 CAMERA_AIM_POINT_FLOAT
+C:\Users\GOLGIR~1\AppData\Local\Temp\cciUdXo7.s:31     .rodata.CAMERA_AIM_POINT_FLOAT:00000000 $d
+C:\Users\GOLGIR~1\AppData\Local\Temp\cciUdXo7.s:41     .rodata.EXP_RANGE:00000000 EXP_RANGE
+C:\Users\GOLGIR~1\AppData\Local\Temp\cciUdXo7.s:38     .rodata.EXP_RANGE:00000000 $d
+C:\Users\GOLGIR~1\AppData\Local\Temp\cciUdXo7.s:57     .rodata:00000000 $d
+C:\Users\GOLGIR~1\AppData\Local\Temp\cciUdXo7.s:61     .text.main:00000000 $t
+C:\Users\GOLGIR~1\AppData\Local\Temp\cciUdXo7.s:66     .text.main:00000000 main
+C:\Users\GOLGIR~1\AppData\Local\Temp\cciUdXo7.s:335    .text.main:000001d8 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+__aeabi_i2d
+__aeabi_ddiv
+__aeabi_d2f
+__aeabi_idiv
+__aeabi_fmul
+__aeabi_fadd
+__aeabi_f2iz
+__aeabi_fsub
+__aeabi_ui2d
+__aeabi_dcmpge
+__aeabi_f2d
+__aeabi_dadd
+__aeabi_d2iz
+TFC_Init
+malloc
+TFC_Task
+TFC_LineScanImageToDigital
+TFC_GetAngleToTrackCenter
+TFC_SetSteeringAngle
+Qprintf
+TFC_Ticker
+LineScanImageReady
+SDA_SERIAL_OUTGOING_QUEUE
