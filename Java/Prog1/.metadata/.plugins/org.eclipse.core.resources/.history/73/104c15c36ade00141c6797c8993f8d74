@@ -1,0 +1,46 @@
+import java.util.Random;
+
+public class Animal 
+{
+	private static final int ARRAYSIZE = 100;
+	private static final int MAXRAND = 100;
+	
+	public static void FillIntArray(int array[])
+	{
+		Random Rand = new Random();
+		for(int i: array)
+			array[i] = 1 + Rand.nextInt(MAXRAND);
+	}
+	
+	public static int SumIntArray(int array[])
+	{
+		int result = 0;
+		for(int i: array)
+			result += array[i];
+		return result;
+	}
+	
+	public static void PrintIntArray(int array[])
+	{
+		for(int i: array)
+			System.out.println("array[" + i + "] == " + array[i]);
+	}
+	
+	
+	
+	
+	public static void main(String[] args)
+	{
+		int TestArray[] = new int[ARRAYSIZE] ;
+		FillIntArray(TestArray);
+		int ArraySum = SumIntArray(TestArray);
+		PrintIntArray(TestArray);
+		
+		String cat = "hi! ";
+		System.out.append(cat, 1, 2);
+		
+		System.out.println("\n\n\nwhaat?");
+
+	}
+	
+}

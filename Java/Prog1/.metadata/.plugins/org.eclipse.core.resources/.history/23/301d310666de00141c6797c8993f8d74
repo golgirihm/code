@@ -1,0 +1,17 @@
+public class Animal 
+{
+
+	public static void main(String[] args)
+	{
+		int finalResult = summation(10);
+		
+		System.out.println();
+	}
+
+	public static int summation(int n)
+	{
+		int result = (n*(n+1))/2;
+		return result;
+	}
+	
+}

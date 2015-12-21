@@ -1,0 +1,21 @@
+public class Animal 
+{
+
+	public static void main(String[] args)
+	{
+		int array[] = new int[100] ;
+		
+
+		
+		
+		int array_total;
+		System.out.println("finalResult == " + array_total);
+	}
+
+	public static int summation(int n)
+	{
+		int result = (n*(n+1))/2;
+		return result;
+	}
+	
+}

@@ -1,0 +1,19 @@
+public class Animal 
+{
+
+
+
+	public static int summation(int n)
+	{
+		int result = (n*(n+1))/2;
+		return result;
+	}
+	
+}
+
+public static void main(String[] args)
+{
+	int finalResult = summation(100);
+	
+	System.out.println("finalResult == " + finalResult);
+}

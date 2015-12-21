@@ -1,0 +1,23 @@
+import java.util.Random;
+
+public class Animal 
+{
+
+	public static void main(String[] args)
+	{
+		int array[] = new int[100] ;
+		Random j = new Random();
+
+		
+		
+		int array_total = 0;
+		System.out.println("array_total == " + array_total);
+	}
+
+	public static int summation(int n)
+	{
+		int result = (n*(n+1))/2;
+		return result;
+	}
+	
+}
