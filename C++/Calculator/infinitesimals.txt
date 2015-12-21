@@ -1,0 +1,24 @@
+        // avoid infinitesimal numbers
+        if (ang == RIGHTANG || ang == -RIGHTANG - SEMICIRCLE) {	// 90 or -270 degrees
+            this->p1 = 0.0;
+            this->p2 = mag;
+            qDebug() << "rounded a little in torect() because of a 90 degree angle" << endl;
+        }
+
+        else if (ang == -RIGHTANG || ang == RIGHTANG + SEMICIRCLE){ // -90 or 270 degrees
+            this->p1 = 0.0;
+            this->p2 = (-1) * mag;
+            qDebug() << "rounded a little in torect() because of a -90 degree angle" << endl;
+        }
+
+        else if (ang == 0){
+            this->p1 = mag;
+            this->p2 = 0.0;
+            qDebug() << "rounded a little in torect() because of a 0 degree angle" << endl;
+        }
+
+        else if (ang == SEMICIRCLE || ang == -SEMICIRCLE){ // 180 or -180 degrees
+            this->p1 = (-1) * mag;
+            this->p2 = 0.0;
+            qDebug() << "rounded a little in torect() because of a 180 degree angle" << endl;
+        }

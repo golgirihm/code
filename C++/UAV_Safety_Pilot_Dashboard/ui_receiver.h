@@ -1,0 +1,541 @@
+/********************************************************************************
+** Form generated from reading UI file 'receiver.ui'
+**
+** Created by: Qt User Interface Compiler version 5.3.2
+**
+** WARNING! All changes made in this file will be lost when recompiling UI file!
+********************************************************************************/
+
+#ifndef UI_RECEIVER_H
+#define UI_RECEIVER_H
+
+#include <QtCore/QVariant>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QFrame>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLCDNumber>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QWidget>
+
+QT_BEGIN_NAMESPACE
+
+class Ui_receiver
+{
+public:
+    QWidget *centralWidget;
+    QLabel *App_Title;
+    QLabel *VCU_Label;
+    QFrame *frame_4;
+    QFrame *line_3;
+    QFrame *frame_5;
+    QLabel *label_10;
+    QLCDNumber *position_longitude;
+    QLCDNumber *position_latitude;
+    QLabel *label_11;
+    QLCDNumber *position_heading;
+    QLabel *label_12;
+    QFrame *frame_6;
+    QLCDNumber *position_pitch;
+    QLabel *label_13;
+    QLCDNumber *position_roll;
+    QLabel *label_14;
+    QLCDNumber *position_yaw;
+    QLabel *label_15;
+    QFrame *line_4;
+    QFrame *frame_7;
+    QLCDNumber *position_altitude;
+    QLabel *label_16;
+    QLCDNumber *baro_altitude;
+    QLabel *label_17;
+    QLCDNumber *baro_airspeed;
+    QLabel *label_18;
+    QLabel *label_26;
+    QLabel *label_29;
+    QLabel *label_27;
+    QLabel *label_28;
+    QLabel *label_protocol;
+    QLabel *label_server_ip;
+    QLabel *label_port_number;
+    QLabel *label_status;
+
+    void setupUi(QMainWindow *receiver)
+    {
+        if (receiver->objectName().isEmpty())
+            receiver->setObjectName(QStringLiteral("receiver"));
+        receiver->resize(1328, 745);
+        receiver->setStyleSheet(QLatin1String("background-color: rgb(255, 191, 0);\n"
+"color: rgb(0, 0, 0);\n"
+"font: 8pt \"Georgia\";"));
+        centralWidget = new QWidget(receiver);
+        centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        App_Title = new QLabel(centralWidget);
+        App_Title->setObjectName(QStringLiteral("App_Title"));
+        App_Title->setGeometry(QRect(450, 40, 431, 111));
+        QFont font;
+        font.setFamily(QStringLiteral("Georgia"));
+        font.setPointSize(8);
+        font.setBold(false);
+        font.setItalic(false);
+        font.setWeight(50);
+        App_Title->setFont(font);
+        App_Title->setToolTipDuration(-1);
+        App_Title->setStyleSheet(QStringLiteral(""));
+        App_Title->setTextFormat(Qt::AutoText);
+        App_Title->setAlignment(Qt::AlignCenter);
+        App_Title->setWordWrap(true);
+        App_Title->setTextInteractionFlags(Qt::NoTextInteraction);
+        VCU_Label = new QLabel(centralWidget);
+        VCU_Label->setObjectName(QStringLiteral("VCU_Label"));
+        VCU_Label->setGeometry(QRect(1190, 10, 81, 41));
+        VCU_Label->setFont(font);
+        VCU_Label->setToolTipDuration(-1);
+        VCU_Label->setAlignment(Qt::AlignCenter);
+        VCU_Label->setWordWrap(true);
+        VCU_Label->setTextInteractionFlags(Qt::NoTextInteraction);
+        frame_4 = new QFrame(centralWidget);
+        frame_4->setObjectName(QStringLiteral("frame_4"));
+        frame_4->setGeometry(QRect(270, 170, 821, 541));
+        frame_4->setStyleSheet(QStringLiteral("background-color: rgb(43, 43, 43);"));
+        frame_4->setFrameShape(QFrame::StyledPanel);
+        frame_4->setFrameShadow(QFrame::Raised);
+        line_3 = new QFrame(frame_4);
+        line_3->setObjectName(QStringLiteral("line_3"));
+        line_3->setGeometry(QRect(-260, 360, 1169, 16));
+        line_3->setStyleSheet(QStringLiteral("color: rgb(0, 0, 0);"));
+        line_3->setLineWidth(3);
+        line_3->setFrameShape(QFrame::HLine);
+        line_3->setFrameShadow(QFrame::Sunken);
+        frame_5 = new QFrame(frame_4);
+        frame_5->setObjectName(QStringLiteral("frame_5"));
+        frame_5->setGeometry(QRect(80, 230, 631, 101));
+        frame_5->setStyleSheet(QStringLiteral("background-color: rgb(255, 191, 0);"));
+        frame_5->setFrameShape(QFrame::StyledPanel);
+        frame_5->setFrameShadow(QFrame::Raised);
+        label_10 = new QLabel(frame_5);
+        label_10->setObjectName(QStringLiteral("label_10"));
+        label_10->setGeometry(QRect(410, 10, 191, 31));
+        label_10->setToolTipDuration(-1);
+        label_10->setAlignment(Qt::AlignCenter);
+        label_10->setWordWrap(true);
+        label_10->setTextInteractionFlags(Qt::NoTextInteraction);
+        position_longitude = new QLCDNumber(frame_5);
+        position_longitude->setObjectName(QStringLiteral("position_longitude"));
+        position_longitude->setEnabled(true);
+        position_longitude->setGeometry(QRect(420, 40, 161, 31));
+        QPalette palette;
+        QBrush brush(QColor(0, 0, 255, 255));
+        brush.setStyle(Qt::SolidPattern);
+        palette.setBrush(QPalette::Active, QPalette::WindowText, brush);
+        QBrush brush1(QColor(255, 191, 0, 255));
+        brush1.setStyle(Qt::SolidPattern);
+        palette.setBrush(QPalette::Active, QPalette::Button, brush1);
+        QBrush brush2(QColor(0, 0, 0, 255));
+        brush2.setStyle(Qt::SolidPattern);
+        palette.setBrush(QPalette::Active, QPalette::Light, brush2);
+        palette.setBrush(QPalette::Active, QPalette::Text, brush);
+        palette.setBrush(QPalette::Active, QPalette::ButtonText, brush);
+        palette.setBrush(QPalette::Active, QPalette::Base, brush1);
+        palette.setBrush(QPalette::Active, QPalette::Window, brush1);
+        palette.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
+        palette.setBrush(QPalette::Inactive, QPalette::Button, brush1);
+        palette.setBrush(QPalette::Inactive, QPalette::Light, brush2);
+        palette.setBrush(QPalette::Inactive, QPalette::Text, brush);
+        palette.setBrush(QPalette::Inactive, QPalette::ButtonText, brush);
+        palette.setBrush(QPalette::Inactive, QPalette::Base, brush1);
+        palette.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+        palette.setBrush(QPalette::Disabled, QPalette::WindowText, brush);
+        palette.setBrush(QPalette::Disabled, QPalette::Button, brush1);
+        palette.setBrush(QPalette::Disabled, QPalette::Light, brush2);
+        palette.setBrush(QPalette::Disabled, QPalette::Text, brush);
+        palette.setBrush(QPalette::Disabled, QPalette::ButtonText, brush);
+        palette.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+        position_longitude->setPalette(palette);
+        position_longitude->setFont(font);
+        position_longitude->setLayoutDirection(Qt::LeftToRight);
+        position_longitude->setStyleSheet(QStringLiteral("color: rgb(0, 0, 255);"));
+        position_longitude->setDigitCount(11);
+        position_latitude = new QLCDNumber(frame_5);
+        position_latitude->setObjectName(QStringLiteral("position_latitude"));
+        position_latitude->setGeometry(QRect(210, 40, 161, 31));
+        QPalette palette1;
+        palette1.setBrush(QPalette::Active, QPalette::WindowText, brush);
+        palette1.setBrush(QPalette::Active, QPalette::Button, brush1);
+        palette1.setBrush(QPalette::Active, QPalette::Light, brush2);
+        palette1.setBrush(QPalette::Active, QPalette::Text, brush);
+        palette1.setBrush(QPalette::Active, QPalette::ButtonText, brush);
+        palette1.setBrush(QPalette::Active, QPalette::Base, brush1);
+        palette1.setBrush(QPalette::Active, QPalette::Window, brush1);
+        palette1.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
+        palette1.setBrush(QPalette::Inactive, QPalette::Button, brush1);
+        palette1.setBrush(QPalette::Inactive, QPalette::Light, brush2);
+        palette1.setBrush(QPalette::Inactive, QPalette::Text, brush);
+        palette1.setBrush(QPalette::Inactive, QPalette::ButtonText, brush);
+        palette1.setBrush(QPalette::Inactive, QPalette::Base, brush1);
+        palette1.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+        palette1.setBrush(QPalette::Disabled, QPalette::WindowText, brush);
+        palette1.setBrush(QPalette::Disabled, QPalette::Button, brush1);
+        palette1.setBrush(QPalette::Disabled, QPalette::Light, brush2);
+        palette1.setBrush(QPalette::Disabled, QPalette::Text, brush);
+        palette1.setBrush(QPalette::Disabled, QPalette::ButtonText, brush);
+        palette1.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette1.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+        position_latitude->setPalette(palette1);
+        position_latitude->setFont(font);
+        position_latitude->setLayoutDirection(Qt::LeftToRight);
+        position_latitude->setStyleSheet(QStringLiteral("color: rgb(0, 0, 255);"));
+        position_latitude->setDigitCount(11);
+        label_11 = new QLabel(frame_5);
+        label_11->setObjectName(QStringLiteral("label_11"));
+        label_11->setGeometry(QRect(190, 10, 191, 31));
+        label_11->setToolTipDuration(-1);
+        label_11->setAlignment(Qt::AlignCenter);
+        label_11->setTextInteractionFlags(Qt::NoTextInteraction);
+        position_heading = new QLCDNumber(frame_5);
+        position_heading->setObjectName(QStringLiteral("position_heading"));
+        position_heading->setGeometry(QRect(10, 40, 161, 31));
+        QPalette palette2;
+        palette2.setBrush(QPalette::Active, QPalette::WindowText, brush);
+        palette2.setBrush(QPalette::Active, QPalette::Button, brush1);
+        palette2.setBrush(QPalette::Active, QPalette::Light, brush2);
+        palette2.setBrush(QPalette::Active, QPalette::Text, brush);
+        palette2.setBrush(QPalette::Active, QPalette::ButtonText, brush);
+        palette2.setBrush(QPalette::Active, QPalette::Base, brush1);
+        palette2.setBrush(QPalette::Active, QPalette::Window, brush1);
+        palette2.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
+        palette2.setBrush(QPalette::Inactive, QPalette::Button, brush1);
+        palette2.setBrush(QPalette::Inactive, QPalette::Light, brush2);
+        palette2.setBrush(QPalette::Inactive, QPalette::Text, brush);
+        palette2.setBrush(QPalette::Inactive, QPalette::ButtonText, brush);
+        palette2.setBrush(QPalette::Inactive, QPalette::Base, brush1);
+        palette2.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+        palette2.setBrush(QPalette::Disabled, QPalette::WindowText, brush);
+        palette2.setBrush(QPalette::Disabled, QPalette::Button, brush1);
+        palette2.setBrush(QPalette::Disabled, QPalette::Light, brush2);
+        palette2.setBrush(QPalette::Disabled, QPalette::Text, brush);
+        palette2.setBrush(QPalette::Disabled, QPalette::ButtonText, brush);
+        palette2.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette2.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+        position_heading->setPalette(palette2);
+        position_heading->setFont(font);
+        position_heading->setLayoutDirection(Qt::LeftToRight);
+        position_heading->setStyleSheet(QStringLiteral("color: rgb(0, 0, 255);"));
+        position_heading->setDigitCount(11);
+        label_12 = new QLabel(frame_5);
+        label_12->setObjectName(QStringLiteral("label_12"));
+        label_12->setGeometry(QRect(-12, 9, 191, 31));
+        label_12->setToolTipDuration(-1);
+        label_12->setAlignment(Qt::AlignCenter);
+        label_12->setWordWrap(true);
+        label_12->setTextInteractionFlags(Qt::NoTextInteraction);
+        frame_6 = new QFrame(frame_4);
+        frame_6->setObjectName(QStringLiteral("frame_6"));
+        frame_6->setGeometry(QRect(80, 390, 631, 101));
+        frame_6->setStyleSheet(QStringLiteral("background-color: rgb(255, 191, 0);"));
+        frame_6->setFrameShape(QFrame::StyledPanel);
+        frame_6->setFrameShadow(QFrame::Raised);
+        position_pitch = new QLCDNumber(frame_6);
+        position_pitch->setObjectName(QStringLiteral("position_pitch"));
+        position_pitch->setGeometry(QRect(20, 40, 161, 31));
+        QPalette palette3;
+        palette3.setBrush(QPalette::Active, QPalette::WindowText, brush2);
+        palette3.setBrush(QPalette::Active, QPalette::Button, brush1);
+        palette3.setBrush(QPalette::Active, QPalette::Light, brush2);
+        palette3.setBrush(QPalette::Active, QPalette::Text, brush2);
+        palette3.setBrush(QPalette::Active, QPalette::ButtonText, brush2);
+        palette3.setBrush(QPalette::Active, QPalette::Base, brush1);
+        palette3.setBrush(QPalette::Active, QPalette::Window, brush1);
+        palette3.setBrush(QPalette::Inactive, QPalette::WindowText, brush2);
+        palette3.setBrush(QPalette::Inactive, QPalette::Button, brush1);
+        palette3.setBrush(QPalette::Inactive, QPalette::Light, brush2);
+        palette3.setBrush(QPalette::Inactive, QPalette::Text, brush2);
+        palette3.setBrush(QPalette::Inactive, QPalette::ButtonText, brush2);
+        palette3.setBrush(QPalette::Inactive, QPalette::Base, brush1);
+        palette3.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+        palette3.setBrush(QPalette::Disabled, QPalette::WindowText, brush2);
+        palette3.setBrush(QPalette::Disabled, QPalette::Button, brush1);
+        palette3.setBrush(QPalette::Disabled, QPalette::Light, brush2);
+        palette3.setBrush(QPalette::Disabled, QPalette::Text, brush2);
+        palette3.setBrush(QPalette::Disabled, QPalette::ButtonText, brush2);
+        palette3.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette3.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+        position_pitch->setPalette(palette3);
+        position_pitch->setFont(font);
+        position_pitch->setLayoutDirection(Qt::LeftToRight);
+        position_pitch->setStyleSheet(QStringLiteral(""));
+        position_pitch->setDigitCount(11);
+        label_13 = new QLabel(frame_6);
+        label_13->setObjectName(QStringLiteral("label_13"));
+        label_13->setGeometry(QRect(-10, 10, 191, 31));
+        label_13->setToolTipDuration(-1);
+        label_13->setAlignment(Qt::AlignCenter);
+        label_13->setWordWrap(true);
+        label_13->setTextInteractionFlags(Qt::NoTextInteraction);
+        position_roll = new QLCDNumber(frame_6);
+        position_roll->setObjectName(QStringLiteral("position_roll"));
+        position_roll->setGeometry(QRect(210, 40, 161, 31));
+        QPalette palette4;
+        palette4.setBrush(QPalette::Active, QPalette::WindowText, brush2);
+        palette4.setBrush(QPalette::Active, QPalette::Button, brush1);
+        palette4.setBrush(QPalette::Active, QPalette::Light, brush2);
+        palette4.setBrush(QPalette::Active, QPalette::Text, brush2);
+        palette4.setBrush(QPalette::Active, QPalette::ButtonText, brush2);
+        palette4.setBrush(QPalette::Active, QPalette::Base, brush1);
+        palette4.setBrush(QPalette::Active, QPalette::Window, brush1);
+        palette4.setBrush(QPalette::Inactive, QPalette::WindowText, brush2);
+        palette4.setBrush(QPalette::Inactive, QPalette::Button, brush1);
+        palette4.setBrush(QPalette::Inactive, QPalette::Light, brush2);
+        palette4.setBrush(QPalette::Inactive, QPalette::Text, brush2);
+        palette4.setBrush(QPalette::Inactive, QPalette::ButtonText, brush2);
+        palette4.setBrush(QPalette::Inactive, QPalette::Base, brush1);
+        palette4.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+        palette4.setBrush(QPalette::Disabled, QPalette::WindowText, brush2);
+        palette4.setBrush(QPalette::Disabled, QPalette::Button, brush1);
+        palette4.setBrush(QPalette::Disabled, QPalette::Light, brush2);
+        palette4.setBrush(QPalette::Disabled, QPalette::Text, brush2);
+        palette4.setBrush(QPalette::Disabled, QPalette::ButtonText, brush2);
+        palette4.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette4.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+        position_roll->setPalette(palette4);
+        position_roll->setFont(font);
+        position_roll->setLayoutDirection(Qt::LeftToRight);
+        position_roll->setDigitCount(11);
+        label_14 = new QLabel(frame_6);
+        label_14->setObjectName(QStringLiteral("label_14"));
+        label_14->setGeometry(QRect(170, 10, 191, 31));
+        label_14->setToolTipDuration(-1);
+        label_14->setAlignment(Qt::AlignCenter);
+        label_14->setTextInteractionFlags(Qt::NoTextInteraction);
+        position_yaw = new QLCDNumber(frame_6);
+        position_yaw->setObjectName(QStringLiteral("position_yaw"));
+        position_yaw->setGeometry(QRect(420, 40, 161, 31));
+        QPalette palette5;
+        palette5.setBrush(QPalette::Active, QPalette::WindowText, brush2);
+        palette5.setBrush(QPalette::Active, QPalette::Button, brush1);
+        palette5.setBrush(QPalette::Active, QPalette::Light, brush2);
+        palette5.setBrush(QPalette::Active, QPalette::Text, brush2);
+        palette5.setBrush(QPalette::Active, QPalette::ButtonText, brush2);
+        palette5.setBrush(QPalette::Active, QPalette::Base, brush1);
+        palette5.setBrush(QPalette::Active, QPalette::Window, brush1);
+        palette5.setBrush(QPalette::Inactive, QPalette::WindowText, brush2);
+        palette5.setBrush(QPalette::Inactive, QPalette::Button, brush1);
+        palette5.setBrush(QPalette::Inactive, QPalette::Light, brush2);
+        palette5.setBrush(QPalette::Inactive, QPalette::Text, brush2);
+        palette5.setBrush(QPalette::Inactive, QPalette::ButtonText, brush2);
+        palette5.setBrush(QPalette::Inactive, QPalette::Base, brush1);
+        palette5.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+        palette5.setBrush(QPalette::Disabled, QPalette::WindowText, brush2);
+        palette5.setBrush(QPalette::Disabled, QPalette::Button, brush1);
+        palette5.setBrush(QPalette::Disabled, QPalette::Light, brush2);
+        palette5.setBrush(QPalette::Disabled, QPalette::Text, brush2);
+        palette5.setBrush(QPalette::Disabled, QPalette::ButtonText, brush2);
+        palette5.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette5.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+        position_yaw->setPalette(palette5);
+        position_yaw->setFont(font);
+        position_yaw->setLayoutDirection(Qt::LeftToRight);
+        position_yaw->setDigitCount(11);
+        label_15 = new QLabel(frame_6);
+        label_15->setObjectName(QStringLiteral("label_15"));
+        label_15->setGeometry(QRect(380, 10, 191, 31));
+        label_15->setToolTipDuration(-1);
+        label_15->setAlignment(Qt::AlignCenter);
+        label_15->setWordWrap(true);
+        label_15->setTextInteractionFlags(Qt::NoTextInteraction);
+        line_4 = new QFrame(frame_4);
+        line_4->setObjectName(QStringLiteral("line_4"));
+        line_4->setGeometry(QRect(-260, 202, 1169, 16));
+        line_4->setStyleSheet(QLatin1String("color: rgb(0, 0, 0);\n"
+"border-color: rgb(0, 0, 0);"));
+        line_4->setLineWidth(3);
+        line_4->setFrameShape(QFrame::HLine);
+        line_4->setFrameShadow(QFrame::Sunken);
+        frame_7 = new QFrame(frame_4);
+        frame_7->setObjectName(QStringLiteral("frame_7"));
+        frame_7->setGeometry(QRect(80, 60, 641, 101));
+        frame_7->setStyleSheet(QStringLiteral("background-color: rgb(255, 191, 0);"));
+        frame_7->setFrameShape(QFrame::StyledPanel);
+        frame_7->setFrameShadow(QFrame::Raised);
+        position_altitude = new QLCDNumber(frame_7);
+        position_altitude->setObjectName(QStringLiteral("position_altitude"));
+        position_altitude->setGeometry(QRect(10, 40, 161, 31));
+        QPalette palette6;
+        QBrush brush3(QColor(255, 0, 0, 255));
+        brush3.setStyle(Qt::SolidPattern);
+        palette6.setBrush(QPalette::Active, QPalette::WindowText, brush3);
+        palette6.setBrush(QPalette::Active, QPalette::Button, brush1);
+        palette6.setBrush(QPalette::Active, QPalette::Light, brush2);
+        palette6.setBrush(QPalette::Active, QPalette::Text, brush3);
+        palette6.setBrush(QPalette::Active, QPalette::ButtonText, brush3);
+        palette6.setBrush(QPalette::Active, QPalette::Base, brush1);
+        palette6.setBrush(QPalette::Active, QPalette::Window, brush1);
+        palette6.setBrush(QPalette::Inactive, QPalette::WindowText, brush3);
+        palette6.setBrush(QPalette::Inactive, QPalette::Button, brush1);
+        palette6.setBrush(QPalette::Inactive, QPalette::Light, brush2);
+        palette6.setBrush(QPalette::Inactive, QPalette::Text, brush3);
+        palette6.setBrush(QPalette::Inactive, QPalette::ButtonText, brush3);
+        palette6.setBrush(QPalette::Inactive, QPalette::Base, brush1);
+        palette6.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+        palette6.setBrush(QPalette::Disabled, QPalette::WindowText, brush3);
+        palette6.setBrush(QPalette::Disabled, QPalette::Button, brush1);
+        palette6.setBrush(QPalette::Disabled, QPalette::Light, brush2);
+        palette6.setBrush(QPalette::Disabled, QPalette::Text, brush3);
+        palette6.setBrush(QPalette::Disabled, QPalette::ButtonText, brush3);
+        palette6.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette6.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+        position_altitude->setPalette(palette6);
+        position_altitude->setFont(font);
+        position_altitude->setLayoutDirection(Qt::LeftToRight);
+        position_altitude->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
+        position_altitude->setDigitCount(11);
+        label_16 = new QLabel(frame_7);
+        label_16->setObjectName(QStringLiteral("label_16"));
+        label_16->setGeometry(QRect(-10, 10, 191, 31));
+        label_16->setToolTipDuration(-1);
+        label_16->setAlignment(Qt::AlignCenter);
+        label_16->setWordWrap(true);
+        label_16->setTextInteractionFlags(Qt::NoTextInteraction);
+        baro_altitude = new QLCDNumber(frame_7);
+        baro_altitude->setObjectName(QStringLiteral("baro_altitude"));
+        baro_altitude->setGeometry(QRect(210, 40, 161, 31));
+        QPalette palette7;
+        palette7.setBrush(QPalette::Active, QPalette::WindowText, brush3);
+        palette7.setBrush(QPalette::Active, QPalette::Button, brush1);
+        palette7.setBrush(QPalette::Active, QPalette::Light, brush2);
+        palette7.setBrush(QPalette::Active, QPalette::Text, brush3);
+        palette7.setBrush(QPalette::Active, QPalette::ButtonText, brush3);
+        palette7.setBrush(QPalette::Active, QPalette::Base, brush1);
+        palette7.setBrush(QPalette::Active, QPalette::Window, brush1);
+        palette7.setBrush(QPalette::Inactive, QPalette::WindowText, brush3);
+        palette7.setBrush(QPalette::Inactive, QPalette::Button, brush1);
+        palette7.setBrush(QPalette::Inactive, QPalette::Light, brush2);
+        palette7.setBrush(QPalette::Inactive, QPalette::Text, brush3);
+        palette7.setBrush(QPalette::Inactive, QPalette::ButtonText, brush3);
+        palette7.setBrush(QPalette::Inactive, QPalette::Base, brush1);
+        palette7.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+        palette7.setBrush(QPalette::Disabled, QPalette::WindowText, brush3);
+        palette7.setBrush(QPalette::Disabled, QPalette::Button, brush1);
+        palette7.setBrush(QPalette::Disabled, QPalette::Light, brush2);
+        palette7.setBrush(QPalette::Disabled, QPalette::Text, brush3);
+        palette7.setBrush(QPalette::Disabled, QPalette::ButtonText, brush3);
+        palette7.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette7.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+        baro_altitude->setPalette(palette7);
+        baro_altitude->setFont(font);
+        baro_altitude->setLayoutDirection(Qt::LeftToRight);
+        baro_altitude->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
+        baro_altitude->setDigitCount(11);
+        label_17 = new QLabel(frame_7);
+        label_17->setObjectName(QStringLiteral("label_17"));
+        label_17->setGeometry(QRect(180, 10, 191, 31));
+        label_17->setToolTipDuration(-1);
+        label_17->setAlignment(Qt::AlignCenter);
+        label_17->setTextInteractionFlags(Qt::NoTextInteraction);
+        baro_airspeed = new QLCDNumber(frame_7);
+        baro_airspeed->setObjectName(QStringLiteral("baro_airspeed"));
+        baro_airspeed->setGeometry(QRect(410, 40, 161, 31));
+        QPalette palette8;
+        palette8.setBrush(QPalette::Active, QPalette::WindowText, brush3);
+        palette8.setBrush(QPalette::Active, QPalette::Button, brush1);
+        palette8.setBrush(QPalette::Active, QPalette::Light, brush2);
+        palette8.setBrush(QPalette::Active, QPalette::Text, brush3);
+        palette8.setBrush(QPalette::Active, QPalette::ButtonText, brush3);
+        palette8.setBrush(QPalette::Active, QPalette::Base, brush1);
+        palette8.setBrush(QPalette::Active, QPalette::Window, brush1);
+        palette8.setBrush(QPalette::Inactive, QPalette::WindowText, brush3);
+        palette8.setBrush(QPalette::Inactive, QPalette::Button, brush1);
+        palette8.setBrush(QPalette::Inactive, QPalette::Light, brush2);
+        palette8.setBrush(QPalette::Inactive, QPalette::Text, brush3);
+        palette8.setBrush(QPalette::Inactive, QPalette::ButtonText, brush3);
+        palette8.setBrush(QPalette::Inactive, QPalette::Base, brush1);
+        palette8.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+        palette8.setBrush(QPalette::Disabled, QPalette::WindowText, brush3);
+        palette8.setBrush(QPalette::Disabled, QPalette::Button, brush1);
+        palette8.setBrush(QPalette::Disabled, QPalette::Light, brush2);
+        palette8.setBrush(QPalette::Disabled, QPalette::Text, brush3);
+        palette8.setBrush(QPalette::Disabled, QPalette::ButtonText, brush3);
+        palette8.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette8.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+        baro_airspeed->setPalette(palette8);
+        baro_airspeed->setFont(font);
+        baro_airspeed->setLayoutDirection(Qt::LeftToRight);
+        baro_airspeed->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
+        baro_airspeed->setDigitCount(11);
+        label_18 = new QLabel(frame_7);
+        label_18->setObjectName(QStringLiteral("label_18"));
+        label_18->setGeometry(QRect(380, 10, 191, 31));
+        label_18->setToolTipDuration(-1);
+        label_18->setAlignment(Qt::AlignCenter);
+        label_18->setWordWrap(true);
+        label_18->setTextInteractionFlags(Qt::NoTextInteraction);
+        label_26 = new QLabel(centralWidget);
+        label_26->setObjectName(QStringLiteral("label_26"));
+        label_26->setGeometry(QRect(20, 15, 61, 19));
+        label_29 = new QLabel(centralWidget);
+        label_29->setObjectName(QStringLiteral("label_29"));
+        label_29->setGeometry(QRect(20, 90, 61, 19));
+        label_27 = new QLabel(centralWidget);
+        label_27->setObjectName(QStringLiteral("label_27"));
+        label_27->setGeometry(QRect(20, 40, 61, 19));
+        label_28 = new QLabel(centralWidget);
+        label_28->setObjectName(QStringLiteral("label_28"));
+        label_28->setGeometry(QRect(20, 65, 61, 19));
+        label_protocol = new QLabel(centralWidget);
+        label_protocol->setObjectName(QStringLiteral("label_protocol"));
+        label_protocol->setGeometry(QRect(90, 15, 115, 19));
+        label_server_ip = new QLabel(centralWidget);
+        label_server_ip->setObjectName(QStringLiteral("label_server_ip"));
+        label_server_ip->setGeometry(QRect(90, 40, 115, 19));
+        label_port_number = new QLabel(centralWidget);
+        label_port_number->setObjectName(QStringLiteral("label_port_number"));
+        label_port_number->setGeometry(QRect(90, 65, 115, 19));
+        label_status = new QLabel(centralWidget);
+        label_status->setObjectName(QStringLiteral("label_status"));
+        label_status->setGeometry(QRect(90, 90, 115, 19));
+        receiver->setCentralWidget(centralWidget);
+
+        retranslateUi(receiver);
+
+        QMetaObject::connectSlotsByName(receiver);
+    } // setupUi
+
+    void retranslateUi(QMainWindow *receiver)
+    {
+        receiver->setWindowTitle(QApplication::translate("receiver", "receiver", 0));
+        App_Title->setText(QApplication::translate("receiver", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Georgia'; font-size:36pt; font-weight:600; font-style:normal;\">\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">UAV Safety Pilot Dashboard</p></body></html>", 0));
+        VCU_Label->setText(QApplication::translate("receiver", "<html><head/><body><p><span style=\" font-size:26pt; font-weight:400;\">VCU</span></p></body></html>", 0));
+        label_10->setText(QApplication::translate("receiver", "<html><head/><body><p><span style=\" font-size:14pt;\">Position Longitude</span></p></body></html>", 0));
+        label_11->setText(QApplication::translate("receiver", "<html><head/><body><p><span style=\" font-size:14pt;\">Position Latitude</span></p></body></html>", 0));
+        label_12->setText(QApplication::translate("receiver", "<html><head/><body><p><span style=\" font-size:14pt;\">Position Heading</span></p></body></html>", 0));
+        label_13->setText(QApplication::translate("receiver", "<html><head/><body><p><span style=\" font-size:14pt;\">Position Pitch</span></p></body></html>", 0));
+        label_14->setText(QApplication::translate("receiver", "<html><head/><body><p><span style=\" font-size:14pt;\">Position Roll</span></p></body></html>", 0));
+        label_15->setText(QApplication::translate("receiver", "<html><head/><body><p><span style=\" font-size:14pt;\">Position Yaw</span></p></body></html>", 0));
+        label_16->setText(QApplication::translate("receiver", "<html><head/><body><p><span style=\" font-size:14pt;\">Position Altitude</span></p></body></html>", 0));
+        label_17->setText(QApplication::translate("receiver", "<html><head/><body><p><span style=\" font-size:14pt;\">Baro Altitude</span></p></body></html>", 0));
+        label_18->setText(QApplication::translate("receiver", "<html><head/><body><p><span style=\" font-size:14pt;\">Baro Airspeed</span></p></body></html>", 0));
+        label_26->setText(QApplication::translate("receiver", "Protocol:", 0));
+        label_29->setText(QApplication::translate("receiver", "Status:", 0));
+        label_27->setText(QApplication::translate("receiver", "Server IP:", 0));
+        label_28->setText(QApplication::translate("receiver", "Port:", 0));
+        label_protocol->setText(QApplication::translate("receiver", "N/A", 0));
+        label_server_ip->setText(QApplication::translate("receiver", "N/A", 0));
+        label_port_number->setText(QApplication::translate("receiver", "N/A", 0));
+        label_status->setText(QApplication::translate("receiver", "not communicating", 0));
+    } // retranslateUi
+
+};
+
+namespace Ui {
+    class receiver: public Ui_receiver {};
+} // namespace Ui
+
+QT_END_NAMESPACE
+
+#endif // UI_RECEIVER_H
