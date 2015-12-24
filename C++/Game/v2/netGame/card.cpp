@@ -3,14 +3,27 @@
 card::card()
 {
 //    qDebug() << "card() made an empty card";
-    rank = NO_RANK;
-    suit = NO_SUIT;
+    setCard(R_t::NO_RANK, S_t::NO_SUIT);
 }
 
 card::card(QChar NewRank, QChar NewSuit)
 {
-    rank = QChar(NewRank);
-    suit = QChar(NewSuit);
+    setCard(NewRank, NewSuit);
+}
+
+card::card(QByteArray bytes)
+{
+    QChar rank_QChar;
+    QChar suit_QChar;
+
+    QDataStream stream(bytes);
+
+    stream >> rank_QChar;
+    stream >> suit_QChar;
+
+    setCard(rank_QChar, suit_QChar);
+
+    qDebug() << endl << "card(bytes) constructor: card == " << getRankQChar() << getSuitQChar();
 }
 
 card::~card()
@@ -20,8 +33,7 @@ card::~card()
 
 card &card::operator =(const card &other)
 {
-    this->suit = other.suit;
-    this->rank = other.rank;
+    setCard(other.suit, other.rank);
     return *this;
 }
 
@@ -34,21 +46,6 @@ QByteArray card::bytes()
     stream << QChar(suit);
 
     return buffer;
-}
-
-card::card(QByteArray bytes)
-{
-    QDataStream stream(bytes);
-
-    QChar rank_QChar;
-    QChar suit_QChar;
-
-    stream >> rank_QChar;
-    stream >> suit_QChar;
-
-    this->setCard(rank_QChar, suit_QChar);
-
-    qDebug() << endl << "card(bytes) constructor: card == " << this->getRankQChar() << this->getSuitQChar();
 }
 
 void card::setSuit(QChar NewSuit)
