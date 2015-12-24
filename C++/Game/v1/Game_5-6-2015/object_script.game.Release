@@ -1,0 +1,17 @@
+INPUT(
+./release\main.o
+./release\game.o
+./release\card.o
+./release\cardstack.o
+./release\net_server.o
+./release\net_client.o
+./release\message.o
+./release\mainscreen.o
+./release\lobby.o
+./release\moc_game.o
+./release\moc_cardstack.o
+./release\moc_net_client.o
+./release\moc_net_server.o
+./release\moc_mainscreen.o
+./release\moc_lobby.o
+);
