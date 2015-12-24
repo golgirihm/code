@@ -3,7 +3,6 @@
 
 #define DEFAULT_USERNAME ""
 
-#include <QObject>
 
 #include <QMainWindow>
 
@@ -15,18 +14,20 @@ struct playerinfo
 //    cardstack Hand;
 };
 
-class player : public QMainWindow
+class player : public QObject
 {
     Q_OBJECT
 
 public:
-    player(QWidget *parent = 0);
+    player();
     ~player();
 
 public slots:
 
 protected:
     playerinfo *info;
+
+protected slots:
 
 };
 

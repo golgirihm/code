@@ -13,6 +13,15 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        player.cpp
+        player.cpp \
+    game.cpp \
+    host.cpp \
+    guest.cpp
 
-HEADERS  += player.h
+HEADERS  += player.h \
+    game.h \
+    host.h \
+    guest.h
+
+
+CONFIG += c++11

@@ -2,8 +2,7 @@
 
 #include <QDebug>
 
-player::player(QWidget *parent)
-    : QMainWindow(parent)
+player::player()
 {
     info = new playerinfo;
     info->userName =  DEFAULT_USERNAME;
@@ -12,5 +11,5 @@ player::player(QWidget *parent)
 
 player::~player()
 {
-
+    delete info;
 }

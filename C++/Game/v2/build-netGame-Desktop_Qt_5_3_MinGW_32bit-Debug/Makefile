@@ -158,6 +158,7 @@ Makefile: ../netGame/netGame.pro B:/Programs/Qt_Items/Qt/5.3/mingw482_32/mkspecs
 		B:/Programs/Qt_Items/Qt/5.3/mingw482_32/mkspecs/features/resolve_config.prf \
 		B:/Programs/Qt_Items/Qt/5.3/mingw482_32/mkspecs/features/exclusive_builds_post.prf \
 		B:/Programs/Qt_Items/Qt/5.3/mingw482_32/mkspecs/features/default_post.prf \
+		B:/Programs/Qt_Items/Qt/5.3/mingw482_32/mkspecs/features/c++11.prf \
 		B:/Programs/Qt_Items/Qt/5.3/mingw482_32/mkspecs/features/win32/rtti.prf \
 		B:/Programs/Qt_Items/Qt/5.3/mingw482_32/mkspecs/features/precompile_header.prf \
 		B:/Programs/Qt_Items/Qt/5.3/mingw482_32/mkspecs/features/warn_on.prf \
@@ -277,6 +278,7 @@ B:/Programs/Qt_Items/Qt/5.3/mingw482_32/mkspecs/features/win32/default_pre.prf:
 B:/Programs/Qt_Items/Qt/5.3/mingw482_32/mkspecs/features/resolve_config.prf:
 B:/Programs/Qt_Items/Qt/5.3/mingw482_32/mkspecs/features/exclusive_builds_post.prf:
 B:/Programs/Qt_Items/Qt/5.3/mingw482_32/mkspecs/features/default_post.prf:
+B:/Programs/Qt_Items/Qt/5.3/mingw482_32/mkspecs/features/c++11.prf:
 B:/Programs/Qt_Items/Qt/5.3/mingw482_32/mkspecs/features/win32/rtti.prf:
 B:/Programs/Qt_Items/Qt/5.3/mingw482_32/mkspecs/features/precompile_header.prf:
 B:/Programs/Qt_Items/Qt/5.3/mingw482_32/mkspecs/features/warn_on.prf:
