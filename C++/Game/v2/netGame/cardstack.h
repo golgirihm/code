@@ -14,9 +14,9 @@ class cardstack : public QObject
 {
     Q_OBJECT
 public:
-    cardstack(QObject *parent = 0);
-    cardstack(const card& OnlyCard, QObject *parent = 0);
-    cardstack(const cardstack& other, QObject *parent = 0);
+    cardstack();
+    cardstack(const card& OnlyCard);
+    cardstack(const cardstack& other);
     ~cardstack();
 
     cardstack &operator = (const cardstack &other);

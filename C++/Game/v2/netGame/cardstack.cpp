@@ -2,20 +2,20 @@
 #include <QTime>
 #include "card.h"
 
-cardstack::cardstack(QObject *parent): QObject(parent)
+cardstack::cardstack()
 {
-
 
 }
 
-cardstack::cardstack(const card& OnlyCard, QObject *parent) : QObject(parent)
+cardstack::cardstack(const card& OnlyCard)
 {
-    this->AddCard(OnlyCard);
+    AddCard(OnlyCard);
+    emit StackChanged(this);
 }
 
-cardstack::cardstack(const cardstack &other, QObject *parent) : QObject(parent)
+cardstack::cardstack(const cardstack &other)
 {
-    this->cards = other.cards;
+    cards = other.cards;
     emit StackChanged(this);
 }
 
@@ -26,7 +26,7 @@ cardstack::~cardstack()
 
 cardstack &cardstack::operator =(const cardstack &other)
 {
-    this->cards = other.cards;
+    cards = other.cards;
     emit StackChanged(this);
     return *this;
 }
@@ -57,7 +57,7 @@ void cardstack::AddCard(const QChar &NewRank, const QChar &NewSuit)
 {
     // use other overload
     card temp(NewRank, NewSuit);
-    this->AddCard(temp);
+    AddCard(temp);
 }
 
 void cardstack::ClearStack()

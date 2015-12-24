@@ -6,7 +6,10 @@ player::player()
 {
     info = new playerinfo;
     info->userName =  DEFAULT_USERNAME;
+//    info->Hand.ToStandardDeck();
+
 //    info->playerNumber = -1;
+//    qDebug() << "My username is " << info->userName;
 }
 
 player::~player()

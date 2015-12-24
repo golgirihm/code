@@ -63,7 +63,7 @@ void game::setPlayerTypeTo(game::PLAYERTYPE newType)
 
             gameHost = new host;
             gamePlayer = gameHost;
-            qDebug() << "allocating host at address:" << gamePlayer << "==" << gameHost;
+            qDebug() << "allocated host at address:" << gamePlayer << "==" << gameHost;
 
         }
         break;
@@ -80,7 +80,7 @@ void game::setPlayerTypeTo(game::PLAYERTYPE newType)
 
             gameGuest = new guest;
             gamePlayer = gameGuest;
-            qDebug() << "allocating guest at address:" << gamePlayer << "==" << gameGuest;
+            qDebug() << "allocated guest at address:" << gamePlayer << "==" << gameGuest;
         }
         break;
     default:
