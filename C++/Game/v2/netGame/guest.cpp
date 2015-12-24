@@ -2,8 +2,8 @@
 
 guest::guest()
 {
-    qDebug() << "Guest hand: ";
-    info->Hand.PrintCards();
+//    qDebug() << "Guest hand: ";
+//    info->Hand.PrintCards();
 }
 
 guest::~guest()

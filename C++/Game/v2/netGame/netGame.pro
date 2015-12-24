@@ -18,14 +18,16 @@ SOURCES += main.cpp\
     host.cpp \
     guest.cpp \
     card.cpp \
-    cardstack.cpp
+    cardstack.cpp \
+    message.cpp
 
 HEADERS  += player.h \
     game.h \
     host.h \
     guest.h \
     card.h \
-    cardstack.h
+    cardstack.h \
+    message.h
 
 
 CONFIG += c++11

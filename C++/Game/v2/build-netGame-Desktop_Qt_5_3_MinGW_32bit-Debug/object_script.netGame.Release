@@ -6,6 +6,7 @@ INPUT(
 ./release/guest.o
 ./release/card.o
 ./release/cardstack.o
+./release/message.o
 ./release/moc_player.o
 ./release/moc_game.o
 ./release/moc_cardstack.o

@@ -6,6 +6,7 @@ INPUT(
 ./debug/guest.o
 ./debug/card.o
 ./debug/cardstack.o
+./debug/message.o
 ./debug/moc_player.o
 ./debug/moc_game.o
 ./debug/moc_cardstack.o
