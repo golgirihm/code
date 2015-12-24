@@ -33,7 +33,7 @@ game::game(QWidget *parent) : QMainWindow(parent)
     layout->addWidget(pb_joinGame,0,1);
 
     // let bg_mainmenu capture button clicks
-    connect(bg_mainmenu, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(buttonClicked(QAbstractButton*)));
+    connect(bg_mainmenu, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(mainMenuButtonClicked(QAbstractButton*)));
 
     centralWidget->setLayout(layout);
     setCentralWidget(centralWidget);
@@ -46,7 +46,7 @@ game::~game()
 }
 
 
-void game::switchPlayerTypeTo(game::PLAYERTYPE newType)
+void game::setPlayerTypeTo(game::PLAYERTYPE newType)
 {
     switch(newType)
     {
@@ -56,14 +56,14 @@ void game::switchPlayerTypeTo(game::PLAYERTYPE newType)
         {
             if(gameGuest)
             {
-                qDebug() << "deleting guest at address: " << gameGuest;
+                qDebug() << "deleting guest at address:" << gameGuest;
                 delete gameGuest;
                 gameGuest = 0;
             }
 
             gameHost = new host;
             gamePlayer = gameHost;
-            qDebug() << "allocating host at address: " << gamePlayer << " == " << gameHost;
+            qDebug() << "allocating host at address:" << gamePlayer << "==" << gameHost;
 
         }
         break;
@@ -73,14 +73,14 @@ void game::switchPlayerTypeTo(game::PLAYERTYPE newType)
         {
             if(gameHost)
             {
-                qDebug() << "deleting host at address: " << gameHost;
+                qDebug() << "deleting host at address:" << gameHost;
                 delete gameHost;
                 gameHost = 0;
             }
 
             gameGuest = new guest;
             gamePlayer = gameGuest;
-            qDebug() << "allocating guest at address: " << gamePlayer << " == " << gameGuest;
+            qDebug() << "allocating guest at address:" << gamePlayer << "==" << gameGuest;
         }
         break;
     default:
@@ -88,19 +88,19 @@ void game::switchPlayerTypeTo(game::PLAYERTYPE newType)
         break;
     }
 
-    qDebug() << "playerType == " << playerType;
+//    qDebug() << "playerType == " << playerType;
 
 }
 
-void game::buttonClicked(QAbstractButton *button)
+void game::mainMenuButtonClicked(QAbstractButton *button)
 {
     if(button == pb_hostGame)
     {
-        switchPlayerTypeTo(PLAYERTYPE::HOST);
+        setPlayerTypeTo(PLAYERTYPE::HOST);
     }
     else if(button == pb_joinGame)
     {
-        switchPlayerTypeTo(PLAYERTYPE::GUEST);
+        setPlayerTypeTo(PLAYERTYPE::GUEST);
     }
 
 }

@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_game_t {
     QByteArrayData data[8];
-    char stringdata[82];
+    char stringdata[87];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -30,17 +30,17 @@ struct qt_meta_stringdata_game_t {
 static const qt_meta_stringdata_game_t qt_meta_stringdata_game = {
     {
 QT_MOC_LITERAL(0, 0, 4),
-QT_MOC_LITERAL(1, 5, 13),
-QT_MOC_LITERAL(2, 19, 0),
-QT_MOC_LITERAL(3, 20, 16),
-QT_MOC_LITERAL(4, 37, 6),
-QT_MOC_LITERAL(5, 44, 18),
-QT_MOC_LITERAL(6, 63, 10),
-QT_MOC_LITERAL(7, 74, 7)
+QT_MOC_LITERAL(1, 5, 15),
+QT_MOC_LITERAL(2, 21, 0),
+QT_MOC_LITERAL(3, 22, 10),
+QT_MOC_LITERAL(4, 33, 7),
+QT_MOC_LITERAL(5, 41, 21),
+QT_MOC_LITERAL(6, 63, 16),
+QT_MOC_LITERAL(7, 80, 6)
     },
-    "game\0buttonClicked\0\0QAbstractButton*\0"
-    "button\0switchPlayerTypeTo\0PLAYERTYPE\0"
-    "newType"
+    "game\0setPlayerTypeTo\0\0PLAYERTYPE\0"
+    "newType\0mainMenuButtonClicked\0"
+    "QAbstractButton*\0button"
 };
 #undef QT_MOC_LITERAL
 
@@ -73,14 +73,14 @@ void game::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
     if (_c == QMetaObject::InvokeMetaMethod) {
         game *_t = static_cast<game *>(_o);
         switch (_id) {
-        case 0: _t->buttonClicked((*reinterpret_cast< QAbstractButton*(*)>(_a[1]))); break;
-        case 1: _t->switchPlayerTypeTo((*reinterpret_cast< PLAYERTYPE(*)>(_a[1]))); break;
+        case 0: _t->setPlayerTypeTo((*reinterpret_cast< PLAYERTYPE(*)>(_a[1]))); break;
+        case 1: _t->mainMenuButtonClicked((*reinterpret_cast< QAbstractButton*(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 0:
+        case 1:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:

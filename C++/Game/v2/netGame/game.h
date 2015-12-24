@@ -27,8 +27,8 @@ public:
     enum PLAYERTYPE : quint8 {NONE, HOST, GUEST};
 
 private slots:
-    void buttonClicked(QAbstractButton *button);
-    void switchPlayerTypeTo(PLAYERTYPE newType);
+    void setPlayerTypeTo(PLAYERTYPE newType);
+    void mainMenuButtonClicked(QAbstractButton *button);
 
 private:
     PLAYERTYPE playerType;

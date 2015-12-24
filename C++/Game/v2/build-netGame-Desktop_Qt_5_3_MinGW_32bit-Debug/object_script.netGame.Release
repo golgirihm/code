@@ -1,0 +1,12 @@
+INPUT(
+./release/main.o
+./release/player.o
+./release/game.o
+./release/host.o
+./release/guest.o
+./release/card.o
+./release/cardstack.o
+./release/moc_player.o
+./release/moc_game.o
+./release/moc_cardstack.o
+);

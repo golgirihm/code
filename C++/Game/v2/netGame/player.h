@@ -10,7 +10,7 @@
 struct playerinfo
 {
     QString userName;
-    qint8 playerNumber;
+//    qint8 playerNumber;
 //    cardstack Hand;
 };
 
