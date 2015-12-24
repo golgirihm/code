@@ -6,10 +6,6 @@
 
 #include "card.h"
 
-namespace RandShuf {
-    static const int SWEEPS = 2;
-}
-
 class cardstack : public QObject
 {
     Q_OBJECT
@@ -23,29 +19,31 @@ public:
     friend QDataStream& operator <<(QDataStream &out, const cardstack &stack);
     friend void operator >>(QDataStream &in, cardstack &stack);
 
+    static const quint8 SHUFFLE_SWEEPS = 2;
+
 private:
     QList<card> cards;
 
 signals:
-    void StackChanged(cardstack* stack);
+    void stackChanged(cardstack* stack);
 
 public slots:
-    void ToStandardDeck();
-    void Shuffle();
+    void toStandardDeck();
+    void shuffle();
 
-    void AddCard(const card& newCard);
-    void AddCard(const QChar& NewRank, const QChar& NewSuit);
-    void ClearStack();
-    card Look(int position) const;
-    card TopCard() const;
-    card BottomCard() const;
-    card TakeCard(int position);
-    card TakeTopCard();
-    card TakeBottomCard();
+    void addCard(const card& newCard);
+    void addCard(const QChar& NewRank, const QChar& NewSuit);
+    void clearStack();
+    card look(int position) const;
+    card topCard() const;
+    card bottomCard() const;
+    card takeCard(int position);
+    card takeTopCard();
+    card takeBottomCard();
 
-    int NumberOfCards() const;
-    QString CompressedString() const;
-    void PrintCards() const;
+    int numberOfCards() const;
+    QString compressedString() const;
+    void printCards() const;
 };
 
 #endif // CARDSTACK_H

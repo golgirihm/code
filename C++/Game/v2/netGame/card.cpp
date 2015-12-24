@@ -74,7 +74,7 @@ QChar card::getRankQChar() const
     return rank;
 }
 
-QString card::CompressedString() const
+QString card::compressedString() const
 {
     return QString(rank) + QString(suit);
 }

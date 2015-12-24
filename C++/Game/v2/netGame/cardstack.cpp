@@ -9,14 +9,14 @@ cardstack::cardstack()
 
 cardstack::cardstack(const card& OnlyCard)
 {
-    AddCard(OnlyCard);
-    emit StackChanged(this);
+    addCard(OnlyCard);
+    emit stackChanged(this);
 }
 
 cardstack::cardstack(const cardstack &other)
 {
     cards = other.cards;
-    emit StackChanged(this);
+    emit stackChanged(this);
 }
 
 cardstack::~cardstack()
@@ -27,11 +27,11 @@ cardstack::~cardstack()
 cardstack &cardstack::operator =(const cardstack &other)
 {
     cards = other.cards;
-    emit StackChanged(this);
+    emit stackChanged(this);
     return *this;
 }
 
-void cardstack::ToStandardDeck()
+void cardstack::toStandardDeck()
 {
     card temp;
 
@@ -44,33 +44,33 @@ void cardstack::ToStandardDeck()
         }
     }
 
-    emit StackChanged(this);
+    emit stackChanged(this);
 }
 
-void cardstack::AddCard(const card &newCard)
+void cardstack::addCard(const card &newCard)
 {
     cards.append(newCard);
-    emit StackChanged(this);
+    emit stackChanged(this);
 }
 
-void cardstack::AddCard(const QChar &NewRank, const QChar &NewSuit)
+void cardstack::addCard(const QChar &NewRank, const QChar &NewSuit)
 {
     // use other overload
     card temp(NewRank, NewSuit);
-    AddCard(temp);
+    addCard(temp);
 }
 
-void cardstack::ClearStack()
+void cardstack::clearStack()
 {
     cards.clear();
-    emit StackChanged(this);
+    emit stackChanged(this);
 }
 
-void cardstack::Shuffle()
+void cardstack::shuffle()
 {
     qDebug() << "Shuffling . . .";
 
-    int NumCards = this->NumberOfCards();
+    int NumCards = numberOfCards();
 
     // avoid division by zero during qrand() % Length
     if(!NumCards) return;
@@ -78,8 +78,8 @@ void cardstack::Shuffle()
     // seed random numbers
     qsrand((uint)QTime::currentTime().msec());
 
-    int i, j, inc = 1;
-    int iterations = NumCards * RandShuf::SWEEPS;
+    qint32 i, j, inc = 1;
+    qint32 iterations = NumCards * SHUFFLE_SWEEPS;
     for(i = 0, j = 0; i < iterations; ++i)
     {
         cards.swap(j, qrand() % NumCards);
@@ -91,38 +91,38 @@ void cardstack::Shuffle()
     }
 }
 
-card cardstack::Look(int position) const
+card cardstack::look(int position) const
 {
     // if deck has at least one card, and the selected position is valid
-    if(position < NumberOfCards() && position >= 0)
+    if(position < numberOfCards() && position >= 0)
         return cards[position];
 
     qDebug() << "warning, empty card handed out by Look(), no card at position " << position;
     return card();
 }
 
-card cardstack::TopCard() const
+card cardstack::topCard() const
 {
     // look at the top card of the deck
-    return this->Look(this->NumberOfCards() - 1);
+    return look(numberOfCards() - 1);
 }
 
-card cardstack::BottomCard() const
+card cardstack::bottomCard() const
 {
     // look at the bottom card of the deck
-    return this->Look(0);
+    return look(0);
 }
 
-card cardstack::TakeCard(int position)
+card cardstack::takeCard(int position)
 {
     card RemovedCard;
 
     // if deck has at least one card, and the selected position is valid
-    if(position < NumberOfCards() && position >= 0)
+    if(position < numberOfCards() && position >= 0)
     {
         RemovedCard = cards.at(position);
         cards.removeAt(position);
-        emit StackChanged(this);
+        emit stackChanged(this);
         return RemovedCard;
     }
 
@@ -130,43 +130,43 @@ card cardstack::TakeCard(int position)
     return RemovedCard;
 }
 
-card cardstack::TakeTopCard()
+card cardstack::takeTopCard()
 {
     // take the top card from the deck
-    return TakeCard(NumberOfCards() - 1);
+    return takeCard(numberOfCards() - 1);
 }
 
-card cardstack::TakeBottomCard()
+card cardstack::takeBottomCard()
 {
     // take the bottom card from the deck
-    return TakeCard(0);
+    return takeCard(0);
 }
 
-int cardstack::NumberOfCards() const
+int cardstack::numberOfCards() const
 {
     return cards.length();
 }
 
-QString cardstack::CompressedString() const
+QString cardstack::compressedString() const
 {
     QString CardString;
 
-    for(int i = 0; i < NumberOfCards(); ++i)
-        CardString += cards[i].CompressedString();
+    for(int i = 0; i < numberOfCards(); ++i)
+        CardString += cards[i].compressedString();
 
     return CardString;
 }
 
-void cardstack::PrintCards() const
+void cardstack::printCards() const
 {
-    for(int i = 0; i < NumberOfCards(); ++i)
+    for(int i = 0; i < numberOfCards(); ++i)
         qDebug() << "card " << i << "\t" << " is " << cards[i].getRankQChar() << " of " << cards[i].getSuitQChar();
 }
 
 
 QDataStream& operator <<(QDataStream &out, const cardstack &stack)
 {
-    return out << stack.CompressedString().toLatin1();
+    return out << stack.compressedString().toLatin1();
 }
 
 
@@ -188,5 +188,5 @@ void operator >>(QDataStream &in, cardstack &stack)
 
     // parse string from stream and add to stack
     for(quint16 i = 0; i < StringLength; i += 2)
-        stack.AddCard(StackString[i], StackString[i+1]);
+        stack.addCard(StackString[i], StackString[i+1]);
 }

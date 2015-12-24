@@ -26,7 +26,7 @@ message::message(const QByteArray &bytes)
     {
         QString display_text(text);
         display_text.replace('\n', ' ');
-        qDebug() << "message(bytes) == " << msgtype << (QChar)msgtype << display_text << from << cards.CompressedString();
+        qDebug() << "message(bytes) == " << msgtype << (QChar)msgtype << display_text << from << cards.compressedString();
     }
 
 }

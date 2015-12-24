@@ -61,7 +61,7 @@ public slots:
     void setCard(QChar NewRank, QChar NewSuit);
     QChar getSuitQChar() const;
     QChar getRankQChar() const;
-    QString CompressedString() const;
+    QString compressedString() const;
 };
 
 

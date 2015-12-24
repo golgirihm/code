@@ -53,13 +53,13 @@ QT_MOC_LITERAL(20, 181, 13),
 QT_MOC_LITERAL(21, 195, 16),
 QT_MOC_LITERAL(22, 212, 10)
     },
-    "cardstack\0StackChanged\0\0cardstack*\0"
-    "stack\0ToStandardDeck\0Shuffle\0AddCard\0"
-    "card\0newCard\0NewRank\0NewSuit\0ClearStack\0"
-    "Look\0position\0TopCard\0BottomCard\0"
-    "TakeCard\0TakeTopCard\0TakeBottomCard\0"
-    "NumberOfCards\0CompressedString\0"
-    "PrintCards"
+    "cardstack\0stackChanged\0\0cardstack*\0"
+    "stack\0toStandardDeck\0shuffle\0addCard\0"
+    "card\0newCard\0NewRank\0NewSuit\0clearStack\0"
+    "look\0position\0topCard\0bottomCard\0"
+    "takeCard\0takeTopCard\0takeBottomCard\0"
+    "numberOfCards\0compressedString\0"
+    "printCards"
 };
 #undef QT_MOC_LITERAL
 
@@ -122,29 +122,29 @@ void cardstack::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
     if (_c == QMetaObject::InvokeMetaMethod) {
         cardstack *_t = static_cast<cardstack *>(_o);
         switch (_id) {
-        case 0: _t->StackChanged((*reinterpret_cast< cardstack*(*)>(_a[1]))); break;
-        case 1: _t->ToStandardDeck(); break;
-        case 2: _t->Shuffle(); break;
-        case 3: _t->AddCard((*reinterpret_cast< const card(*)>(_a[1]))); break;
-        case 4: _t->AddCard((*reinterpret_cast< const QChar(*)>(_a[1])),(*reinterpret_cast< const QChar(*)>(_a[2]))); break;
-        case 5: _t->ClearStack(); break;
-        case 6: { card _r = _t->Look((*reinterpret_cast< int(*)>(_a[1])));
+        case 0: _t->stackChanged((*reinterpret_cast< cardstack*(*)>(_a[1]))); break;
+        case 1: _t->toStandardDeck(); break;
+        case 2: _t->shuffle(); break;
+        case 3: _t->addCard((*reinterpret_cast< const card(*)>(_a[1]))); break;
+        case 4: _t->addCard((*reinterpret_cast< const QChar(*)>(_a[1])),(*reinterpret_cast< const QChar(*)>(_a[2]))); break;
+        case 5: _t->clearStack(); break;
+        case 6: { card _r = _t->look((*reinterpret_cast< int(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< card*>(_a[0]) = _r; }  break;
-        case 7: { card _r = _t->TopCard();
+        case 7: { card _r = _t->topCard();
             if (_a[0]) *reinterpret_cast< card*>(_a[0]) = _r; }  break;
-        case 8: { card _r = _t->BottomCard();
+        case 8: { card _r = _t->bottomCard();
             if (_a[0]) *reinterpret_cast< card*>(_a[0]) = _r; }  break;
-        case 9: { card _r = _t->TakeCard((*reinterpret_cast< int(*)>(_a[1])));
+        case 9: { card _r = _t->takeCard((*reinterpret_cast< int(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< card*>(_a[0]) = _r; }  break;
-        case 10: { card _r = _t->TakeTopCard();
+        case 10: { card _r = _t->takeTopCard();
             if (_a[0]) *reinterpret_cast< card*>(_a[0]) = _r; }  break;
-        case 11: { card _r = _t->TakeBottomCard();
+        case 11: { card _r = _t->takeBottomCard();
             if (_a[0]) *reinterpret_cast< card*>(_a[0]) = _r; }  break;
-        case 12: { int _r = _t->NumberOfCards();
+        case 12: { int _r = _t->numberOfCards();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 13: { QString _r = _t->CompressedString();
+        case 13: { QString _r = _t->compressedString();
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
-        case 14: _t->PrintCards(); break;
+        case 14: _t->printCards(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -163,7 +163,7 @@ void cardstack::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         void **func = reinterpret_cast<void **>(_a[1]);
         {
             typedef void (cardstack::*_t)(cardstack * );
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&cardstack::StackChanged)) {
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&cardstack::stackChanged)) {
                 *result = 0;
             }
         }
@@ -207,7 +207,7 @@ int cardstack::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void cardstack::StackChanged(cardstack * _t1)
+void cardstack::stackChanged(cardstack * _t1)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
