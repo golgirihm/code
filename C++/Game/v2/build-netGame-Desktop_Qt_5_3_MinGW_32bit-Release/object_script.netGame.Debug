@@ -1,0 +1,17 @@
+INPUT(
+./debug/main.o
+./debug/player.o
+./debug/game.o
+./debug/host.o
+./debug/guest.o
+./debug/card.o
+./debug/cardstack.o
+./debug/message.o
+./debug/netclient.o
+./debug/netserver.o
+./debug/moc_player.o
+./debug/moc_game.o
+./debug/moc_cardstack.o
+./debug/moc_netclient.o
+./debug/moc_netserver.o
+);

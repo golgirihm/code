@@ -2,20 +2,18 @@
 #define CARDSTACK_H
 
 #include <QObject>
-#include <QWidget>
 
 #include "card.h"
-
 class cardstack : public QObject
 {
     Q_OBJECT
 public:
     cardstack();
     cardstack(const card& OnlyCard);
-    cardstack(const cardstack& other);
     ~cardstack();
 
     cardstack &operator = (const cardstack &other);
+
     friend QDataStream& operator <<(QDataStream &out, const cardstack &stack);
     friend void operator >>(QDataStream &in, cardstack &stack);
 

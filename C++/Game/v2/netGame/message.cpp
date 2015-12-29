@@ -1,12 +1,19 @@
 #include "message.h"
 #include <QLatin1String>
 
+#include <QDebug>
+
 message::message(const quint8 &newMsgtype, const QString &newText, const QString &newFrom, const cardstack &newCards)
 {
-    msgtype = newMsgtype;
-    text = newText;
-    from = newFrom;
-    cards = newCards;
+    _msgtype = newMsgtype;
+    _text = newText;
+    _from = newFrom;
+    _cards = newCards;
+
+    // convert _msgtype, _text, _from, and _cards into a QByteArray,
+    // then use the inherited append() function
+    append(bytes());
+
 }
 
 // unpack a message from a QbyteArray
@@ -16,17 +23,17 @@ message::message(const QByteArray &bytes)
     char* Latin1_text;
     char* Latin1_from;
 
-    stream >> msgtype;
-    stream >> Latin1_text;         text = QString::fromLatin1(Latin1_text);
-    stream >> Latin1_from;         from = QString::fromLatin1(Latin1_from);
-    stream >> cards;
+    stream >> _msgtype;
+    stream >> Latin1_text;         _text = QString::fromLatin1(Latin1_text);
+    stream >> Latin1_from;         _from = QString::fromLatin1(Latin1_from);
+    stream >> _cards;
 
     // don't clutter the debug output
-    if(msgtype != 'P' && msgtype != 'D' && msgtype != 'T')
+    if(_msgtype != 'P' && _msgtype != 'D' && _msgtype != 'T')
     {
-        QString display_text(text);
+        QString display_text(_text);
         display_text.replace('\n', ' ');
-        qDebug() << "message(bytes) == " << msgtype << (QChar)msgtype << display_text << from << cards.compressedString();
+//        qDebug() << "message(bytes) == " << _msgtype << (QChar)_msgtype << display_text << from << _cards.compressedString();
     }
 
 }
@@ -38,10 +45,10 @@ QByteArray message::bytes()
 
     QDataStream stream(&bytes, QIODevice::WriteOnly);
 
-    stream << msgtype;
-    stream << text.toLatin1();
-    stream << from.toLatin1();
-    stream << cards;
+    stream << _msgtype;
+    stream << _text.toLatin1();
+    stream << _from.toLatin1();
+    stream << _cards;
 
 //    qDebug() << "message::bytes(): bytes.size() == " <<  bytes.size();
 
@@ -53,23 +60,28 @@ message::~message()
     //    qDebug() << "~message()";
 }
 
-QChar message::get_msgtype()
+QChar &message::msgtype()
 {
-    return msgtype;
+    return _msgtype;
 }
 
-QString message::get_from()
+QString &message::from()
 {
-    return from;
+    return _from;
 }
 
-QString message::get_text()
+QString &message::text()
 {
-    return text;
+    return _text;
 }
 
-cardstack message::get_cards()
+cardstack &message::cards()
 {
-    return cards;
+    return _cards;
+}
+
+QString message::compressedString()
+{
+    return msgtype() + ',' + text() + ',' + from() + ',' + cards().compressedString();
 }
 

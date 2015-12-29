@@ -3,13 +3,10 @@
 
 #define DEFAULT_USERNAME "Default_Username"
 
-
-#include "card.h"
+class game;
 #include "cardstack.h"
 
-#include <QMainWindow>
-
-
+#include <QDebug>
 
 struct playerinfo
 {
@@ -23,15 +20,18 @@ class player : public QObject
     Q_OBJECT
 
 public:
-    player();
+    player(game *gameUI);
     ~player();
 
 public slots:
 
 protected:
+    game *ui;
     playerinfo *info;
 
-protected slots:
+
+
+
 
 };
 

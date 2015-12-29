@@ -1,7 +1,12 @@
 #include "guest.h"
+#include "game.h"
 
-guest::guest()
+guest::guest(game *gameUI) : player(gameUI)
 {
+    ui->setLobbyInfoText("You are a guest.");
+//    ui->setLobbyInfoText("You are a guest.");
+//    netClient = new netclient;
+//    netClient->attemptToConnect();
 //    qDebug() << "Guest hand: ";
 //    info->Hand.PrintCards();
 }
@@ -9,5 +14,12 @@ guest::guest()
 guest::~guest()
 {
 
+}
+
+void guest::sendTest()
+{
+//    cardstack cards;
+//    cards.toStandardDeck();
+//    netClient->SendToServer(message('C', "guest to host", "Hamid", cards));
 }
 

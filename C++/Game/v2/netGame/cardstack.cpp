@@ -1,6 +1,6 @@
 #include "cardstack.h"
-#include <QTime>
 #include "card.h"
+#include <QTime>
 
 cardstack::cardstack()
 {
@@ -10,12 +10,6 @@ cardstack::cardstack()
 cardstack::cardstack(const card& OnlyCard)
 {
     addCard(OnlyCard);
-    emit stackChanged(this);
-}
-
-cardstack::cardstack(const cardstack &other)
-{
-    cards = other.cards;
     emit stackChanged(this);
 }
 

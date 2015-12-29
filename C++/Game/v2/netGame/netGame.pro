@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,7 +19,9 @@ SOURCES += main.cpp\
     guest.cpp \
     card.cpp \
     cardstack.cpp \
-    message.cpp
+    message.cpp \
+    netclient.cpp \
+    netserver.cpp
 
 HEADERS  += player.h \
     game.h \
@@ -27,7 +29,9 @@ HEADERS  += player.h \
     guest.h \
     card.h \
     cardstack.h \
-    message.h
+    message.h \
+    netclient.h \
+    netserver.h
 
 
 CONFIG += c++11
