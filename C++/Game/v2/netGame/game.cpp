@@ -15,7 +15,7 @@
 #define L_LOBBYCURRENTUSERS_TEXT "Users in lobby:"
 #define L_LOBBYENTERUSERNAME_TEXT "Enter new username:"
 #define L_LOBBYCURRENTUSERNAMEDISP_TEXT "Current Username:"
-#define L_LOBBYCURRENTUSERNAME_TEXT "DefaultPlayerName"
+#define L_LOBBYCURRENTUSERNAME_TEXT ""
 
 
 #include <QDebug>

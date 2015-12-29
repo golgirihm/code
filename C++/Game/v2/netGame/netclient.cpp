@@ -125,5 +125,5 @@ QByteArray netclient::ReceiveExternalData()
 
 void netclient::connectionMessage()
 {
-    qDebug() << "Connection made on " << serverIP << port;
+    qDebug() << "Connection made on IPv4 address:" << serverIP << ", port:" << port;
 }

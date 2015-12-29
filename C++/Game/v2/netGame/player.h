@@ -1,7 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#define DEFAULT_USERNAME "Default_Username"
+#define DEFAULT_USERNAME "DefaultPlayerName"
 
 class game;
 #include "cardstack.h"

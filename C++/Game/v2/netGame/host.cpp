@@ -1,11 +1,17 @@
 #include "host.h"
+//#include "player.h"
 #include "game.h"
+#include "netserver.h"
 
 host::host(game *gameUI) : player(gameUI)
 {
     ui->setLobbyInfoText("You are the host.");
-//    netServer = new netserver;
-//    netServer->StartServer();
+    ui->setLobbyUserName(info->userName);
+
+    netServer = new netserver;
+    netServer->StartServer();
+
+
 
 //    qDebug() << "I'm hosting with a hand of: ";
 //    info->Hand.PrintCards();
