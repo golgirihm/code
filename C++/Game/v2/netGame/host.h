@@ -20,8 +20,8 @@ public slots:
 
 private slots:
     void initialLobbySetUp();
-    void PBLobbyAcceptEnabler();
-    void PBLobbyChangeUserNameEnabler();
+    void pbLobbyAcceptEnabler();
+    void pbLobbyChangeUserNameEnabler();
     void processNewUserNameRequest();
     void ready();
     void clientConnected();
@@ -31,8 +31,8 @@ private slots:
 private:
     netserver *gameServer;
 
+    GAMESTATE gameState;
     QList<playerinfo> guestList;
-
 };
 
 #endif // HOST_H

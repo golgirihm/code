@@ -1,11 +1,8 @@
 #ifndef netserver_H
 #define netserver_H
 
-#include <QtNetwork>
-#include <QTcpServer>
-#include <QTcpSocket>
 #include "netcomm.h"
-class QByteArray;
+class QTcpServer;
 
 class netserver : public netComm
 {
@@ -35,7 +32,6 @@ private slots:
 
 signals:
     void clientAdded();
-
 
 };
 

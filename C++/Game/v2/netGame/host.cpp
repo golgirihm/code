@@ -1,5 +1,5 @@
 #include "host.h"
-//#include "player.h"
+#include "player.h"
 #include "gameUI.h"
 #include "netserver.h"
 #include "message.h"
@@ -26,6 +26,7 @@ host::host(gameUI *parentUI) : player(parentUI)
 
 host::~host()
 {
+
 }
 
 
@@ -38,11 +39,11 @@ void host::initialLobbySetUp()
     ui->setLobbyIPAddressEnabled(false);
     ui->setLobbyPortEnabled(true);
     ui->setLobbyUserNameEnabled(true);
-    PBLobbyAcceptEnabler();
-    PBLobbyChangeUserNameEnabler();
+    pbLobbyAcceptEnabler();
+    pbLobbyChangeUserNameEnabler();
 }
 
-void host::PBLobbyAcceptEnabler()
+void host::pbLobbyAcceptEnabler()
 {
     QHostAddress IPAddress = QHostAddress(ui->getLobbyIPAddressString());
     int port = ui->getLobbyPortString().toInt();
@@ -55,7 +56,7 @@ void host::PBLobbyAcceptEnabler()
 
 }
 
-void host::PBLobbyChangeUserNameEnabler()
+void host::pbLobbyChangeUserNameEnabler()
 {
     QString newName = ui->getLobbyEnteredUserName();
 

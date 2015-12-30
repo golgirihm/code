@@ -1,8 +1,10 @@
 #ifndef NETCOMM_H
 #define NETCOMM_H
 
-#include <QtNetwork>
 #include <QObject>
+#include <QHostAddress>
+class QHostInfo;
+class QTcpSocket;
 
 #define DEFAULTPORT 12345
 

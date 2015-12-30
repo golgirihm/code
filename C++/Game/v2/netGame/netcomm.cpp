@@ -1,5 +1,9 @@
 #include "netcomm.h"
 
+#include <QTcpSocket>
+#include <QHostAddress>
+#include <QHostInfo>
+
 // TODO: remove this include
 #include "message.h"
 
@@ -22,8 +26,8 @@ QHostAddress netComm::getLocalMachineIPv4()
 {
     QHostAddress localIPv4;
 
-    foreach(QHostAddress adr_it, QHostInfo::fromName(QHostInfo().localHostName()).addresses())
-        if(adr_it.toIPv4Address()) {localIPv4 = adr_it;}
+    foreach(QHostAddress itAdr, QHostInfo::fromName(QHostInfo().localHostName()).addresses())
+        if(itAdr.toIPv4Address()) {localIPv4 = itAdr;}
 
     return localIPv4;
 }
@@ -53,19 +57,19 @@ void netComm::readSocketData()
     // the socket that sent the data
     QTcpSocket* socket = qobject_cast<QTcpSocket*>(sender());
 
-    qint64 bytes_available = socket->bytesAvailable();
+    qint64 bytesAvailable = socket->bytesAvailable();
 
-    if(!bytes_available)
+    if(!bytesAvailable)
     {
         qDebug() << "Message receipt failed: no bytes available.";
         return;
     }
 
     QByteArray buffer;
-    buffer.resize(bytes_available);  // resize buffer to fit incoming data
+    buffer.resize(bytesAvailable);  // resize buffer to fit incoming data
 
     // buffer = MsgType + data
-    socket->read(buffer.data(), bytes_available);
+    socket->read(buffer.data(), bytesAvailable);
 
     // MsgType = MSGTOSERVER or MSGTOCLIENT
     quint8 MsgType = buffer[0];

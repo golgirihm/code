@@ -18,8 +18,8 @@ public slots:
 
 private slots:
     void initialLobbySetUp();
-    void PBLobbyAcceptEnabler();
-    void PBLobbyChangeUserNameEnabler();
+    void pbLobbyAcceptEnabler();
+    void pbLobbyChangeUserNameEnabler();
     void processNewUserNameRequest();
     void ready();
     void processReceivedData();

@@ -11,8 +11,8 @@ class netcomm;
 struct playerinfo
 {
     QString userName;
-//    qint8 playerNumber;
     cardstack Hand;
+//    qint8 playerNumber;
 };
 
 class player : public QObject
@@ -32,8 +32,8 @@ public slots:
 
 protected slots:
     virtual void initialLobbySetUp() = 0;
-    virtual void PBLobbyAcceptEnabler() = 0;
-    virtual void PBLobbyChangeUserNameEnabler() = 0;
+    virtual void pbLobbyAcceptEnabler() = 0;
+    virtual void pbLobbyChangeUserNameEnabler() = 0;
     virtual void processNewUserNameRequest() = 0;
     virtual void ready() = 0;
     virtual void processReceivedData() = 0;
@@ -43,7 +43,6 @@ protected:
     gameUI *ui;
 //    netcomm *gameComm;
     playerinfo *info;
-
 
 
 

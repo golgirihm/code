@@ -1,4 +1,5 @@
 #include "netclient.h"
+#include <QTcpSocket>
 
 #define ATTEMPT_WAIT_MSECS 200
 
@@ -22,7 +23,7 @@ netclient::netclient()
 
 netclient::~netclient()
 {
-    //    qDebug() << "~netclient()";
+    // qDebug() << "~netclient()";
 }
 
 // returns true if socket is in the connected state

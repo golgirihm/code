@@ -4,8 +4,6 @@
 #include "card.h"
 #include "cardstack.h"
 
-#include <QByteArray>
-
 #define NO_CHAR QChar('~')
 #define NO_STRING QString(NO_CHAR)
 

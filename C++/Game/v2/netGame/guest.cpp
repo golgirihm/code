@@ -1,5 +1,5 @@
 #include "guest.h"
-//#include "player.h"
+#include "player.h"
 #include "gameUI.h"
 #include "netclient.h"
 #include "message.h"
@@ -36,11 +36,11 @@ void guest::initialLobbySetUp()
     ui->setLobbyIPAddressEnabled(true);
     ui->setLobbyPortEnabled(true);
     ui->setLobbyUserNameEnabled(false);
-    PBLobbyAcceptEnabler();
-    PBLobbyChangeUserNameEnabler();
+    pbLobbyAcceptEnabler();
+    pbLobbyChangeUserNameEnabler();
 }
 
-void guest::PBLobbyAcceptEnabler()
+void guest::pbLobbyAcceptEnabler()
 {
     QHostAddress IPAddress = QHostAddress(ui->getLobbyIPAddressString());
     int port = ui->getLobbyPortString().toInt();
@@ -54,7 +54,7 @@ void guest::PBLobbyAcceptEnabler()
 
 }
 
-void guest::PBLobbyChangeUserNameEnabler()
+void guest::pbLobbyChangeUserNameEnabler()
 {
     QString newName = ui->getLobbyEnteredUserName();
     // handle change username button

@@ -95,17 +95,6 @@ void netComm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 5: _t->connectionMessage(); break;
         default: ;
         }
-    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        switch (_id) {
-        default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 4:
-            switch (*reinterpret_cast<int*>(_a[1])) {
-            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-            case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QTcpSocket* >(); break;
-            }
-            break;
-        }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         void **func = reinterpret_cast<void **>(_a[1]);
@@ -154,7 +143,7 @@ int netComm::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 6)
-            qt_static_metacall(this, _c, _id, _a);
+            *reinterpret_cast<int*>(_a[0]) = -1;
         _id -= 6;
     }
     return _id;

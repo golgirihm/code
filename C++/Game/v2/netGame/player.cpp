@@ -16,10 +16,10 @@ player::player(gameUI *parentUI)
     ui->setLobbyCurrentUserName(info->userName);
     ui->setLobbyStartEnabled(false);
 
-    connect(this, SIGNAL(userNameChanged()), this, SLOT(PBLobbyChangeUserNameEnabler()));
-    connect(this, SIGNAL(userNameChanged()), this, SLOT(PBLobbyAcceptEnabler()));
-    connect(ui, SIGNAL(lobbyNetworkTextChanged()), this, SLOT(PBLobbyAcceptEnabler()));
-    connect(ui, SIGNAL(lobbyEnterUserNameTextChanged()), this, SLOT(PBLobbyChangeUserNameEnabler()));
+    connect(this, SIGNAL(userNameChanged()), this, SLOT(pbLobbyChangeUserNameEnabler()));
+    connect(this, SIGNAL(userNameChanged()), this, SLOT(pbLobbyAcceptEnabler()));
+    connect(ui, SIGNAL(lobbyNetworkTextChanged()), this, SLOT(pbLobbyAcceptEnabler()));
+    connect(ui, SIGNAL(lobbyEnterUserNameTextChanged()), this, SLOT(pbLobbyChangeUserNameEnabler()));
     connect(ui, SIGNAL(userNameChangeRequested()), this, SLOT(processNewUserNameRequest()));
     connect(ui, SIGNAL(acceptSettingsClicked()), this, SLOT(ready()));
 
@@ -46,4 +46,3 @@ void player::setUserName(QString newName)
         emit userNameChanged();
     }
 }
-

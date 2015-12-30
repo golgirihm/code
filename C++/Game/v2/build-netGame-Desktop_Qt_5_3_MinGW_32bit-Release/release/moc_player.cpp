@@ -42,7 +42,7 @@ QT_MOC_LITERAL(9, 144, 11),
 QT_MOC_LITERAL(10, 156, 7)
     },
     "player\0userNameChanged\0\0initialLobbySetUp\0"
-    "PBLobbyAcceptEnabler\0PBLobbyChangeUserNameEnabler\0"
+    "pbLobbyAcceptEnabler\0pbLobbyChangeUserNameEnabler\0"
     "processNewUserNameRequest\0ready\0"
     "processReceivedData\0setUserName\0newName"
 };
@@ -95,8 +95,8 @@ void player::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         switch (_id) {
         case 0: _t->userNameChanged(); break;
         case 1: _t->initialLobbySetUp(); break;
-        case 2: _t->PBLobbyAcceptEnabler(); break;
-        case 3: _t->PBLobbyChangeUserNameEnabler(); break;
+        case 2: _t->pbLobbyAcceptEnabler(); break;
+        case 3: _t->pbLobbyChangeUserNameEnabler(); break;
         case 4: _t->processNewUserNameRequest(); break;
         case 5: _t->ready(); break;
         case 6: _t->processReceivedData(); break;

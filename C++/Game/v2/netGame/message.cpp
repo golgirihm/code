@@ -1,5 +1,4 @@
 #include "message.h"
-#include <QLatin1String>
 
 #include <QDebug>
 

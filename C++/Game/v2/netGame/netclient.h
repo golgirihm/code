@@ -1,10 +1,8 @@
 #ifndef netclient_H
 #define netclient_H
 
-#include <QtNetwork>
-#include <QTcpSocket>
 #include "netcomm.h"
-class QByteArray;
+#include <QTimer>
 
 class netclient : public netComm
 {

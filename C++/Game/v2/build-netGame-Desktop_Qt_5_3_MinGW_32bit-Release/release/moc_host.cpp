@@ -39,8 +39,8 @@ QT_MOC_LITERAL(6, 100, 5),
 QT_MOC_LITERAL(7, 106, 15),
 QT_MOC_LITERAL(8, 122, 19)
     },
-    "host\0initialLobbySetUp\0\0PBLobbyAcceptEnabler\0"
-    "PBLobbyChangeUserNameEnabler\0"
+    "host\0initialLobbySetUp\0\0pbLobbyAcceptEnabler\0"
+    "pbLobbyChangeUserNameEnabler\0"
     "processNewUserNameRequest\0ready\0"
     "clientConnected\0processReceivedData"
 };
@@ -86,8 +86,8 @@ void host::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
         host *_t = static_cast<host *>(_o);
         switch (_id) {
         case 0: _t->initialLobbySetUp(); break;
-        case 1: _t->PBLobbyAcceptEnabler(); break;
-        case 2: _t->PBLobbyChangeUserNameEnabler(); break;
+        case 1: _t->pbLobbyAcceptEnabler(); break;
+        case 2: _t->pbLobbyChangeUserNameEnabler(); break;
         case 3: _t->processNewUserNameRequest(); break;
         case 4: _t->ready(); break;
         case 5: _t->clientConnected(); break;

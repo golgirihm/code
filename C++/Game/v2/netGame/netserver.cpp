@@ -1,5 +1,6 @@
 ﻿#include "netserver.h"
-
+#include <QTcpServer>
+#include <QTcpSocket>
 
 #include <QDebug>
 
