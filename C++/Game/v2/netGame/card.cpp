@@ -37,6 +37,12 @@ card &card::operator =(const card &other)
     return *this;
 }
 
+bool card::operator ==(const card &other)
+{
+    return((getRankQChar() == other.getRankQChar()) && (getSuitQChar() == other.getSuitQChar()));
+
+}
+
 QByteArray card::bytes()
 {
     QByteArray buffer;

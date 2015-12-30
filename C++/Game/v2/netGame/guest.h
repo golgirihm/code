@@ -6,14 +6,28 @@ class netclient;
 
 class guest : public player
 {
+    Q_OBJECT
+
 public:
-    guest(game *gameUI);
+    guest(gameUI *parentUI);
     ~guest();
 
-    netclient *netClient;
+signals:
 
 public slots:
-    void sendTest();
+
+private slots:
+    void initialLobbySetUp();
+    void PBLobbyAcceptEnabler();
+    void PBLobbyChangeUserNameEnabler();
+    void processNewUserNameRequest();
+    void ready();
+    void processReceivedData();
+private:
+    netclient *gameClient;
+
+
+
 };
 
 #endif // GUEST_H

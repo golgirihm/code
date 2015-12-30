@@ -1,4 +1,4 @@
-#include "game.h"
+#include "gameUI.h"
 #include "player.h"
 #include "host.h"
 #include "guest.h"
@@ -7,13 +7,14 @@
 #define PB_HOSTGAME_TEXT "Host"
 #define PB_JOINGAME_TEXT "Join"
 #define L_LOBBY_TEXT "Lobby"
-#define PB_ACCEPT_TEXT "Accept all settings"
-#define PB_CHANGEUSERNAME_TEXT "Request"
+#define PB_ACCEPT_TEXT "Accept settings"
+#define PB_CHANGEUSERNAME_TEXT_H "Set"
+#define PB_CHANGEUSERNAME_TEXT_G "Request"
 #define PB_SENDCHAT_TEXT "Send"
 #define L_LOBBYIPADDRESS_TEXT "IP address:"
 #define L_LOBBYPORTNUMBER_TEXT "Port number:"
 #define L_LOBBYCURRENTUSERS_TEXT "Users in lobby:"
-#define L_LOBBYENTERUSERNAME_TEXT "Enter new username:"
+#define L_LOBBYENTERUSERNAME_TEXT "Enter new username (2 character minimum):"
 #define L_LOBBYCURRENTUSERNAMEDISP_TEXT "Current Username:"
 #define L_LOBBYCURRENTUSERNAME_TEXT ""
 
@@ -32,33 +33,22 @@
 #include <QFont>
 #include <QSize>
 
-game::game(QWidget *parent) : QMainWindow(parent)
+gameUI::gameUI(QWidget *parent) : QMainWindow(parent)
 {
     // initialize player type to undefined
     playerType = PLAYERTYPE::NONE;
-
-    // allocate a widget for each screen
-    for(quint8 i = 0; i < NUMBER_OF_SCREENS; ++i)
-    {
-        screenWidget[i] = new QWidget;
-    }
-
 
     // initialize currently unused pointers to 0
     gamePlayer = 0;
     gameHost = 0;
     gameGuest = 0;
 
-    // set up cosmetics
-    font_title.setPointSize(32);
-    font_title.setBold(true);
-    font_header.setPointSize(18);
-    font_distinct.setBold(true);
-    size_tbInitial.setHeight(400);
-    size_tbInitial.setWidth(400);
+    // allocate a widget for each screen
+    for(quint8 i = 0; i < NUMBER_OF_SCREENS; ++i)
+        screenWidget[i] = new QWidget;
 
-
-    // place all widgets
+    // generate all screens
+    setUpCosmetics();
     setUpScreen0();
     setUpScreen1();
     setUpScreen2();
@@ -75,62 +65,110 @@ game::game(QWidget *parent) : QMainWindow(parent)
     connect(pageComboBox, SIGNAL(activated(int)), centralStackedWidget, SLOT(setCurrentIndex(int)));
 
     tempLayout = new QGridLayout;
-    tempLayout->addWidget(centralStackedWidget);
+    tempLayout->addWidget(centralStackedWidget,0,0);
     tempLayout->addWidget(pageComboBox,1,0);
 
     tempcentralWidget = new QWidget;
     tempcentralWidget->setLayout(tempLayout);
     setCentralWidget(tempcentralWidget);
-
-    centralStackedWidget->setCurrentIndex(1);
 }
 
-game::~game()
+gameUI::~gameUI()
 {
 
 }
 
-QString game::getLobbyIPAddress()
+QString gameUI::getLobbyIPAddressString()
 {
-    return le_lobbyIPAddress->text();
+    return le_lobbyIPAddress->text().simplified();
 }
 
-quint16 game::getLobbyPort()
+QString gameUI::getLobbyPortString()
 {
-    return (quint16)le_lobbyPortNumber->text().toInt();
+    return le_lobbyPortNumber->text().simplified();
 }
 
-QString game::getLobbyEnteredUserName()
+QString gameUI::getLobbyEnteredUserName()
 {
-    return le_lobbyEnterUserName->text();
+    return le_lobbyEnterUserName->text().simplified();
 }
 
-void game::setLobbyIPAddress(QString newIP)
+void gameUI::setLobbyIPAddress(QString newIP)
 {
     le_lobbyIPAddress->setText(newIP);
 }
 
-void game::setLobbyPort(quint16 newPort)
+void gameUI::setLobbyPort(quint16 newPort)
 {
     le_lobbyPortNumber->setText(QString::number(newPort));
 }
 
-void game::setLobbyUserName(QString newUserName)
+void gameUI::setLobbyEnterUserNameText(QString enteredNameText)
+{
+    le_lobbyEnterUserName->setText(enteredNameText);
+}
+
+void gameUI::setLobbyCurrentUserName(QString newUserName)
 {
     l_lobbyCurrentUsername->setText(newUserName);
 }
 
-void game::setLobbyInfoText(QString InfoText)
+void gameUI::setLobbyText(QString lobbyText)
 {
-    tb_lobbyInfo->setText(InfoText);
+    l_lobby->setText(lobbyText);
 }
 
-void game::setLobbyCurrentUsersText(QString CurrentUsersText)
+void gameUI::setLobbyInfoText(QString infoText)
 {
-    tb_lobbyCurrentUsers->setText(CurrentUsersText);
+    tb_lobbyInfo->setText(infoText);
 }
 
-void game::setUpScreen0()
+void gameUI::setLobbyCurrentUsersText(QString currentUsersText)
+{
+    tb_lobbyCurrentUsers->setText(currentUsersText);
+}
+
+void gameUI::setLobbyIPAddressEnabled(bool enabled)
+{
+    le_lobbyIPAddress->setEnabled(enabled);
+}
+
+void gameUI::setLobbyPortEnabled(bool enabled)
+{
+    le_lobbyPortNumber->setEnabled(enabled);
+}
+
+void gameUI::setLobbyUserNameEnabled(bool enabled)
+{
+    le_lobbyEnterUserName->setEnabled(enabled);
+}
+
+void gameUI::setLobbyChangeUserNameEnabled(bool enabled)
+{
+    pb_changeUserName->setEnabled(enabled);
+}
+
+void gameUI::setLobbyAcceptEnabled(bool enabled)
+{
+    pb_accept->setEnabled(enabled);
+}
+
+void gameUI::setLobbyStartEnabled(bool enabled)
+{
+    pb_start->setEnabled(enabled);
+}
+
+void gameUI::setUpCosmetics()
+{
+    font_title.setPointSize(32);
+    font_title.setBold(true);
+    font_header.setPointSize(18);
+    font_distinct.setBold(true);
+    size_tbInitial.setHeight(400);
+    size_tbInitial.setWidth(400);
+}
+
+void gameUI::setUpScreen0()
 {
     // horizontal layout
     screenLayout[0] = new QHBoxLayout;
@@ -155,7 +193,7 @@ void game::setUpScreen0()
     screenWidget[0]->setLayout(hl);
 }
 
-void game::setUpScreen1()
+void gameUI::setUpScreen1()
 {
     // grid layout
     screenLayout[1] = new QVBoxLayout;
@@ -163,7 +201,6 @@ void game::setUpScreen1()
     // allocate all widgets
     gl_lobbyUsers = new QGridLayout;
     gl_lobbyNetworkInfo = new QGridLayout;
-    gl_lobbyMainButtons = new QGridLayout;
     l_lobby = new QLabel(L_LOBBY_TEXT);
     l_lobbyIPAddress = new QLabel(L_LOBBYIPADDRESS_TEXT);
     l_lobbyPortNumber = new QLabel(L_LOBBYPORTNUMBER_TEXT);
@@ -176,12 +213,18 @@ void game::setUpScreen1()
     le_lobbyIPAddress = new QLineEdit;
     le_lobbyPortNumber = new QLineEdit;
     le_lobbyEnterUserName = new QLineEdit;
-    pb_changeUserName = new QPushButton(PB_CHANGEUSERNAME_TEXT);
+    pb_changeUserName = new QPushButton(PB_CHANGEUSERNAME_TEXT_G);
     pb_accept = new QPushButton(PB_ACCEPT_TEXT);
     pb_start = new QPushButton("Start");
 
-    // emit a signal whenever the change username button is clicked
+    // emit a signal whenever activity occurs on the lobby
     connect(pb_changeUserName, SIGNAL(clicked()), this, SIGNAL(userNameChangeRequested()));
+    connect(pb_accept, SIGNAL(clicked()), this, SIGNAL(acceptSettingsClicked()));
+    connect(pb_start, SIGNAL(clicked()), this, SIGNAL(hostStartClicked()));
+    connect(le_lobbyIPAddress, SIGNAL(textChanged(QString)), this, SIGNAL(lobbyNetworkTextChanged()));
+    connect(le_lobbyPortNumber, SIGNAL(textChanged(QString)), this, SIGNAL(lobbyNetworkTextChanged()));
+    connect(le_lobbyEnterUserName, SIGNAL(textChanged(QString)), this, SIGNAL(lobbyEnterUserNameTextChanged()));
+    connect(le_lobbyEnterUserName, SIGNAL(returnPressed()), pb_changeUserName, SLOT(animateClick()));
 
     // cosmetics
     l_lobby->setFont(font_title);
@@ -190,11 +233,12 @@ void game::setUpScreen1()
     tb_lobbyCurrentUsers->setFont(font_header);
 
     // network info layout
-    gl_lobbyNetworkInfo->addWidget(tb_lobbyInfo,0,0,2,1);
+    gl_lobbyNetworkInfo->addWidget(tb_lobbyInfo,0,0,3,1);
     gl_lobbyNetworkInfo->addWidget(l_lobbyIPAddress,0,1);
     gl_lobbyNetworkInfo->addWidget(le_lobbyIPAddress,0,2);
     gl_lobbyNetworkInfo->addWidget(l_lobbyPortNumber,1,1);
     gl_lobbyNetworkInfo->addWidget(le_lobbyPortNumber,1,2);
+    gl_lobbyNetworkInfo->addWidget(pb_accept,2,1,1,2);
 
     // username layout
     gl_lobbyUsers->addWidget(l_lobbyCurrentUsers,0,0);
@@ -205,20 +249,17 @@ void game::setUpScreen1()
     gl_lobbyUsers->addWidget(le_lobbyEnterUserName,4,1);
     gl_lobbyUsers->addWidget(pb_changeUserName,4,2);
 
-    // main buttons layout
-    gl_lobbyMainButtons->addWidget(pb_accept,0,0);
-    gl_lobbyMainButtons->addWidget(pb_start,0,1);
-
     // set up screen
     vl = (QVBoxLayout*)screenLayout[1];
     vl->addWidget(l_lobby);
     vl->addLayout(gl_lobbyNetworkInfo);
     vl->addLayout(gl_lobbyUsers);
-    vl->addLayout(gl_lobbyMainButtons);
+    vl->addWidget(pb_start);
+    pb_start->hide();   // default is hidden
     screenWidget[1]->setLayout(vl);
 }
 
-void game::setUpScreen2()
+void gameUI::setUpScreen2()
 {
     // grid layout
     screenLayout[2] = new QGridLayout;
@@ -233,7 +274,7 @@ void game::setUpScreen2()
     screenWidget[2]->setLayout(gl);
 }
 
-void game::setPlayerTypeTo(game::PLAYERTYPE newType)
+void gameUI::setPlayerTypeTo(PLAYERTYPE newType)
 {
     switch(newType)
     {
@@ -250,8 +291,11 @@ void game::setPlayerTypeTo(game::PLAYERTYPE newType)
 
             gameHost = new host(this);
             gamePlayer = gameHost;
+            pb_start->show();
+            pb_changeUserName->setText(PB_CHANGEUSERNAME_TEXT_H);
+            le_lobbyEnterUserName->selectAll();
+            le_lobbyEnterUserName->setFocus();
             qDebug() << "allocated host at address:" << gamePlayer << "==" << gameHost;
-
 
 
         }
@@ -269,7 +313,10 @@ void game::setPlayerTypeTo(game::PLAYERTYPE newType)
 
             gameGuest = new guest(this);
             gamePlayer = gameGuest;
+            pb_start->hide();
+            pb_changeUserName->setText(PB_CHANGEUSERNAME_TEXT_G);
             qDebug() << "allocated guest at address:" << gamePlayer << "==" << gameGuest;
+
         }
         break;
     default:
@@ -281,19 +328,19 @@ void game::setPlayerTypeTo(game::PLAYERTYPE newType)
 
 }
 
-void game::screen0ButtonClicked(QAbstractButton *button)
+
+void gameUI::screen0ButtonClicked(QAbstractButton *button)
 {
     if(button == pb_hostGame)
     {
         setPlayerTypeTo(PLAYERTYPE::HOST);
-        gameHost->sendTest();
     }
     else if(button == pb_joinGame)
     {
         setPlayerTypeTo(PLAYERTYPE::GUEST);
-        gameGuest->sendTest();
     }
 
+    centralStackedWidget->setCurrentIndex(1);
 }
 
 

@@ -1,4 +1,4 @@
-#include "game.h"
+#include "gameUI.h"
 #include "player.h"
 #include "host.h"
 #include "guest.h"
@@ -13,8 +13,8 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
 
-    game w;
-    w.show();
+    gameUI game1;
+    game1.show();
 
     return a.exec();
 }

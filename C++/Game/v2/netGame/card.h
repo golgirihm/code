@@ -48,6 +48,7 @@ public:
     card(QByteArray bytes);
     QByteArray bytes();
     card &operator = (const card &other);
+    bool operator == (const card &other);
 
 private:
     QChar rank;

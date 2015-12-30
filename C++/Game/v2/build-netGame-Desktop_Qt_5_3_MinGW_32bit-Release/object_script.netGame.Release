@@ -1,7 +1,6 @@
 INPUT(
 ./release/main.o
 ./release/player.o
-./release/game.o
 ./release/host.o
 ./release/guest.o
 ./release/card.o
@@ -9,9 +8,14 @@ INPUT(
 ./release/message.o
 ./release/netclient.o
 ./release/netserver.o
+./release/gameUI.o
+./release/netcomm.o
 ./release/moc_player.o
-./release/moc_game.o
+./release/moc_host.o
+./release/moc_guest.o
 ./release/moc_cardstack.o
 ./release/moc_netclient.o
 ./release/moc_netserver.o
+./release/moc_gameUI.o
+./release/moc_netcomm.o
 );

@@ -1,5 +1,5 @@
-#ifndef GAME_H
-#define GAME_H
+#ifndef GAMEUI_H
+#define GAMEUI_H
 
 #include <QMainWindow>
 
@@ -24,33 +24,55 @@ class QLabel;
 class QFont;
 class QSize;
 
-class game : public QMainWindow
+class gameUI : public QMainWindow
 {
     Q_OBJECT
 public:
-    game(QWidget *parent = 0);
-    ~game();
+    gameUI(QWidget *parent = 0);
+    ~gameUI();
 
     enum PLAYERTYPE : quint8 {NONE, HOST, GUEST};
 
-    QString getLobbyIPAddress();
-    quint16 getLobbyPort();
+signals:
+    void lobbyNetworkTextChanged();
+    void lobbyEnterUserNameTextChanged();
+    void userNameChangeRequested();
+    void acceptSettingsClicked();
+    void hostStartClicked();
+
+public slots:
+
+    // screen 1
+    QString getLobbyIPAddressString();
+    QString getLobbyPortString();
     QString getLobbyEnteredUserName();
     void setLobbyIPAddress(QString newIP);
     void setLobbyPort(quint16 newPort);
-    void setLobbyUserName(QString newUserName);
-    void setLobbyInfoText(QString InfoText);
-    void setLobbyCurrentUsersText(QString CurrentUsersText);
+    void setLobbyEnterUserNameText(QString enteredNameText);
+    void setLobbyCurrentUserName(QString newUserName);
+    void setLobbyText(QString lobbyText);
+    void setLobbyInfoText(QString infoText);
+    void setLobbyCurrentUsersText(QString currentUsersText);
+    void setLobbyIPAddressEnabled(bool enabled);
+    void setLobbyPortEnabled(bool enabled);
+    void setLobbyUserNameEnabled(bool enabled);
+    void setLobbyChangeUserNameEnabled(bool enabled);
+    void setLobbyAcceptEnabled(bool enabled);
+    void setLobbyStartEnabled(bool enabled);
+
+    // screen 2
 
 private slots:
-    void setPlayerTypeTo(PLAYERTYPE newType);
     void screen0ButtonClicked(QAbstractButton *button);
+    void setPlayerTypeTo(PLAYERTYPE newType);
 
 private:
     // private functions
+    void setUpCosmetics();
     void setUpScreen0();
     void setUpScreen1();
     void setUpScreen2();
+
 
     // player type (host/guest)
     PLAYERTYPE playerType;
@@ -77,17 +99,18 @@ private:
     QFont font_distinct;
     QSize size_tbInitial;
 
-    //![0] screen 0 widgets
+    //![0]
+    // screen 0 widgets
     QButtonGroup *bg_mainmenu;
     QPushButton *pb_hostGame;
     QPushButton *pb_joinGame;
     //![0]
 
 
-    //![1] screen 1 widgets
+    //![1]
+    // screen 1 widgets
     QGridLayout *gl_lobbyUsers,
-    *gl_lobbyNetworkInfo,
-    *gl_lobbyMainButtons;
+    *gl_lobbyNetworkInfo;
 
     QLabel *l_lobby,
     *l_lobbyIPAddress,
@@ -110,13 +133,11 @@ private:
     //![1]
 
 
-    //![2] screen 2 widgets
+    //![2]
+    // screen 2 widgets
     QLineEdit *le_chatInput;
     QPushButton *pb_sendChat;
     //![2]
-
-signals:
-    void userNameChangeRequested();
 };
 
-#endif // GAME_H
+#endif // GAMEUI_H

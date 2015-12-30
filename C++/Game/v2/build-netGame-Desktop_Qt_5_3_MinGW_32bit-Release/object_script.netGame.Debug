@@ -1,7 +1,6 @@
 INPUT(
 ./debug/main.o
 ./debug/player.o
-./debug/game.o
 ./debug/host.o
 ./debug/guest.o
 ./debug/card.o
@@ -9,9 +8,14 @@ INPUT(
 ./debug/message.o
 ./debug/netclient.o
 ./debug/netserver.o
+./debug/gameUI.o
+./debug/netcomm.o
 ./debug/moc_player.o
-./debug/moc_game.o
+./debug/moc_host.o
+./debug/moc_guest.o
 ./debug/moc_cardstack.o
 ./debug/moc_netclient.o
 ./debug/moc_netserver.o
+./debug/moc_gameUI.o
+./debug/moc_netcomm.o
 );

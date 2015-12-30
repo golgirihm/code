@@ -1,10 +1,10 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#define DEFAULT_USERNAME "DefaultPlayerName"
-
-class game;
+class gameUI;
+class netcomm;
 #include "cardstack.h"
+
 
 #include <QDebug>
 
@@ -20,13 +20,28 @@ class player : public QObject
     Q_OBJECT
 
 public:
-    player(game *gameUI);
+    player(gameUI *parentUI);
     ~player();
+
+    bool validUserName(QString userName);
+
+signals:
+    void userNameChanged();
 
 public slots:
 
+protected slots:
+    virtual void initialLobbySetUp() = 0;
+    virtual void PBLobbyAcceptEnabler() = 0;
+    virtual void PBLobbyChangeUserNameEnabler() = 0;
+    virtual void processNewUserNameRequest() = 0;
+    virtual void ready() = 0;
+    virtual void processReceivedData() = 0;
+    void setUserName(QString newName);
+
 protected:
-    game *ui;
+    gameUI *ui;
+//    netcomm *gameComm;
     playerinfo *info;
 
 

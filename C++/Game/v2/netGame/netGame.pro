@@ -14,24 +14,26 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         player.cpp \
-    game.cpp \
     host.cpp \
     guest.cpp \
     card.cpp \
     cardstack.cpp \
     message.cpp \
     netclient.cpp \
-    netserver.cpp
+    netserver.cpp \
+    gameUI.cpp \
+    netcomm.cpp
 
 HEADERS  += player.h \
-    game.h \
     host.h \
     guest.h \
     card.h \
     cardstack.h \
     message.h \
     netclient.h \
-    netserver.h
+    netserver.h \
+    gameUI.h \
+    netcomm.h
 
 
 CONFIG += c++11
