@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_cardstack_t {
-    QByteArrayData data[23];
-    char stringdata[223];
+    QByteArrayData data[25];
+    char stringdata[243];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,30 +36,32 @@ QT_MOC_LITERAL(3, 24, 10),
 QT_MOC_LITERAL(4, 35, 5),
 QT_MOC_LITERAL(5, 41, 14),
 QT_MOC_LITERAL(6, 56, 7),
-QT_MOC_LITERAL(7, 64, 7),
-QT_MOC_LITERAL(8, 72, 4),
-QT_MOC_LITERAL(9, 77, 7),
-QT_MOC_LITERAL(10, 85, 7),
-QT_MOC_LITERAL(11, 93, 7),
-QT_MOC_LITERAL(12, 101, 10),
-QT_MOC_LITERAL(13, 112, 4),
-QT_MOC_LITERAL(14, 117, 8),
-QT_MOC_LITERAL(15, 126, 7),
-QT_MOC_LITERAL(16, 134, 10),
-QT_MOC_LITERAL(17, 145, 8),
-QT_MOC_LITERAL(18, 154, 11),
-QT_MOC_LITERAL(19, 166, 14),
-QT_MOC_LITERAL(20, 181, 13),
-QT_MOC_LITERAL(21, 195, 16),
-QT_MOC_LITERAL(22, 212, 10)
+QT_MOC_LITERAL(7, 64, 4),
+QT_MOC_LITERAL(8, 69, 8),
+QT_MOC_LITERAL(9, 78, 7),
+QT_MOC_LITERAL(10, 86, 10),
+QT_MOC_LITERAL(11, 97, 13),
+QT_MOC_LITERAL(12, 111, 16),
+QT_MOC_LITERAL(13, 128, 10),
+QT_MOC_LITERAL(14, 139, 7),
+QT_MOC_LITERAL(15, 147, 4),
+QT_MOC_LITERAL(16, 152, 7),
+QT_MOC_LITERAL(17, 160, 9),
+QT_MOC_LITERAL(18, 170, 7),
+QT_MOC_LITERAL(19, 178, 9),
+QT_MOC_LITERAL(20, 188, 7),
+QT_MOC_LITERAL(21, 196, 10),
+QT_MOC_LITERAL(22, 207, 8),
+QT_MOC_LITERAL(23, 216, 11),
+QT_MOC_LITERAL(24, 228, 14)
     },
     "cardstack\0stackChanged\0\0cardstack*\0"
-    "stack\0toStandardDeck\0shuffle\0addCard\0"
-    "card\0newCard\0NewRank\0NewSuit\0clearStack\0"
-    "look\0position\0topCard\0bottomCard\0"
-    "takeCard\0takeTopCard\0takeBottomCard\0"
-    "numberOfCards\0compressedString\0"
-    "printCards"
+    "stack\0toStandardDeck\0shuffle\0look\0"
+    "position\0topCard\0bottomCard\0numberOfCards\0"
+    "compressedString\0printCards\0addCard\0"
+    "card\0newCard\0card::R_t\0NewRank\0card::S_t\0"
+    "NewSuit\0clearStack\0takeCard\0takeTopCard\0"
+    "takeBottomCard"
 };
 #undef QT_MOC_LITERAL
 
@@ -83,17 +85,17 @@ static const uint qt_meta_data_cardstack[] = {
        5,    0,   92,    2, 0x0a /* Public */,
        6,    0,   93,    2, 0x0a /* Public */,
        7,    1,   94,    2, 0x0a /* Public */,
-       7,    2,   97,    2, 0x0a /* Public */,
-      12,    0,  102,    2, 0x0a /* Public */,
-      13,    1,  103,    2, 0x0a /* Public */,
-      15,    0,  106,    2, 0x0a /* Public */,
-      16,    0,  107,    2, 0x0a /* Public */,
-      17,    1,  108,    2, 0x0a /* Public */,
-      18,    0,  111,    2, 0x0a /* Public */,
-      19,    0,  112,    2, 0x0a /* Public */,
-      20,    0,  113,    2, 0x0a /* Public */,
-      21,    0,  114,    2, 0x0a /* Public */,
-      22,    0,  115,    2, 0x0a /* Public */,
+       9,    0,   97,    2, 0x0a /* Public */,
+      10,    0,   98,    2, 0x0a /* Public */,
+      11,    0,   99,    2, 0x0a /* Public */,
+      12,    0,  100,    2, 0x0a /* Public */,
+      13,    0,  101,    2, 0x0a /* Public */,
+      14,    1,  102,    2, 0x0a /* Public */,
+      14,    2,  105,    2, 0x0a /* Public */,
+      21,    0,  110,    2, 0x0a /* Public */,
+      22,    1,  111,    2, 0x0a /* Public */,
+      23,    0,  114,    2, 0x0a /* Public */,
+      24,    0,  115,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
@@ -101,18 +103,18 @@ static const uint qt_meta_data_cardstack[] = {
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 8,    9,
-    QMetaType::Void, QMetaType::QChar, QMetaType::QChar,   10,   11,
+    QMetaType::Void, QMetaType::UInt,    8,
     QMetaType::Void,
-    0x80000000 | 8, QMetaType::Int,   14,
-    0x80000000 | 8,
-    0x80000000 | 8,
-    0x80000000 | 8, QMetaType::Int,   14,
-    0x80000000 | 8,
-    0x80000000 | 8,
-    QMetaType::Int,
+    QMetaType::Void,
+    QMetaType::UInt,
     QMetaType::QString,
     QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 15,   16,
+    QMetaType::Void, 0x80000000 | 17, 0x80000000 | 19,   18,   20,
+    QMetaType::Void,
+    0x80000000 | 15, QMetaType::UInt,    8,
+    0x80000000 | 15,
+    0x80000000 | 15,
 
        0        // eod
 };
@@ -125,26 +127,23 @@ void cardstack::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 0: _t->stackChanged((*reinterpret_cast< cardstack*(*)>(_a[1]))); break;
         case 1: _t->toStandardDeck(); break;
         case 2: _t->shuffle(); break;
-        case 3: _t->addCard((*reinterpret_cast< const card(*)>(_a[1]))); break;
-        case 4: _t->addCard((*reinterpret_cast< const QChar(*)>(_a[1])),(*reinterpret_cast< const QChar(*)>(_a[2]))); break;
-        case 5: _t->clearStack(); break;
-        case 6: { card _r = _t->look((*reinterpret_cast< int(*)>(_a[1])));
-            if (_a[0]) *reinterpret_cast< card*>(_a[0]) = _r; }  break;
-        case 7: { card _r = _t->topCard();
-            if (_a[0]) *reinterpret_cast< card*>(_a[0]) = _r; }  break;
-        case 8: { card _r = _t->bottomCard();
-            if (_a[0]) *reinterpret_cast< card*>(_a[0]) = _r; }  break;
-        case 9: { card _r = _t->takeCard((*reinterpret_cast< int(*)>(_a[1])));
-            if (_a[0]) *reinterpret_cast< card*>(_a[0]) = _r; }  break;
-        case 10: { card _r = _t->takeTopCard();
-            if (_a[0]) *reinterpret_cast< card*>(_a[0]) = _r; }  break;
-        case 11: { card _r = _t->takeBottomCard();
-            if (_a[0]) *reinterpret_cast< card*>(_a[0]) = _r; }  break;
-        case 12: { int _r = _t->numberOfCards();
-            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 13: { QString _r = _t->compressedString();
+        case 3: _t->look((*reinterpret_cast< const quint32(*)>(_a[1]))); break;
+        case 4: _t->topCard(); break;
+        case 5: _t->bottomCard(); break;
+        case 6: { quint32 _r = _t->numberOfCards();
+            if (_a[0]) *reinterpret_cast< quint32*>(_a[0]) = _r; }  break;
+        case 7: { QString _r = _t->compressedString();
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
-        case 14: _t->printCards(); break;
+        case 8: _t->printCards(); break;
+        case 9: _t->addCard((*reinterpret_cast< const card(*)>(_a[1]))); break;
+        case 10: _t->addCard((*reinterpret_cast< const card::R_t(*)>(_a[1])),(*reinterpret_cast< const card::S_t(*)>(_a[2]))); break;
+        case 11: _t->clearStack(); break;
+        case 12: { card _r = _t->takeCard((*reinterpret_cast< const quint32(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< card*>(_a[0]) = _r; }  break;
+        case 13: { card _r = _t->takeTopCard();
+            if (_a[0]) *reinterpret_cast< card*>(_a[0]) = _r; }  break;
+        case 14: { card _r = _t->takeBottomCard();
+            if (_a[0]) *reinterpret_cast< card*>(_a[0]) = _r; }  break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {

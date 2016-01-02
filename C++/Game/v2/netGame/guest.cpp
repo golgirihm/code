@@ -1,19 +1,19 @@
 #include "guest.h"
-#include "player.h"
 #include "gameUI.h"
 #include "netclient.h"
 #include "message.h"
 
 #define LOBBY_TEXT_G "Guest Lobby"
-#define DEFAULT_ENTEREDUSERNAME_TEXT_G "guestPlayer"
+#define DEFAULT_ENTEREDUSERNAME_TEXT_G ""
 #define LOBBYINFO1_TEXT_G "You are a guest.\n\nBe sure to enter the host's IP Address and port number correctly, and then accept the network settings."
 #define LOBBYINFO2_TEXT_G "Attempting to connect to the host's IP Address and Port.\n\n . . ."
+#define LOBBYINFO3_TEXT_G "Connected to the host.\n\nWaiting for the host to start the game . . ."
 
 
 guest::guest(gameUI *parentUI) : player(parentUI)
 {
     gameClient = new netclient;
-    connect(gameClient, SIGNAL(externalDataReady()), this, SLOT(processReceivedData()));
+    connect(gameClient, SIGNAL(externalDataReady()), this, SLOT(processReadyExternalData()));
 
     // TODO: REMOVE
     ui->setLobbyIPAddress(netComm::getLocalMachineIPv4().toString());
@@ -67,17 +67,17 @@ void guest::pbLobbyChangeUserNameEnabler()
 void guest::processNewUserNameRequest()
 {
 
+    QString newName = ui->getLobbyEnteredUserName();
 
     if(gameClient->isConnected()) // if connected to server
     {
         // send message to host with new username
-
+        gameClient->SendToServer( message(C::USERNAME_ASK, info->ID, newName) );
         // wait for message back with new name to set
-
     }
     else
     {
-        setUserName(ui->getLobbyEnteredUserName());
+        setUserName(newName);
     }
 
 
@@ -95,9 +95,25 @@ void guest::ready()
     gameClient->attemptToConnect();
 }
 
-void guest::processReceivedData()
+void guest::processReadyExternalData()
 {
     message msg(gameClient->receiveExternalData());
 
-    qDebug() << "CLIENT: received username:" << msg.text();
+    qDebug() << "GUEST received message:" << msg.compressedString();
+
+
+    // handle all communication from server here
+    switch(msg.msgtype())
+    {
+    case S::USERNAME:
+        setUserName(msg.text());
+        info->ID = msg.extraData().at(0);
+        ui->setLobbyUserNameEnabled(true);
+        ui->setLobbyInfoText(LOBBYINFO3_TEXT_G);
+        break;
+    case S::LOBBYLIST:
+        break;
+    case S::OPEN_MAIN_GAME:
+        break;
+    }
 }

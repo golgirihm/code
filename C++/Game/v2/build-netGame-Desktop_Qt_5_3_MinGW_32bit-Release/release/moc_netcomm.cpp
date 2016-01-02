@@ -34,14 +34,14 @@ QT_MOC_LITERAL(1, 8, 17),
 QT_MOC_LITERAL(2, 26, 0),
 QT_MOC_LITERAL(3, 27, 12),
 QT_MOC_LITERAL(4, 40, 19),
-QT_MOC_LITERAL(5, 60, 14),
-QT_MOC_LITERAL(6, 75, 17),
-QT_MOC_LITERAL(7, 93, 11),
-QT_MOC_LITERAL(8, 105, 6)
+QT_MOC_LITERAL(5, 60, 17),
+QT_MOC_LITERAL(6, 78, 11),
+QT_MOC_LITERAL(7, 90, 6),
+QT_MOC_LITERAL(8, 97, 14)
     },
     "netComm\0externalDataReady\0\0aboutToClose\0"
-    "receiveExternalData\0readSocketData\0"
-    "connectionMessage\0QTcpSocket*\0socket"
+    "receiveExternalData\0connectionMessage\0"
+    "QTcpSocket*\0socket\0readSocketData"
 };
 #undef QT_MOC_LITERAL
 
@@ -64,9 +64,9 @@ static const uint qt_meta_data_netComm[] = {
 
  // slots: name, argc, parameters, tag, flags
        4,    0,   46,    2, 0x0a /* Public */,
-       5,    0,   47,    2, 0x09 /* Protected */,
-       6,    1,   48,    2, 0x09 /* Protected */,
-       6,    0,   51,    2, 0x29 /* Protected | MethodCloned */,
+       5,    1,   47,    2, 0x09 /* Protected */,
+       5,    0,   50,    2, 0x29 /* Protected | MethodCloned */,
+       8,    0,   51,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -74,8 +74,8 @@ static const uint qt_meta_data_netComm[] = {
 
  // slots: parameters
     QMetaType::QByteArray,
+    QMetaType::Void, 0x80000000 | 6,    7,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 7,    8,
     QMetaType::Void,
 
        0        // eod
@@ -90,9 +90,9 @@ void netComm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 1: _t->aboutToClose(); break;
         case 2: { QByteArray _r = _t->receiveExternalData();
             if (_a[0]) *reinterpret_cast< QByteArray*>(_a[0]) = _r; }  break;
-        case 3: _t->readSocketData(); break;
-        case 4: _t->connectionMessage((*reinterpret_cast< QTcpSocket*(*)>(_a[1]))); break;
-        case 5: _t->connectionMessage(); break;
+        case 3: _t->connectionMessage((*reinterpret_cast< QTcpSocket*(*)>(_a[1]))); break;
+        case 4: _t->connectionMessage(); break;
+        case 5: _t->readSocketData(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

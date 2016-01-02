@@ -19,8 +19,6 @@ public slots:
     // sends data to the connected server
     void SendToServer(QByteArray data);
 
-
-
 private:
     QTcpSocket *tcpSocket;
     QTimer* attempt_timer;

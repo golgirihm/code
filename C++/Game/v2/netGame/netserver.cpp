@@ -15,7 +15,7 @@ netserver::~netserver()
     emit aboutToClose();
 }
 
-void netserver::StartServer()
+void netserver::StartServer() const
 {
     // start listening for clients
     if(!tcpServer->listen(ipv4, port))
@@ -29,7 +29,7 @@ void netserver::StartServer()
     }
 }
 
-bool netserver::isListening()
+bool netserver::isListening() const
 {
     return tcpServer->isListening();
 }
@@ -40,7 +40,7 @@ void netserver::AddTcpClient()
     ClientList.append(NewClient);
     connect(NewClient, SIGNAL(readyRead()), this, SLOT(readSocketData()));
     connectionMessage(NewClient);
-    emit clientAdded();
+    emit clientAdded((quint8)ClientList.indexOf(NewClient));
 }
 
 void netserver::RemoveTcpClient()
@@ -48,10 +48,10 @@ void netserver::RemoveTcpClient()
     qDebug() << "removing a client...";
     QTcpSocket* finishedclient = qobject_cast<QTcpSocket*>(sender());
     tcpServer->disconnect(finishedclient);
-    ClientList.removeOne(finishedclient);
+//    ClientList.removeOne(finishedclient);// careful, this could cause ID's to become incorrect
 }
 
-void netserver::CloseOffServer()
+void netserver::CloseOffServer() const
 {
     if(tcpServer->isListening())
        tcpServer->close();
@@ -77,17 +77,22 @@ void netserver::SendToAllClients(QByteArray public_msg)
         SendToClient(public_msg, i);
 }
 
+void netserver::SendToSelf(QByteArray internal_msg)
+{
+    externalData.append(internal_msg);
+    emit externalDataReady();
+}
+
 void netserver::SendToAll(QByteArray public_msg)
 {
     // send to self
-    externalData.append(public_msg);
-    emit externalDataReady();
+    SendToSelf(public_msg);
 
     // send to all others
     SendToAllClients(public_msg);
 }
 
-int netserver::ClientCount()
+int netserver::ClientCount() const
 {
     return ClientList.length();
 }

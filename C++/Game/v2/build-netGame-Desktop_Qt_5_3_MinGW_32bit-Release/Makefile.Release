@@ -890,7 +890,8 @@ release/main.o: ../netGame/main.cpp ../netGame/gameUI.h \
 		B:/Programs/Qt_Items/Qt/5.3/mingw482_32/include/QtGui/qguiapplication.h \
 		B:/Programs/Qt_Items/Qt/5.3/mingw482_32/include/QtGui/qinputmethod.h \
 		B:/Programs/Qt_Items/Qt/5.3/mingw482_32/include/QtCore/QThread \
-		B:/Programs/Qt_Items/Qt/5.3/mingw482_32/include/QtCore/qthread.h
+		B:/Programs/Qt_Items/Qt/5.3/mingw482_32/include/QtCore/qthread.h \
+		../netGame/message.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/main.o ../netGame/main.cpp
 
 release/player.o: ../netGame/player.cpp ../netGame/player.h \

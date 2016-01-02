@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_host_t {
-    QByteArrayData data[9];
-    char stringdata[142];
+    QByteArrayData data[10];
+    char stringdata[153];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,12 +37,13 @@ QT_MOC_LITERAL(4, 45, 28),
 QT_MOC_LITERAL(5, 74, 25),
 QT_MOC_LITERAL(6, 100, 5),
 QT_MOC_LITERAL(7, 106, 15),
-QT_MOC_LITERAL(8, 122, 19)
+QT_MOC_LITERAL(8, 122, 5),
+QT_MOC_LITERAL(9, 128, 24)
     },
     "host\0initialLobbySetUp\0\0pbLobbyAcceptEnabler\0"
     "pbLobbyChangeUserNameEnabler\0"
     "processNewUserNameRequest\0ready\0"
-    "clientConnected\0processReceivedData"
+    "clientConnected\0newID\0processReadyExternalData"
 };
 #undef QT_MOC_LITERAL
 
@@ -65,8 +66,8 @@ static const uint qt_meta_data_host[] = {
        4,    0,   51,    2, 0x08 /* Private */,
        5,    0,   52,    2, 0x08 /* Private */,
        6,    0,   53,    2, 0x08 /* Private */,
-       7,    0,   54,    2, 0x08 /* Private */,
-       8,    0,   55,    2, 0x08 /* Private */,
+       7,    1,   54,    2, 0x08 /* Private */,
+       9,    0,   57,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -74,7 +75,7 @@ static const uint qt_meta_data_host[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::UChar,    8,
     QMetaType::Void,
 
        0        // eod
@@ -90,12 +91,11 @@ void host::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
         case 2: _t->pbLobbyChangeUserNameEnabler(); break;
         case 3: _t->processNewUserNameRequest(); break;
         case 4: _t->ready(); break;
-        case 5: _t->clientConnected(); break;
-        case 6: _t->processReceivedData(); break;
+        case 5: _t->clientConnected((*reinterpret_cast< quint8(*)>(_a[1]))); break;
+        case 6: _t->processReadyExternalData(); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 const QMetaObject host::staticMetaObject = {

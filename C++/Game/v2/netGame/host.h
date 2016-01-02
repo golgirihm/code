@@ -12,7 +12,9 @@ public:
     host(gameUI *parentUI);
     ~host();
 
-    enum GAMESTATE : quint8 {INITIAL_STATE, SERVER_STARTED, GUESTS_CONNECTED, GAME_STARTED};
+    enum GAMESTATE : quint8 {INITIAL_STATE, SERVER_STARTED, GUESTS_IN_LOBBY, GAME_STARTED};
+
+
 
 signals:
 
@@ -24,15 +26,14 @@ private slots:
     void pbLobbyChangeUserNameEnabler();
     void processNewUserNameRequest();
     void ready();
-    void clientConnected();
-    void processReceivedData();
-
+    void clientConnected(quint8 newID);
+    void processReadyExternalData();
 
 private:
     netserver *gameServer;
 
     GAMESTATE gameState;
-    QList<playerinfo> guestList;
+    QList<playerinfo*> guestList;
 };
 
 #endif // HOST_H

@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_player_t {
     QByteArrayData data[11];
-    char stringdata[164];
+    char stringdata[169];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,14 +37,15 @@ QT_MOC_LITERAL(4, 42, 20),
 QT_MOC_LITERAL(5, 63, 28),
 QT_MOC_LITERAL(6, 92, 25),
 QT_MOC_LITERAL(7, 118, 5),
-QT_MOC_LITERAL(8, 124, 19),
-QT_MOC_LITERAL(9, 144, 11),
-QT_MOC_LITERAL(10, 156, 7)
+QT_MOC_LITERAL(8, 124, 24),
+QT_MOC_LITERAL(9, 149, 11),
+QT_MOC_LITERAL(10, 161, 7)
     },
     "player\0userNameChanged\0\0initialLobbySetUp\0"
     "pbLobbyAcceptEnabler\0pbLobbyChangeUserNameEnabler\0"
     "processNewUserNameRequest\0ready\0"
-    "processReceivedData\0setUserName\0newName"
+    "processReadyExternalData\0setUserName\0"
+    "newName"
 };
 #undef QT_MOC_LITERAL
 
@@ -99,7 +100,7 @@ void player::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 3: _t->pbLobbyChangeUserNameEnabler(); break;
         case 4: _t->processNewUserNameRequest(); break;
         case 5: _t->ready(); break;
-        case 6: _t->processReceivedData(); break;
+        case 6: _t->processReadyExternalData(); break;
         case 7: _t->setUserName((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }

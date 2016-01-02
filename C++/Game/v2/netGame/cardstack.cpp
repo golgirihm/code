@@ -2,6 +2,8 @@
 #include "card.h"
 #include <QTime>
 
+const card cardstack::EMPTY_CARD;
+
 cardstack::cardstack()
 {
 
@@ -10,28 +12,51 @@ cardstack::cardstack()
 cardstack::cardstack(const card& OnlyCard)
 {
     addCard(OnlyCard);
-    emit stackChanged(this);
+}
+
+cardstack::cardstack(const cardstack &other) : QObject(this)
+{
+    *this = other;
 }
 
 cardstack::~cardstack()
 {
-    //    qDebug() << "~cardstack()";
+//    qDebug() << "~cardstack()";
 }
 
-cardstack &cardstack::operator =(const cardstack &other)
+cardstack &cardstack::operator=(const cardstack &other)
 {
     cards = other.cards;
     emit stackChanged(this);
     return *this;
 }
 
+bool cardstack::operator==(const cardstack &other)
+{
+    if(numberOfCards() != other.numberOfCards())
+        return false;
+
+    for(quint32 i = 0; i < numberOfCards(); ++i)
+    {
+        if((cards.at(i) != other.cards.at(i)))
+            return false;
+    }
+
+    return true;
+}
+
+bool cardstack::operator!=(const cardstack &other)
+{
+    return !(*this == other);
+}
+
 void cardstack::toStandardDeck()
 {
     card temp;
 
-    for(int i = 0; i < NUMSUITS_STD; ++i)
+    for(quint32 i = 0; i < NUMSUITS_STD; ++i)
     {
-        for(int j = 0; j < NUMRANKS_STD; ++j)
+        for(quint32 j = 0; j < NUMRANKS_STD; ++j)
         {
             temp.setCard(RANKS_STD[j], SUITS_STD[i]);
             cards.append(temp);
@@ -47,11 +72,10 @@ void cardstack::addCard(const card &newCard)
     emit stackChanged(this);
 }
 
-void cardstack::addCard(const QChar &NewRank, const QChar &NewSuit)
+void cardstack::addCard(const card::R_t &NewRank, const card::S_t &NewSuit)
 {
     // use other overload
-    card temp(NewRank, NewSuit);
-    addCard(temp);
+    addCard(card(NewRank, NewSuit));
 }
 
 void cardstack::clearStack()
@@ -72,71 +96,74 @@ void cardstack::shuffle()
     // seed random numbers
     qsrand((uint)QTime::currentTime().msec());
 
-    qint32 i, j, inc = 1;
-    qint32 iterations = NumCards * SHUFFLE_SWEEPS;
-    for(i = 0, j = 0; i < iterations; ++i)
+    qint32 i, curPos, inc = 1;
+    qint32 iterations = NumCards * cardstack::SHUFFLE_SWEEPS;
+    for(i = 0, curPos = 0; i < iterations; ++i)
     {
-        cards.swap(j, qrand() % NumCards);
+        cards.swap(curPos, qrand() % NumCards);
 
-        j += inc;
+        // add to or subtract from the current position in the cardstack
+        curPos += inc;
 
-        if(j == NumCards - 1 || j == 0)
+        // switch direction
+        if((curPos == NumCards - 1) || (curPos == 0))
             inc *= -1;
     }
+
+    emit stackChanged(this);
 }
 
-card cardstack::look(int position) const
+const card &cardstack::look(const quint32 &position) const
 {
     // if deck has at least one card, and the selected position is valid
-    if(position < numberOfCards() && position >= 0)
+    if(position < numberOfCards())
         return cards[position];
 
     qDebug() << "warning, empty card handed out by Look(), no card at position " << position;
-    return card();
+    return cardstack::EMPTY_CARD;
 }
 
-card cardstack::topCard() const
+const card &cardstack::topCard() const
 {
     // look at the top card of the deck
     return look(numberOfCards() - 1);
 }
 
-card cardstack::bottomCard() const
+const card &cardstack::bottomCard() const
 {
     // look at the bottom card of the deck
     return look(0);
 }
 
-card cardstack::takeCard(int position)
+const card cardstack::takeCard(const quint32 &position)
 {
     card RemovedCard;
 
-    // if deck has at least one card, and the selected position is valid
-    if(position < numberOfCards() && position >= 0)
+    // if the selected position is valid
+    if(position < numberOfCards())
     {
-        RemovedCard = cards.at(position);
-        cards.removeAt(position);
+        RemovedCard = cards.takeAt(position);
         emit stackChanged(this);
         return RemovedCard;
     }
 
     qDebug() << "warning, empty card handed out by TakeCard(), no card at position " << position;
-    return RemovedCard;
+    return cardstack::EMPTY_CARD;
 }
 
-card cardstack::takeTopCard()
+const card cardstack::takeTopCard()
 {
     // take the top card from the deck
     return takeCard(numberOfCards() - 1);
 }
 
-card cardstack::takeBottomCard()
+const card cardstack::takeBottomCard()
 {
     // take the bottom card from the deck
     return takeCard(0);
 }
 
-int cardstack::numberOfCards() const
+quint32 cardstack::numberOfCards() const
 {
     return cards.length();
 }
@@ -145,7 +172,7 @@ QString cardstack::compressedString() const
 {
     QString CardString;
 
-    for(int i = 0; i < numberOfCards(); ++i)
+    for(quint32 i = 0; i < numberOfCards(); ++i)
         CardString += cards[i].compressedString();
 
     return CardString;
@@ -153,16 +180,14 @@ QString cardstack::compressedString() const
 
 void cardstack::printCards() const
 {
-    for(int i = 0; i < numberOfCards(); ++i)
-        qDebug() << "card " << i << "\t" << " is " << cards[i].getRankQChar() << " of " << cards[i].getSuitQChar();
+    for(quint32 i = 0; i < numberOfCards(); ++i)
+        qDebug() << "card " << i << "\tis " << QChar(cards[i].getRank()) << " of " << QChar(cards[i].getSuit());
 }
-
 
 QDataStream& operator <<(QDataStream &out, const cardstack &stack)
 {
     return out << stack.compressedString().toLatin1();
 }
-
 
 void operator >>(QDataStream &in, cardstack &stack)
 {
@@ -181,6 +206,6 @@ void operator >>(QDataStream &in, cardstack &stack)
     }
 
     // parse string from stream and add to stack
-    for(quint16 i = 0; i < StringLength; i += 2)
-        stack.addCard(StackString[i], StackString[i+1]);
+    for(quint32 i = 0; i+1 < StringLength; i += 2)
+        stack.addCard(static_cast<card::R_t>(StackString.at(i).toLatin1()), static_cast<card::S_t>(StackString.at(i+1).toLatin1()));
 }

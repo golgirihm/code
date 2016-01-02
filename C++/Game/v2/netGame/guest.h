@@ -22,7 +22,7 @@ private slots:
     void pbLobbyChangeUserNameEnabler();
     void processNewUserNameRequest();
     void ready();
-    void processReceivedData();
+    void processReadyExternalData();
 private:
     netclient *gameClient;
 

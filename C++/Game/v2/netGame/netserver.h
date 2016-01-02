@@ -13,13 +13,14 @@ public:
     ~netserver();
 
 public slots:
-    void StartServer();
-    bool isListening();
-    void CloseOffServer();
-    int ClientCount();
+    void StartServer() const;
+    bool isListening() const;
+    void CloseOffServer() const;
+    int ClientCount() const;
 
     void SendToClient(QByteArray private_msg, int client_number);
     void SendToAllClients(QByteArray public_msg);
+    void SendToSelf(QByteArray internal_msg);
     void SendToAll(QByteArray public_msg);
 
 private:
@@ -31,7 +32,7 @@ private slots:
     void RemoveTcpClient();
 
 signals:
-    void clientAdded();
+    void clientAdded(quint8);
 
 };
 

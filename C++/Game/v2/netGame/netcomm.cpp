@@ -14,7 +14,6 @@ netComm::netComm()
     // find ip address of this machine by default
     ipv4 = getLocalMachineIPv4();
     port = DEFAULTPORT;
-
 }
 
 netComm::~netComm()
@@ -32,22 +31,22 @@ QHostAddress netComm::getLocalMachineIPv4()
     return localIPv4;
 }
 
-quint16 netComm::getPort()
+const quint16 &netComm::getPort() const
 {
     return port;
 }
 
-QHostAddress netComm::getIPv4()
+const QHostAddress &netComm::getIPv4() const
 {
     return ipv4;
 }
 
-void netComm::setPort(quint16 newPort)
+void netComm::setPort(const quint16 &newPort)
 {
     port = newPort;
 }
 
-void netComm::setIPv4(QHostAddress newIPv4)
+void netComm::setIPv4(const QHostAddress &newIPv4)
 {
     ipv4 = newIPv4;
 }

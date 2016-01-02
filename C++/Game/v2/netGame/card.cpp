@@ -6,76 +6,54 @@ card::card()
     setCard(R_t::NO_RANK, S_t::NO_SUIT);
 }
 
-card::card(QChar NewRank, QChar NewSuit)
+card::card(R_t NewRank, S_t NewSuit)
 {
     setCard(NewRank, NewSuit);
 }
 
-card::card(QByteArray bytes)
-{
-    QChar rank_QChar;
-    QChar suit_QChar;
-
-    QDataStream stream(bytes);
-
-    stream >> rank_QChar;
-    stream >> suit_QChar;
-
-    setCard(rank_QChar, suit_QChar);
-
-    qDebug() << endl << "card(bytes) constructor: card == " << getRankQChar() << getSuitQChar();
-}
-
 card::~card()
 {
-    //    qDebug() << "~card()";
+//    qDebug() << "~card() was: " << compressedString();
 }
 
 card &card::operator =(const card &other)
 {
-    setCard(other.suit, other.rank);
+    setCard(other.rank, other.suit);
     return *this;
 }
 
-bool card::operator ==(const card &other)
+bool card::operator ==(const card &other) const
 {
-    return((getRankQChar() == other.getRankQChar()) && (getSuitQChar() == other.getSuitQChar()));
-
+    return((getRank() == other.getRank()) && (getSuit() == other.getSuit()));
 }
 
-QByteArray card::bytes()
+bool card::operator!=(const card &other) const
 {
-    QByteArray buffer;
-    QDataStream stream(&buffer, QIODevice::WriteOnly);
-
-    stream << QChar(rank);
-    stream << QChar(suit);
-
-    return buffer;
+    return !(*this == other);
 }
 
-void card::setSuit(QChar NewSuit)
+void card::setRank(R_t NewRank)
 {
-    suit = QChar(NewSuit);
+    rank = NewRank;
 }
 
-void card::setRank(QChar NewRank)
+void card::setSuit(S_t NewSuit)
 {
-    rank = QChar(NewRank);
+    suit = NewSuit;
 }
 
-void card::setCard(QChar NewRank, QChar NewSuit)
+void card::setCard(R_t NewRank, S_t NewSuit)
 {
-    rank = QChar(NewRank);
-    suit = QChar(NewSuit);
+    setRank(NewRank);
+    setSuit(NewSuit);
 }
 
-QChar card::getSuitQChar() const
+const card::S_t &card::getSuit() const
 {
     return suit;
 }
 
-QChar card::getRankQChar() const
+const card::R_t &card::getRank() const
 {
     return rank;
 }

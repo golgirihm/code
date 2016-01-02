@@ -4,28 +4,33 @@
 #include "card.h"
 #include "cardstack.h"
 
-#define NO_CHAR QChar('~')
-#define NO_STRING QString(NO_CHAR)
+#define NO_STRING ""
 
 class message : public QByteArray
 {
 public:
-    message(const quint8 &newMsgtype, const QString &newText = NO_STRING, const QString &newFrom = NO_STRING, const cardstack &newCards = cardstack(card()) );
+    message(const QChar &newMsgtype,
+            const QChar &newSenderID,
+            const QString &newText = NO_STRING,
+            const QByteArray &newExtraData = NO_STRING,
+            const cardstack &newCards = cardstack(card()));
     message(const QByteArray &bytes);
     ~message();
 
     QByteArray bytes();
 
-    QChar &msgtype();
-    QString &from();
-    QString &text();
-    cardstack &cards();
-    QString compressedString();
+    const quint8 &msgtype() const;
+    const quint8 &senderID() const;
+    const QByteArray &extraData() const;
+    const QString &text()const;
+    const cardstack &cards() const;
+    QString compressedString() const;
 
 private:
-    QChar _msgtype;
-    QString _from;
+    quint8 _msgtype;
+    quint8 _senderID;
     QString _text;
+    QByteArray _extraData;
     cardstack _cards;
 
 signals:

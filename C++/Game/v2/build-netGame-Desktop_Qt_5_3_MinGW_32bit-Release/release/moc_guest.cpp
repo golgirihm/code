@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_guest_t {
     QByteArrayData data[8];
-    char stringdata[127];
+    char stringdata[132];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,12 +36,12 @@ QT_MOC_LITERAL(3, 25, 20),
 QT_MOC_LITERAL(4, 46, 28),
 QT_MOC_LITERAL(5, 75, 25),
 QT_MOC_LITERAL(6, 101, 5),
-QT_MOC_LITERAL(7, 107, 19)
+QT_MOC_LITERAL(7, 107, 24)
     },
     "guest\0initialLobbySetUp\0\0pbLobbyAcceptEnabler\0"
     "pbLobbyChangeUserNameEnabler\0"
     "processNewUserNameRequest\0ready\0"
-    "processReceivedData"
+    "processReadyExternalData"
 };
 #undef QT_MOC_LITERAL
 
@@ -87,7 +87,7 @@ void guest::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
         case 2: _t->pbLobbyChangeUserNameEnabler(); break;
         case 3: _t->processNewUserNameRequest(); break;
         case 4: _t->ready(); break;
-        case 5: _t->processReceivedData(); break;
+        case 5: _t->processReadyExternalData(); break;
         default: ;
         }
     }
