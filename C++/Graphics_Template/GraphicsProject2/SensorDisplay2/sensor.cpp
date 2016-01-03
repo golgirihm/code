@@ -2,37 +2,39 @@
 
 sensor::sensor(quint16 newNumRows, quint16 newNumCols, quint16 newCellSize, quint16 newGridSpacing)
 {
+    // assign temporaries to private members
     numRows = newNumRows;
     numCols = newNumCols;
     cellSize = newCellSize;
     gridSpacing = newGridSpacing;
-    cellSpacing = cellSize + gridSpacing;
 
+    // calculate dimensions
+    cellSpacing = cellSize + gridSpacing;
     quint16 totalHPix = numRows * cellSpacing + gridSpacing;
     quint16 totalVPix = numCols * cellSpacing + gridSpacing;
 
+    // create a graphics scene and set its parameters
     sensorScene = new QGraphicsScene;
     sensorScene->setSceneRect(0,0,totalHPix,totalVPix);
-
-    // use sensorScene as the scene to visualize
-    setScene(sensorScene);
+    setFixedSize(totalHPix,totalVPix);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setFixedSize(totalHPix,totalVPix);
 
     // create a matrix of cells
-    for(quint16 row = 0; row < numRows; ++row)
+    for(quint16 row = 0, rowPx = gridSpacing; row < numRows; ++row, rowPx +=cellSpacing)
     {
-        for(quint16 col = 0; col < numCols; ++col)
+        for(quint16 col = 0, colPx = gridSpacing; col < numCols; ++col, colPx +=cellSpacing)
         {
-            cell *newCell = new cell(cellSize);
-            newCell->setPos(gridSpacing + row*cellSpacing, gridSpacing + col * cellSpacing);
+            cell *newCell = new cell;
+            newCell->setPos(rowPx, colPx);
             sensorScene->addItem(newCell);
             cellList.append(newCell);
         }
     }
 
 
+    // use sensorScene as the scene to visualize in this graphics view
+    setScene(sensorScene);
 }
 
 sensor::~sensor()

@@ -14,9 +14,9 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    cell.cpp \
-    sensor.cpp
+    sensor.cpp \
+    sensorCell.cpp
 
 HEADERS  += mainwindow.h \
-    cell.h \
-    sensor.h
+    sensor.h \
+    sensorCell.h

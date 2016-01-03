@@ -1,23 +1,28 @@
 #ifndef SENSOR_H
 #define SENSOR_H
 
-#include "cell.h"
+#include "sensorCell.h"
 #include <QGraphicsView>
 
-#define DEF_NUMROWS 4
-#define DEF_NUMCOLS 4
-#define DEF_CELLSIZE 70
-#define DEF_GRIDSPACING 4
+
 
 class sensor : public QGraphicsView
 {
-public:
 
-    sensor(quint16 newNumRows = DEF_NUMROWS,
-           quint16 newNumCols = DEF_NUMCOLS,
-           quint16 newCellSize = DEF_CELLSIZE,
-           quint16 newGridSpacing = DEF_GRIDSPACING);
+    Q_OBJECT
+
+public:
+    static const quint16 DEF_NUMROWS = 4;
+    static const quint16 DEF_NUMCOLS = 4;
+    static const quint16 DEF_GRIDSPACING = 4;
+
+    sensor(quint16 newNumRows = sensor::DEF_NUMROWS,
+           quint16 newNumCols = sensor::DEF_NUMCOLS,
+           quint16 newCellSize = cell::DEF_CELLSIZE,
+           quint16 newGridSpacing = sensor::DEF_GRIDSPACING);
     ~sensor();
+
+public slots:
 
 
 private:
@@ -28,7 +33,7 @@ private:
     quint16 cellSpacing;
 
     QGraphicsScene *sensorScene;
-    QList<cell*> cellList;
+    QList<sensorCell*> cellList;
 
 
 };

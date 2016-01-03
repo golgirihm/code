@@ -3,15 +3,13 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
     centralWidget = new QWidget;
-    layout = new QGridLayout;
+    centralLayout = new QGridLayout;
     sensor_1 = new sensor;
 //    sensor_2 = new sensor;
 
-    layout->addWidget(sensor_1);
-//    layout->addWidget(sensor_2,0,1);
+    centralLayout->addWidget(sensor_1);
 
-
-    centralWidget->setLayout(layout);
+    centralWidget->setLayout(centralLayout);
     setCentralWidget(centralWidget);
 }
 
