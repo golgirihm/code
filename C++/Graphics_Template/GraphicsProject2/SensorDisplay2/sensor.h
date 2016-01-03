@@ -18,7 +18,7 @@ public:
 
     sensor(quint16 newNumRows = sensor::DEF_NUMROWS,
            quint16 newNumCols = sensor::DEF_NUMCOLS,
-           quint16 newCellSize = cell::DEF_CELLSIZE,
+           quint16 newCellSize = sensorCell::DEF_CELLSIZE,
            quint16 newGridSpacing = sensor::DEF_GRIDSPACING);
     ~sensor();
 

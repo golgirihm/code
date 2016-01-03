@@ -17,7 +17,8 @@ private:
     QWidget *centralWidget;
     QGridLayout *centralLayout;
     sensor *sensor_1;
-    sensor *sensor_2;
+//    sensor *sensor_2;
+//    sensor *sensor_3;
 
 };
 

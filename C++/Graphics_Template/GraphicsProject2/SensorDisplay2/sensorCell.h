@@ -8,13 +8,17 @@ class sensorCell : public QGraphicsRectItem
 {
 
 public:
-    static const quint16 DEF_CELLSIZE = 30;
+    static const quint16 DEF_CELLSIZE = 50;
 
-    sensorCell(quint8 size = cell::DEF_CELLSIZE);
+    sensorCell(quint8 size = sensorCell::DEF_CELLSIZE);
     ~sensorCell();
 
     void setColor(quint8 r, quint8 g, quint8 b);
-    void setString(QString dispString);
+    void setString(QString newSensorCellString);
+
+private:
+    QGraphicsRectItem *sensorCellRect;
+    QGraphicsTextItem *sensorCellString;
 
 };
 
