@@ -2,6 +2,15 @@
 #define GAMEUI_H
 
 #include <QMainWindow>
+#include <QWidget>
+
+#define NUMBER_OF_SCREENS 3
+
+namespace Ui {
+class form_startscreen;
+class form_lobby;
+class form_maingame;
+}
 
 class player;
 class host;
@@ -24,9 +33,18 @@ class QLabel;
 class QFont;
 class QSize;
 
+#include <QHostAddress>
+
+
 class gameUI : public QMainWindow
 {
     Q_OBJECT
+
+//    /// allow player, host, and guest to access all gamueUI members
+//    friend class player;
+//    friend class host;
+//    friend class guest;
+
 public:
     gameUI(QWidget *parent = 0);
     ~gameUI();
@@ -40,104 +58,71 @@ signals:
     void acceptSettingsClicked();
     void hostStartClicked();
 
+
 public slots:
 
-    // screen 1
-    QString getLobbyIPAddressString();
-    QString getLobbyPortString();
-    QString getLobbyEnteredUserName();
-    void setLobbyIPAddress(QString newIP);
-    void setLobbyPort(quint16 newPort);
-    void setLobbyEnterUserNameText(QString enteredNameText);
-    void setLobbyCurrentUserName(QString newUserName);
-    void setLobbyText(QString lobbyText);
-    void setLobbyInfoText(QString infoText);
-    void setLobbyCurrentUsersText(QString currentUsersText);
-    void setLobbyIPAddressEnabled(bool enabled);
-    void setLobbyPortEnabled(bool enabled);
-    void setLobbyUserNameEnabled(bool enabled);
-    void setLobbyChangeUserNameEnabled(bool enabled);
-    void setLobbyAcceptEnabled(bool enabled);
-    void setLobbyStartEnabled(bool enabled);
+    /// \todo: remove
+    QPushButton *get_pb1_accept();
+    QPushButton *get_pb1_changeUserName();
 
-    // screen 2
+
+    /// screen 1
+    QHostAddress get_le1_IPAddress();
+    int get_le1_portNumber();
+    QString get_le1_enterUserName();
+    void set_le1_IPAddress(QHostAddress newIP);
+    void set_le1_portNumber(quint16 newPort);
+    void set_le1_enterUserName(QString enteredNameText);
+    void set_l1_currentUsername(QString newUserName);
+    void set_l1_lobby(QString lobbyText);
+    void set_tb1_info(QString infoText);
+    void set_tb1_currentUsers(QString currentUsersText);
+    void setEnabled_le1_IPAddress(bool enabled);
+    void setEnabled_le1_portNumber(bool enabled);
+    void setEnabled_le1_enterUserName(bool enabled);
+    void setEnabled_pb1_changeUserName(bool enabled);
+    void setEnabled_pb1_accept(bool enabled);
+    void setEnabled_pb1_start(bool enabled);
+
+    /// screen 2
+
 
 private slots:
-    void screen0ButtonClicked(QAbstractButton *button);
+    void ui0buttonclicked(QAbstractButton *button);
     void setPlayerTypeTo(PLAYERTYPE newType);
 
 private:
-    // private functions
+    /// private functions
     void setUpCosmetics();
-    void setUpScreen0();
-    void setUpScreen1();
-    void setUpScreen2();
+    void setUpUi0();
+    void setUpUi1();
+    void setUpUi2();
 
-
-    // player type (host/guest)
+    /// player type (host/guest)
     PLAYERTYPE playerType;
 
-    // pointers to the player of this game
+    /// pointers to the player of this game
     player *gamePlayer;
     host *gameHost;
     guest *gameGuest;
 
-    // general GUI variables
+    /// general GUI variables
     QStackedWidget *centralStackedWidget;
-    QWidget *tempcentralWidget;
-    QGridLayout *tempLayout;
-    QComboBox *pageComboBox;
-    QWidget *screenWidget[3];
-    QLayout *screenLayout[3];
-    QGridLayout *gl;
-    QVBoxLayout *vl;
-    QHBoxLayout *hl;
+    QWidget *screenWidget[NUMBER_OF_SCREENS];
+    Ui::form_startscreen *ui0;
+    Ui::form_lobby *ui1;
+    Ui::form_maingame *ui2;
 
-    // cosmetics
+    /// cosmetics
     QFont font_title;
     QFont font_header;
     QFont font_distinct;
     QSize size_tbInitial;
 
-    //![0]
-    // screen 0 widgets
-    QButtonGroup *bg_mainmenu;
-    QPushButton *pb_hostGame;
-    QPushButton *pb_joinGame;
-    //![0]
-
-
-    //![1]
-    // screen 1 widgets
-    QGridLayout *gl_lobbyUsers,
-    *gl_lobbyNetworkInfo;
-
-    QLabel *l_lobby,
-    *l_lobbyIPAddress,
-    *l_lobbyPortNumber,
-    *l_lobbyCurrentUsers,
-    *l_lobbyCurrentUsernameDisp,
-    *l_lobbyCurrentUsername,
-    *l_lobbyEnterUserName;
-
-    QTextBrowser *tb_lobbyInfo,
-    *tb_lobbyCurrentUsers;
-
-    QLineEdit *le_lobbyEnterUserName,
-    *le_lobbyIPAddress,
-    *le_lobbyPortNumber;
-
-    QPushButton *pb_changeUserName,
-    *pb_accept,
-    *pb_start;
-    //![1]
-
-
-    //![2]
-    // screen 2 widgets
-    QLineEdit *le_chatInput;
-    QPushButton *pb_sendChat;
-    //![2]
+    /// \todo: REMOVE
+    QWidget *tempcentralWidget;
+    QLayout *tempLayout;
+    QComboBox *pageComboBox;
 };
 
 #endif // GAMEUI_H

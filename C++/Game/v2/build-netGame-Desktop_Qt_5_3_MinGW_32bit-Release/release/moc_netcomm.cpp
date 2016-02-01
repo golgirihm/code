@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_netComm_t {
     QByteArrayData data[9];
-    char stringdata[112];
+    char stringdata[119];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,13 +35,13 @@ QT_MOC_LITERAL(2, 26, 0),
 QT_MOC_LITERAL(3, 27, 12),
 QT_MOC_LITERAL(4, 40, 19),
 QT_MOC_LITERAL(5, 60, 17),
-QT_MOC_LITERAL(6, 78, 11),
-QT_MOC_LITERAL(7, 90, 6),
-QT_MOC_LITERAL(8, 97, 14)
+QT_MOC_LITERAL(6, 78, 18),
+QT_MOC_LITERAL(7, 97, 6),
+QT_MOC_LITERAL(8, 104, 14)
     },
     "netComm\0externalDataReady\0\0aboutToClose\0"
     "receiveExternalData\0connectionMessage\0"
-    "QTcpSocket*\0socket\0readSocketData"
+    "threadedTcpSocket*\0socket\0readSocketData"
 };
 #undef QT_MOC_LITERAL
 
@@ -90,10 +90,21 @@ void netComm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 1: _t->aboutToClose(); break;
         case 2: { QByteArray _r = _t->receiveExternalData();
             if (_a[0]) *reinterpret_cast< QByteArray*>(_a[0]) = _r; }  break;
-        case 3: _t->connectionMessage((*reinterpret_cast< QTcpSocket*(*)>(_a[1]))); break;
+        case 3: _t->connectionMessage((*reinterpret_cast< threadedTcpSocket*(*)>(_a[1]))); break;
         case 4: _t->connectionMessage(); break;
         case 5: _t->readSocketData(); break;
         default: ;
+        }
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+        case 3:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 0:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< threadedTcpSocket* >(); break;
+            }
+            break;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
@@ -143,7 +154,7 @@ int netComm::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 6)
-            *reinterpret_cast<int*>(_a[0]) = -1;
+            qt_static_metacall(this, _c, _id, _a);
         _id -= 6;
     }
     return _id;

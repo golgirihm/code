@@ -1,6 +1,7 @@
 #ifndef NETCOMM_H
 #define NETCOMM_H
 
+#include "threadedtcpsocket.h"
 #include <QObject>
 #include <QHostAddress>
 class QHostInfo;
@@ -36,7 +37,7 @@ protected:
     QList<QByteArray> externalData; // queue of received data
 
 protected slots:
-    void connectionMessage(QTcpSocket *socket = 0);
+    void connectionMessage(threadedTcpSocket *socket = 0);
 
 private slots:
     void readSocketData();

@@ -1,19 +1,25 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#define MSG_USERNAME_DELIMITER ','
+#define LOCAL_USERNAME_DELIMITER '\n'
+
 class gameUI;
 class netcomm;
 #include "cardstack.h"
 
 #include <QDebug>
 
-#define HOSTID 0xFF
+#define HOSTID 0x80
 
 namespace S
 {   // from-server message types
     enum S_t : quint8
     {
+        START_INFO = 'S',
         USERNAME = 'U',
+        LOBBY_USERS = 'B',
+        USERNAME_TAKEN = 'T',
         LOBBYLIST = 'L',
         OPEN_MAIN_GAME = 'O',
 //        CHATMESSAGE = 'M',
@@ -28,7 +34,7 @@ namespace C
 {   // from-client message types
     enum C_t : quint8
     {
-        USERNAME_ASK = 'U',
+        USERNAME_ASK = 'A',
         CHATMESSAGE = 'Q',
 //        CARD_TO_PLAY = 'C'
     };
@@ -47,26 +53,21 @@ public:
     class playerinfo
     {
     public:
-        quint8 ID;
+        qint8 ID;
         QString userName;
         cardstack Hand;
     };
 
-
-
     static bool validUserName(QString userName);
-
-signals:
-    void userNameChanged();
 
 public slots:
 
 protected slots:
     virtual void initialLobbySetUp() = 0;
-    virtual void pbLobbyAcceptEnabler() = 0;
-    virtual void pbLobbyChangeUserNameEnabler() = 0;
-    virtual void processNewUserNameRequest() = 0;
-    virtual void ready() = 0;
+    virtual void pbLobbyAcceptEnabler();
+    virtual void pbLobbyChangeUserNameEnabler();
+    virtual void processSelfUserNameRequest() = 0;
+    virtual void acceptClicked();
     virtual void processReadyExternalData() = 0;
     void setUserName(QString newName);
 
@@ -75,6 +76,8 @@ protected:
 //    netcomm *gameComm;
     playerinfo *info;
 
+signals:
+    void userNameChanged();
 
 
 

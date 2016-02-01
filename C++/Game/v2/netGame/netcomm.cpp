@@ -1,5 +1,6 @@
 #include "netcomm.h"
 
+#include "threadedtcpsocket.h"
 #include <QTcpSocket>
 #include <QHostAddress>
 #include <QHostInfo>
@@ -54,7 +55,8 @@ void netComm::setIPv4(const QHostAddress &newIPv4)
 void netComm::readSocketData()
 {
     // the socket that sent the data
-    QTcpSocket* socket = qobject_cast<QTcpSocket*>(sender());
+//    QTcpSocket* socket = qobject_cast<QTcpSocket*>(sender());
+    threadedTcpSocket *socket = qobject_cast<threadedTcpSocket*>(sender());
 
     qint64 bytesAvailable = socket->bytesAvailable();
 
@@ -81,14 +83,14 @@ void netComm::readSocketData()
             (MsgType == MSGTOCLIENT && commType == COMMTYPE::CLIENT))
     {
         // TODO: remove qDebugs
-        qDebug() << "--------------Read Socket Data-------------";
-        qDebug() << buffer.size() << "bytes:";
-        qDebug() << message(buffer).compressedString();
+        qDebug()  << "\n--------------Appending Socket Data To externalData--------------";
+//        qDebug() << buffer.size() << "bytes:";
+//        qDebug() << message(buffer).compressedString();
 
         externalData.append(buffer);
         emit externalDataReady();
 
-        qDebug() << "**************************************************";
+        qDebug() << "*****************************************************************";
     }
     else
     {
@@ -113,7 +115,7 @@ QByteArray netComm::receiveExternalData()
     }
 }
 
-void netComm::connectionMessage(QTcpSocket *socket)
+void netComm::connectionMessage(threadedTcpSocket *socket)
 {
     QString descriptorInfo;
 

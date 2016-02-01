@@ -20,13 +20,12 @@ private slots:
     void initialLobbySetUp();
     void pbLobbyAcceptEnabler();
     void pbLobbyChangeUserNameEnabler();
-    void processNewUserNameRequest();
-    void ready();
+    void processSelfUserNameRequest();
+    void acceptClicked();
     void processReadyExternalData();
+
 private:
     netclient *gameClient;
-
-
 
 };
 

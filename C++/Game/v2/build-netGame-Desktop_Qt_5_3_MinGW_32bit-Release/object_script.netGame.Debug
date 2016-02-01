@@ -10,6 +10,7 @@ INPUT(
 ./debug/netserver.o
 ./debug/gameUI.o
 ./debug/netcomm.o
+./debug/threadedtcpsocket.o
 ./debug/moc_player.o
 ./debug/moc_host.o
 ./debug/moc_guest.o
@@ -18,4 +19,5 @@ INPUT(
 ./debug/moc_netserver.o
 ./debug/moc_gameUI.o
 ./debug/moc_netcomm.o
+./debug/moc_threadedtcpsocket.o
 );

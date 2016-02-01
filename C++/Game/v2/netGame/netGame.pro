@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     netclient.cpp \
     netserver.cpp \
     gameUI.cpp \
-    netcomm.cpp
+    netcomm.cpp \
+    threadedtcpsocket.cpp
 
 HEADERS  += player.h \
     host.h \
@@ -33,7 +34,13 @@ HEADERS  += player.h \
     netclient.h \
     netserver.h \
     gameUI.h \
-    netcomm.h
+    netcomm.h \
+    threadedtcpsocket.h
 
 
-CONFIG += c++11
+CONFIG += c++11 + communi
+
+FORMS += \
+    form_startscreen.ui \
+    form_lobby.ui \
+    form_maingame.ui

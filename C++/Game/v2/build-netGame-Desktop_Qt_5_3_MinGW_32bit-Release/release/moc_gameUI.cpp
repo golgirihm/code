@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_gameUI_t {
-    QByteArrayData data[37];
-    char stringdata[636];
+    QByteArrayData data[41];
+    char stringdata[692];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,53 +36,59 @@ QT_MOC_LITERAL(3, 32, 29),
 QT_MOC_LITERAL(4, 62, 23),
 QT_MOC_LITERAL(5, 86, 21),
 QT_MOC_LITERAL(6, 108, 16),
-QT_MOC_LITERAL(7, 125, 23),
-QT_MOC_LITERAL(8, 149, 18),
-QT_MOC_LITERAL(9, 168, 23),
-QT_MOC_LITERAL(10, 192, 17),
-QT_MOC_LITERAL(11, 210, 5),
-QT_MOC_LITERAL(12, 216, 12),
-QT_MOC_LITERAL(13, 229, 7),
-QT_MOC_LITERAL(14, 237, 25),
-QT_MOC_LITERAL(15, 263, 15),
-QT_MOC_LITERAL(16, 279, 23),
-QT_MOC_LITERAL(17, 303, 11),
-QT_MOC_LITERAL(18, 315, 12),
-QT_MOC_LITERAL(19, 328, 9),
-QT_MOC_LITERAL(20, 338, 16),
-QT_MOC_LITERAL(21, 355, 8),
-QT_MOC_LITERAL(22, 364, 24),
-QT_MOC_LITERAL(23, 389, 16),
-QT_MOC_LITERAL(24, 406, 24),
-QT_MOC_LITERAL(25, 431, 7),
-QT_MOC_LITERAL(26, 439, 19),
-QT_MOC_LITERAL(27, 459, 23),
-QT_MOC_LITERAL(28, 483, 29),
-QT_MOC_LITERAL(29, 513, 21),
-QT_MOC_LITERAL(30, 535, 20),
-QT_MOC_LITERAL(31, 556, 20),
-QT_MOC_LITERAL(32, 577, 16),
-QT_MOC_LITERAL(33, 594, 6),
-QT_MOC_LITERAL(34, 601, 15),
-QT_MOC_LITERAL(35, 617, 10),
-QT_MOC_LITERAL(36, 628, 7)
+QT_MOC_LITERAL(7, 125, 14),
+QT_MOC_LITERAL(8, 140, 12),
+QT_MOC_LITERAL(9, 153, 22),
+QT_MOC_LITERAL(10, 176, 17),
+QT_MOC_LITERAL(11, 194, 12),
+QT_MOC_LITERAL(12, 207, 18),
+QT_MOC_LITERAL(13, 226, 21),
+QT_MOC_LITERAL(14, 248, 17),
+QT_MOC_LITERAL(15, 266, 5),
+QT_MOC_LITERAL(16, 272, 18),
+QT_MOC_LITERAL(17, 291, 7),
+QT_MOC_LITERAL(18, 299, 21),
+QT_MOC_LITERAL(19, 321, 15),
+QT_MOC_LITERAL(20, 337, 22),
+QT_MOC_LITERAL(21, 360, 11),
+QT_MOC_LITERAL(22, 372, 12),
+QT_MOC_LITERAL(23, 385, 9),
+QT_MOC_LITERAL(24, 395, 12),
+QT_MOC_LITERAL(25, 408, 8),
+QT_MOC_LITERAL(26, 417, 20),
+QT_MOC_LITERAL(27, 438, 16),
+QT_MOC_LITERAL(28, 455, 24),
+QT_MOC_LITERAL(29, 480, 7),
+QT_MOC_LITERAL(30, 488, 25),
+QT_MOC_LITERAL(31, 514, 28),
+QT_MOC_LITERAL(32, 543, 29),
+QT_MOC_LITERAL(33, 573, 21),
+QT_MOC_LITERAL(34, 595, 20),
+QT_MOC_LITERAL(35, 616, 16),
+QT_MOC_LITERAL(36, 633, 16),
+QT_MOC_LITERAL(37, 650, 6),
+QT_MOC_LITERAL(38, 657, 15),
+QT_MOC_LITERAL(39, 673, 10),
+QT_MOC_LITERAL(40, 684, 7)
     },
     "gameUI\0lobbyNetworkTextChanged\0\0"
     "lobbyEnterUserNameTextChanged\0"
     "userNameChangeRequested\0acceptSettingsClicked\0"
-    "hostStartClicked\0getLobbyIPAddressString\0"
-    "getLobbyPortString\0getLobbyEnteredUserName\0"
-    "setLobbyIPAddress\0newIP\0setLobbyPort\0"
-    "newPort\0setLobbyEnterUserNameText\0"
-    "enteredNameText\0setLobbyCurrentUserName\0"
-    "newUserName\0setLobbyText\0lobbyText\0"
-    "setLobbyInfoText\0infoText\0"
-    "setLobbyCurrentUsersText\0currentUsersText\0"
-    "setLobbyIPAddressEnabled\0enabled\0"
-    "setLobbyPortEnabled\0setLobbyUserNameEnabled\0"
-    "setLobbyChangeUserNameEnabled\0"
-    "setLobbyAcceptEnabled\0setLobbyStartEnabled\0"
-    "screen0ButtonClicked\0QAbstractButton*\0"
+    "hostStartClicked\0get_pb1_accept\0"
+    "QPushButton*\0get_pb1_changeUserName\0"
+    "get_le1_IPAddress\0QHostAddress\0"
+    "get_le1_portNumber\0get_le1_enterUserName\0"
+    "set_le1_IPAddress\0newIP\0set_le1_portNumber\0"
+    "newPort\0set_le1_enterUserName\0"
+    "enteredNameText\0set_l1_currentUsername\0"
+    "newUserName\0set_l1_lobby\0lobbyText\0"
+    "set_tb1_info\0infoText\0set_tb1_currentUsers\0"
+    "currentUsersText\0setEnabled_le1_IPAddress\0"
+    "enabled\0setEnabled_le1_portNumber\0"
+    "setEnabled_le1_enterUserName\0"
+    "setEnabled_pb1_changeUserName\0"
+    "setEnabled_pb1_accept\0setEnabled_pb1_start\0"
+    "ui0buttonclicked\0QAbstractButton*\0"
     "button\0setPlayerTypeTo\0PLAYERTYPE\0"
     "newType"
 };
@@ -94,7 +100,7 @@ static const uint qt_meta_data_gameUI[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      23,   14, // methods
+      25,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -102,31 +108,33 @@ static const uint qt_meta_data_gameUI[] = {
        5,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,  129,    2, 0x06 /* Public */,
-       3,    0,  130,    2, 0x06 /* Public */,
-       4,    0,  131,    2, 0x06 /* Public */,
-       5,    0,  132,    2, 0x06 /* Public */,
-       6,    0,  133,    2, 0x06 /* Public */,
+       1,    0,  139,    2, 0x06 /* Public */,
+       3,    0,  140,    2, 0x06 /* Public */,
+       4,    0,  141,    2, 0x06 /* Public */,
+       5,    0,  142,    2, 0x06 /* Public */,
+       6,    0,  143,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       7,    0,  134,    2, 0x0a /* Public */,
-       8,    0,  135,    2, 0x0a /* Public */,
-       9,    0,  136,    2, 0x0a /* Public */,
-      10,    1,  137,    2, 0x0a /* Public */,
-      12,    1,  140,    2, 0x0a /* Public */,
-      14,    1,  143,    2, 0x0a /* Public */,
-      16,    1,  146,    2, 0x0a /* Public */,
-      18,    1,  149,    2, 0x0a /* Public */,
-      20,    1,  152,    2, 0x0a /* Public */,
-      22,    1,  155,    2, 0x0a /* Public */,
-      24,    1,  158,    2, 0x0a /* Public */,
-      26,    1,  161,    2, 0x0a /* Public */,
-      27,    1,  164,    2, 0x0a /* Public */,
-      28,    1,  167,    2, 0x0a /* Public */,
-      29,    1,  170,    2, 0x0a /* Public */,
+       7,    0,  144,    2, 0x0a /* Public */,
+       9,    0,  145,    2, 0x0a /* Public */,
+      10,    0,  146,    2, 0x0a /* Public */,
+      12,    0,  147,    2, 0x0a /* Public */,
+      13,    0,  148,    2, 0x0a /* Public */,
+      14,    1,  149,    2, 0x0a /* Public */,
+      16,    1,  152,    2, 0x0a /* Public */,
+      18,    1,  155,    2, 0x0a /* Public */,
+      20,    1,  158,    2, 0x0a /* Public */,
+      22,    1,  161,    2, 0x0a /* Public */,
+      24,    1,  164,    2, 0x0a /* Public */,
+      26,    1,  167,    2, 0x0a /* Public */,
+      28,    1,  170,    2, 0x0a /* Public */,
       30,    1,  173,    2, 0x0a /* Public */,
-      31,    1,  176,    2, 0x08 /* Private */,
-      34,    1,  179,    2, 0x08 /* Private */,
+      31,    1,  176,    2, 0x0a /* Public */,
+      32,    1,  179,    2, 0x0a /* Public */,
+      33,    1,  182,    2, 0x0a /* Public */,
+      34,    1,  185,    2, 0x0a /* Public */,
+      35,    1,  188,    2, 0x08 /* Private */,
+      38,    1,  191,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -136,24 +144,26 @@ static const uint qt_meta_data_gameUI[] = {
     QMetaType::Void,
 
  // slots: parameters
+    0x80000000 | 8,
+    0x80000000 | 8,
+    0x80000000 | 11,
+    QMetaType::Int,
     QMetaType::QString,
-    QMetaType::QString,
-    QMetaType::QString,
-    QMetaType::Void, QMetaType::QString,   11,
-    QMetaType::Void, QMetaType::UShort,   13,
-    QMetaType::Void, QMetaType::QString,   15,
-    QMetaType::Void, QMetaType::QString,   17,
+    QMetaType::Void, 0x80000000 | 11,   15,
+    QMetaType::Void, QMetaType::UShort,   17,
     QMetaType::Void, QMetaType::QString,   19,
     QMetaType::Void, QMetaType::QString,   21,
     QMetaType::Void, QMetaType::QString,   23,
-    QMetaType::Void, QMetaType::Bool,   25,
-    QMetaType::Void, QMetaType::Bool,   25,
-    QMetaType::Void, QMetaType::Bool,   25,
-    QMetaType::Void, QMetaType::Bool,   25,
-    QMetaType::Void, QMetaType::Bool,   25,
-    QMetaType::Void, QMetaType::Bool,   25,
-    QMetaType::Void, 0x80000000 | 32,   33,
-    QMetaType::Void, 0x80000000 | 35,   36,
+    QMetaType::Void, QMetaType::QString,   25,
+    QMetaType::Void, QMetaType::QString,   27,
+    QMetaType::Void, QMetaType::Bool,   29,
+    QMetaType::Void, QMetaType::Bool,   29,
+    QMetaType::Void, QMetaType::Bool,   29,
+    QMetaType::Void, QMetaType::Bool,   29,
+    QMetaType::Void, QMetaType::Bool,   29,
+    QMetaType::Void, QMetaType::Bool,   29,
+    QMetaType::Void, 0x80000000 | 36,   37,
+    QMetaType::Void, 0x80000000 | 39,   40,
 
        0        // eod
 };
@@ -168,27 +178,31 @@ void gameUI::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 2: _t->userNameChangeRequested(); break;
         case 3: _t->acceptSettingsClicked(); break;
         case 4: _t->hostStartClicked(); break;
-        case 5: { QString _r = _t->getLobbyIPAddressString();
+        case 5: { QPushButton* _r = _t->get_pb1_accept();
+            if (_a[0]) *reinterpret_cast< QPushButton**>(_a[0]) = _r; }  break;
+        case 6: { QPushButton* _r = _t->get_pb1_changeUserName();
+            if (_a[0]) *reinterpret_cast< QPushButton**>(_a[0]) = _r; }  break;
+        case 7: { QHostAddress _r = _t->get_le1_IPAddress();
+            if (_a[0]) *reinterpret_cast< QHostAddress*>(_a[0]) = _r; }  break;
+        case 8: { int _r = _t->get_le1_portNumber();
+            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
+        case 9: { QString _r = _t->get_le1_enterUserName();
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
-        case 6: { QString _r = _t->getLobbyPortString();
-            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
-        case 7: { QString _r = _t->getLobbyEnteredUserName();
-            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
-        case 8: _t->setLobbyIPAddress((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 9: _t->setLobbyPort((*reinterpret_cast< quint16(*)>(_a[1]))); break;
-        case 10: _t->setLobbyEnterUserNameText((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 11: _t->setLobbyCurrentUserName((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 12: _t->setLobbyText((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 13: _t->setLobbyInfoText((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 14: _t->setLobbyCurrentUsersText((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 15: _t->setLobbyIPAddressEnabled((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 16: _t->setLobbyPortEnabled((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 17: _t->setLobbyUserNameEnabled((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 18: _t->setLobbyChangeUserNameEnabled((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 19: _t->setLobbyAcceptEnabled((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 20: _t->setLobbyStartEnabled((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 21: _t->screen0ButtonClicked((*reinterpret_cast< QAbstractButton*(*)>(_a[1]))); break;
-        case 22: _t->setPlayerTypeTo((*reinterpret_cast< PLAYERTYPE(*)>(_a[1]))); break;
+        case 10: _t->set_le1_IPAddress((*reinterpret_cast< QHostAddress(*)>(_a[1]))); break;
+        case 11: _t->set_le1_portNumber((*reinterpret_cast< quint16(*)>(_a[1]))); break;
+        case 12: _t->set_le1_enterUserName((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 13: _t->set_l1_currentUsername((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 14: _t->set_l1_lobby((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 15: _t->set_tb1_info((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 16: _t->set_tb1_currentUsers((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 17: _t->setEnabled_le1_IPAddress((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 18: _t->setEnabled_le1_portNumber((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 19: _t->setEnabled_le1_enterUserName((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 20: _t->setEnabled_pb1_changeUserName((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 21: _t->setEnabled_pb1_accept((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 22: _t->setEnabled_pb1_start((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 23: _t->ui0buttonclicked((*reinterpret_cast< QAbstractButton*(*)>(_a[1]))); break;
+        case 24: _t->setPlayerTypeTo((*reinterpret_cast< PLAYERTYPE(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -252,13 +266,13 @@ int gameUI::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 23)
+        if (_id < 25)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 23;
+        _id -= 25;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 23)
+        if (_id < 25)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 23;
+        _id -= 25;
     }
     return _id;
 }

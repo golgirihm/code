@@ -20,9 +20,8 @@ public slots:
     void SendToServer(QByteArray data);
 
 private:
-    QTcpSocket *tcpSocket;
+    threadedTcpSocket *tcpSocket;
     QTimer* attempt_timer;
-    QTimer* status_timer;
 
 private slots:
 

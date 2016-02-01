@@ -7,15 +7,16 @@
 
 netclient::netclient()
 {
+    /// allocate memory and establish this as a client
     commType = COMMTYPE::CLIENT;
-    tcpSocket = new QTcpSocket;
+    tcpSocket = new threadedTcpSocket;
+    attempt_timer = new QTimer(this);
 
-    // set up
+    /// set up tcpSocket
     connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(readSocketData()));
     connect(tcpSocket, SIGNAL(connected()), this, SIGNAL(connectionMade()));
 
-    //  this timer causes the socket to repeatedly attempt to connect to the server
-    attempt_timer = new QTimer(this);
+    ///  this timer causes the socket to repeatedly attempt to connect to the server
     connect(attempt_timer, SIGNAL(timeout()), this, SLOT(attemptToConnect()));
     connect(tcpSocket, SIGNAL(connected()), attempt_timer, SLOT(stop()));
     connect(tcpSocket, SIGNAL(connected()), this, SLOT(connectionMessage()));
@@ -24,15 +25,17 @@ netclient::netclient()
 netclient::~netclient()
 {
     // qDebug() << "~netclient()";
+    delete attempt_timer;
+    delete tcpSocket;
 }
 
-// returns true if socket is in the connected state
+/// returns true if socket is in the connected state
 bool netclient::isConnected()
 {
     return (tcpSocket->state() == QTcpSocket::ConnectedState);
 }
 
-// repeatedly attempts to connect to the server
+/// repeatedly attempts to connect to the server
 void netclient::attemptToConnect()
 {
     // attempt to connect every so often if this attempt fails
@@ -46,13 +49,17 @@ void netclient::attemptToConnect()
     }
 }
 
+/// sends a message to the server
 void netclient::SendToServer(QByteArray data)
 {
     if(!isConnected())
+    {
+        qDebug() << "CLIENT: Warning - SendToServer failed, client is not connected. returning.";
         return;
+    }
 
     data.prepend(MSGTOSERVER);
-    tcpSocket->write(data, data.size());
+    tcpSocket->write(data);
 
     if(!tcpSocket->flush())
         qDebug() << "ERROR: unsuccessful write in SendToSocket";

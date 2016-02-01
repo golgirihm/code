@@ -22,7 +22,7 @@ public:
     const quint8 &msgtype() const;
     const quint8 &senderID() const;
     const QByteArray &extraData() const;
-    const QString &text()const;
+    const QString &text() const;
     const cardstack &cards() const;
     QString compressedString() const;
 

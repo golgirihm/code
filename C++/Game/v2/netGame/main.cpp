@@ -23,7 +23,6 @@ int main(int argc, char *argv[])
     // why does this work, but not when it gets sent?
 //    qDebug() << QString(QByteArray().append(5));
 
-
 //    cardstack hand1;
 //    hand1.toStandardDeck();
 //    message msg1(C::CHATMESSAGE, 64, "SomeText", "SomeExtraData", hand1);

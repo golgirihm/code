@@ -88,7 +88,7 @@ static const uint qt_meta_data_netserver[] = {
     QMetaType::Void, QMetaType::UChar,    2,
 
  // slots: parameters
-    QMetaType::Void,
+    QMetaType::Bool,
     QMetaType::Bool,
     QMetaType::Void,
     QMetaType::Int,
@@ -108,7 +108,8 @@ void netserver::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         netserver *_t = static_cast<netserver *>(_o);
         switch (_id) {
         case 0: _t->clientAdded((*reinterpret_cast< quint8(*)>(_a[1]))); break;
-        case 1: _t->StartServer(); break;
+        case 1: { bool _r = _t->StartServer();
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
         case 2: { bool _r = _t->isListening();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
         case 3: _t->CloseOffServer(); break;

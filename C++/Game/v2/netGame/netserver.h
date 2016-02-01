@@ -1,6 +1,8 @@
 #ifndef netserver_H
 #define netserver_H
 
+#include <QThreadPool>
+
 #include "netcomm.h"
 class QTcpServer;
 
@@ -12,8 +14,20 @@ public:
     netserver();
     ~netserver();
 
+    class client_t
+    {
+    public:
+        QTcpSocket *socket;
+        QThread *thread;
+
+//        bool operator==(const client_t *other)
+//        {
+//            return ((socket == other->socket) && (thread = other->thread));
+//        }
+    };
+
 public slots:
-    void StartServer() const;
+    bool StartServer() const;
     bool isListening() const;
     void CloseOffServer() const;
     int ClientCount() const;
@@ -25,7 +39,10 @@ public slots:
 
 private:
     QTcpServer *tcpServer;
-    QList<QTcpSocket*> ClientList;  // list of all connected sockets on server
+
+//    QList<QThread*> threadList;
+    QList<threadedTcpSocket*> clientList;  /// list of all connected sockets on server
+//    QList<client_t> clientList;
 
 private slots:
     void AddTcpClient();
